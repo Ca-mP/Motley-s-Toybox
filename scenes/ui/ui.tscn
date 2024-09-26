@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw3teyaodus8k"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_fq3fa"]
+[ext_resource type="Texture2D" uid="uid://dokp3swo1ts58" path="res://sprites/ui/FireballUI.png" id="2_r38ly"]
+[ext_resource type="Texture2D" uid="uid://bnxnibrhuosnj" path="res://sprites/ui/item-frame.png" id="3_7l3hn"]
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("healthbar", "material_icon", "material_counter")]
+script = ExtResource("1_fq3fa")
+healthbar = NodePath("TopBar/HealthBar")
+material_icon = NodePath("TopBar/Materials/MaterialIcon")
+material_counter = NodePath("TopBar/Materials/MaterialCounter")
+
+[node name="Background" type="Node" parent="."]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Background"]
+offset_left = 1092.0
+offset_right = 1158.0
+offset_bottom = 40.0
+texture = ExtResource("3_7l3hn")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="ItemFrame" type="TextureRect" parent="Background"]
+offset_left = 1054.0
+offset_right = 1094.0
+offset_bottom = 40.0
+texture = ExtResource("3_7l3hn")
+expand_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+metadata/_edit_lock_ = true
+
+[node name="HealthBar" type="ProgressBar" parent="TopBar"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Materials" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="MaterialIcon" type="TextureRect" parent="TopBar/Materials"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("2_r38ly")
+expand_mode = 2
+
+[node name="MaterialCounter" type="Label" parent="TopBar/Materials"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12"
+horizontal_alignment = 1

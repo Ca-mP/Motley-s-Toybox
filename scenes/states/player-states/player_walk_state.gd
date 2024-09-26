@@ -1,0 +1,24 @@
+extends PlayerState
+class_name PlayerWalkState
+
+signal idle
+signal jump
+signal cast
+
+func _ready() -> void:
+	super()
+
+func enter_state():
+	super()
+	animator.play("walk")
+
+func _physics_process(_delta: float) -> void:
+	if actor.velocity.x == 0 and actor.direction == 0:
+		idle.emit()
+	if Input.is_action_pressed("jump"):
+		jump.emit()
+	if Input.is_action_pressed("spell") and actor.material_equipped_amount:
+		cast.emit()
+
+func exit_state():
+	super()

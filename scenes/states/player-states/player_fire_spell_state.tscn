@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8o05mnj8718l"]
+
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fire_spell_state.gd" id="1_b3nmt"]
+
+[node name="PlayerFireSpellState" type="Node"]
+script = ExtResource("1_b3nmt")

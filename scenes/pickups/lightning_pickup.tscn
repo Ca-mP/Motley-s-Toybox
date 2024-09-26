@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://c0f7rd3q06t55"]
+
+[ext_resource type="Script" path="res://scenes/pickups/pickup.gd" id="1_6gayy"]
+[ext_resource type="Texture2D" uid="uid://btbptlatwsq3l" path="res://sprites/pickups/LightningItem.png" id="2_45fgf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3cpj"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy6sm"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjotw"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox45l"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44a3l"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chscq"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4ilx"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(0, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypuyp"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(1920, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwc41"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(3840, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d77lj"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(5760, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tgpj"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(7680, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_441ii"]
+atlas = ExtResource("2_45fgf")
+region = Rect2(9600, 1080, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_peffq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3cpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy6sm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjotw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ox45l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44a3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chscq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4ilx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypuyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwc41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d77lj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tgpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_441ii")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bblhd"]
+
+[node name="LightningPickup" type="Node2D" node_paths=PackedStringArray("area")]
+script = ExtResource("1_6gayy")
+type = "lightning"
+quantity = 1
+area = NodePath("Area2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.03, 0.03)
+sprite_frames = SubResource("SpriteFrames_peffq")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_bblhd")
