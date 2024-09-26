@@ -1,7 +1,19 @@
-[gd_scene load_steps=32 format=3 uid="uid://t2a2q7xppmr2"]
+[gd_scene load_steps=24 format=3 uid="uid://dmtmrhvnqsk4b"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_u1c5b"]
-[ext_resource type="Texture2D" uid="uid://dsbhnd4lxp0du" path="res://sprites/player/WizSpriteSheet.png" id="2_ev4q7"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
+[ext_resource type="Texture2D" uid="uid://dsbhnd4lxp0du" path="res://sprites/player/WizSpriteSheet.png" id="2_stlx7"]
+[ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_3e7yi"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_jump_state.gd" id="4_vg3c6"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_walk_state.gd" id="5_tntcf"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_idle_state.gd" id="6_peq4c"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fall_state.gd" id="7_y0vod"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fireball_state.gd" id="8_3rjay"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_cast_state.gd" id="8_fnswv"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fire_spell_state.gd" id="9_rxxqp"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_land_state.gd" id="9_wuijw"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_lightning_spell_state.gd" id="11_hnfra"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_water_spell_state.gd" id="12_8fo6j"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_done_cast_state.gd" id="13_ru3pq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mieej"]
 radius = 11.0
@@ -20,6 +32,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [24]
+}
+
+[sub_resource type="Animation" id="Animation_ypg6x"]
+resource_name = "fall"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_jhge4"]
@@ -110,6 +138,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1qbk6"]
 _data = {
 "RESET": SubResource("Animation_iro6b"),
+"fall": SubResource("Animation_ypg6x"),
 "idle": SubResource("Animation_jhge4"),
 "jump": SubResource("Animation_y2o3f"),
 "land": SubResource("Animation_uet0l"),
@@ -117,124 +146,107 @@ _data = {
 "walk": SubResource("Animation_lw0qb")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nwwre"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sctn6"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_37d6a"]
-animation = &"land"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xc3ti"]
-animation = &"spell"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i6q56"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1gan0"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tq3vb"]
-priority = 3
-advance_mode = 2
-advance_condition = &"casting"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tclxp"]
-priority = 2
-advance_mode = 2
-advance_condition = &"jumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_waa10"]
-priority = 2
-advance_mode = 2
-advance_condition = &"landing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x8dkr"]
-priority = 2
-advance_mode = 2
-advance_condition = &"walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iynnm"]
-priority = 3
-advance_mode = 2
-advance_condition = &"casting"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_towly"]
-priority = 2
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fw7yx"]
-advance_mode = 2
-advance_condition = &"jumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lx2bw"]
-advance_mode = 2
-advance_condition = &"casting"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ykchh"]
-advance_mode = 2
-advance_condition = &"walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b6202"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"landing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_plei0"]
-advance_mode = 2
-advance_condition = &"jumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0n7ds"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sr3uj"]
-advance_mode = 2
-advance_condition = &"jumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w6344"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"walking"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wnk3q"]
-states/Start/position = Vector2(85, 100)
-states/idle/node = SubResource("AnimationNodeAnimation_nwwre")
-states/idle/position = Vector2(254, 100)
-states/jump/node = SubResource("AnimationNodeAnimation_sctn6")
-states/jump/position = Vector2(479, 25)
-states/land/node = SubResource("AnimationNodeAnimation_37d6a")
-states/land/position = Vector2(663, 25)
-states/spell/node = SubResource("AnimationNodeAnimation_xc3ti")
-states/spell/position = Vector2(479, 184)
-states/walk/node = SubResource("AnimationNodeAnimation_i6q56")
-states/walk/position = Vector2(579, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_1gan0"), "jump", "spell", SubResource("AnimationNodeStateMachineTransition_tq3vb"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_tclxp"), "jump", "land", SubResource("AnimationNodeStateMachineTransition_waa10"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_x8dkr"), "idle", "spell", SubResource("AnimationNodeStateMachineTransition_iynnm"), "spell", "idle", SubResource("AnimationNodeStateMachineTransition_towly"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_fw7yx"), "walk", "spell", SubResource("AnimationNodeStateMachineTransition_lx2bw"), "spell", "walk", SubResource("AnimationNodeStateMachineTransition_ykchh"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_b6202"), "spell", "jump", SubResource("AnimationNodeStateMachineTransition_plei0"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_0n7ds"), "land", "jump", SubResource("AnimationNodeStateMachineTransition_sr3uj"), "land", "walk", SubResource("AnimationNodeStateMachineTransition_w6344")]
-
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "done_cast_state")]
+position = Vector2(420, 473)
 collision_mask = 6
-script = ExtResource("1_u1c5b")
+script = ExtResource("1_ri1hm")
+max_health = 20
+current_health = 20
+material_equipped = "fire"
 max_speed = 200
 acceleration = 50
+lightning_material = {
+"current": 0,
+"max": 20,
+"unlocked": true
+}
+water_material = {
+"current": 20,
+"max": 20,
+"unlocked": false
+}
+state_machine = NodePath("StateMachine")
+idle_state = NodePath("StateMachine/PlayerIdleState")
+walk_state = NodePath("StateMachine/PlayerWalkState")
+jump_state = NodePath("StateMachine/PlayerJumpState")
+fall_state = NodePath("StateMachine/PlayerFallState")
+land_state = NodePath("StateMachine/PlayerLandState")
+cast_state = NodePath("StateMachine/PlayerCastState")
+fire_spell_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState")
+lightning_spell_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSpellState")
+water_spell_state = NodePath("StateMachine/PlayerCastState/PlayerWaterSpellState")
+fireball_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState/PlayerFireballState")
+done_cast_state = NodePath("StateMachine/PlayerDoneCastState")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_3e7yi")
+starting_state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("6_peq4c")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerWalkState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("5_tntcf")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerJumpState" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_timer", "actor", "animator")]
+script = ExtResource("4_vg3c6")
+jump_timer = NodePath("JumpTimer")
 jump_velocity = 400
-max_health = 20
-current_health = 19
-material_equipped = "fire"
-fire_unlocked = true
-max_fire_materials = 20
-current_fire_materials = 3
-lightning_unlocked = true
-max_lightning_materials = 20
-water_unlocked = true
-max_water_materials = 20
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="JumpTimer" type="Timer" parent="StateMachine/PlayerJumpState"]
+wait_time = 0.4
+one_shot = true
+
+[node name="PlayerFallState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("7_y0vod")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerLandState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("9_wuijw")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerCastState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("8_fnswv")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerFireSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("9_rxxqp")
+actor = NodePath("../../..")
+animator = NodePath("../../../AnimationPlayer")
+
+[node name="PlayerFireballState" type="Node" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("8_3rjay")
+actor = NodePath("../../../..")
+animator = NodePath("../../../../AnimationPlayer")
+
+[node name="PlayerLightningSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("11_hnfra")
+actor = NodePath("../../..")
+animator = NodePath("../../../AnimationPlayer")
+
+[node name="PlayerWaterSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("12_8fo6j")
+actor = NodePath("../../..")
+animator = NodePath("../../../AnimationPlayer")
+
+[node name="PlayerDoneCastState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("13_ru3pq")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3, -29)
 scale = Vector2(0.07, 0.07)
-texture = ExtResource("2_ev4q7")
+texture = ExtResource("2_stlx7")
 hframes = 6
 vframes = 6
 frame = 24
@@ -247,30 +259,15 @@ metadata/_edit_lock_ = true
 [node name="FloorCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 3)
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="FireballTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
-
-[node name="JumpTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
-one_shot = true
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1qbk6")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_wnk3q")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/casting = false
-parameters/conditions/idle = false
-parameters/conditions/jumping = false
-parameters/conditions/landing = false
-parameters/conditions/walking = false
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.2
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[connection signal="timeout" from="Timers/FireballTimer" to="." method="_on_fireball_timer_timeout"]
-[connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="StateMachine/PlayerJumpState/JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

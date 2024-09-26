@@ -6,12 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://d8b5urny8w3u" path="res://scenes/pickups/fire_pickup.tscn" id="3_nel7g"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="5_5m280"]
 [ext_resource type="PackedScene" uid="uid://cjujgg3nn4ytq" path="res://scenes/enemies/teddy_bear.tscn" id="6_2xp1x"]
-[ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player_new.tscn" id="7_ltjl5"]
+[ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="7_ltjl5"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_hv5dv")
 
-[node name="PlayerNew" parent="." instance=ExtResource("7_ltjl5")]
+[node name="Player" parent="." instance=ExtResource("7_ltjl5")]
 
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource("3_hitd2")

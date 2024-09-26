@@ -10,6 +10,7 @@ extends CanvasLayer
 @export var material_counter: Label
 
 var fire_icon = preload("res://sprites/ui/FireballUI.png")
+var lightning_icon = preload("res://sprites/ui/LightningUI.png")
 
 func update():
 	healthbar.max_value = player_max_health
@@ -18,6 +19,8 @@ func update():
 	#get material icons and update the material icon
 	if player_material_equipped == "fire":
 		$TopBar/Materials/MaterialIcon.texture = fire_icon
+	elif player_material_equipped == "lightning":
+		$TopBar/Materials/MaterialIcon.texture = lightning_icon
 	
 	material_counter.text = str(player_current_materials)
 	

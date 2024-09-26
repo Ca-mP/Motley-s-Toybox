@@ -1,157 +1,101 @@
 extends CharacterBody2D
+class_name Player
 
 @export_category("Character")
-@export var max_speed: int
-@export var acceleration: int
-@export var jump_velocity: int
 @export var max_health: int
 @export var current_health: int
 @export var material_equipped: String
+@export var max_speed: int
+@export var acceleration: int
 
 @export_category("Fire")
-@export var fire_unlocked: bool
-@export var max_fire_materials: int
-@export var current_fire_materials: int
+@export var fire_material := {"unlocked": true, "max": 20, "current": 20}
 
 @export_category("Lightning")
-@export var lightning_unlocked: bool
-@export var max_lightning_materials: int
-@export var current_lightning_materials: int
+@export var lightning_material := {"unlocked": true, "max": 20, "current": 20}
 
 @export_category("Water")
-@export var water_unlocked: bool
-@export var max_water_materials: int
-@export var current_water_materials: int
+@export var water_material := {"unlocked": true, "max": 20, "current": 20}
 
-@onready var state_machine = $AnimationTree
+@export_category("States")
+@export var state_machine: StateMachine
+@export var idle_state: State
+@export var walk_state: State
+@export var jump_state: State
+@export var fall_state: State
+@export var land_state: State
+@export var cast_state: State
 
-var spell_mode := "attack" #determines what material does when used, can be attack or utility
+@export var fire_spell_state: State
+@export var lightning_spell_state: State
+@export var water_spell_state: State
+@export var fireball_state: State
 
-var direction: float
-var aim_direction: Vector2
-var can_jump := true
-var casting := false
+@export var done_cast_state: State
 
+@onready var spell_mode := "attack"
+@onready var can_cast: bool
+@onready var aim_direction: Vector2
+@onready var friction: int
 @onready var material_equipped_amount: int
-var material_equipped_max: int
-var can_fireball := true
+@onready var material_equipped_max: int
 
-var friction: float
-
-var fireball_scene = preload("res://scenes/projectiles/fireball.tscn")
+var direction
+var jump_buffer: bool
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
 
 func _ready() -> void:
+	#connecting states
+	idle_state.walk.connect(state_machine.change_state.bind(walk_state))
+	idle_state.jump.connect(state_machine.change_state.bind(jump_state))
+	idle_state.cast.connect(state_machine.change_state.bind(cast_state))
+	
+	walk_state.idle.connect(state_machine.change_state.bind(idle_state))
+	walk_state.jump.connect(state_machine.change_state.bind(jump_state))
+	walk_state.cast.connect(state_machine.change_state.bind(cast_state))
+	
+	jump_state.fall.connect(state_machine.change_state.bind(fall_state))
+	jump_state.cast.connect(state_machine.change_state.bind(cast_state))
+	
+	fall_state.land.connect(state_machine.change_state.bind(land_state))
+	fall_state.cast.connect(state_machine.change_state.bind(cast_state))
+	
+	land_state.idle.connect(state_machine.change_state.bind(idle_state))
+	land_state.walk.connect(state_machine.change_state.bind(walk_state))
+	land_state.jump.connect(state_machine.change_state.bind(jump_state))
+	land_state.fall.connect(state_machine.change_state.bind(fall_state))
+	land_state.cast.connect(state_machine.change_state.bind(cast_state))
+	
+	cast_state.fire_spell.connect(state_machine.change_state.bind(fire_spell_state))
+	cast_state.lightning_spell.connect(state_machine.change_state.bind(lightning_spell_state))
+	cast_state.water_spell.connect(state_machine.change_state.bind(water_spell_state))
+	
+	fire_spell_state.fireball.connect(state_machine.change_state.bind(fireball_state))
+	
+	fireball_state.done.connect(state_machine.change_state.bind(done_cast_state))
+	
+	done_cast_state.idle.connect(state_machine.change_state.bind(idle_state))
+	done_cast_state.walk.connect(state_machine.change_state.bind(walk_state))
+	done_cast_state.jump.connect(state_machine.change_state.bind(jump_state))
+	done_cast_state.fall.connect(state_machine.change_state.bind(fall_state))
+	
+	#setting these
 	switch_material("fire")
 
 func _physics_process(delta: float) -> void:
-	#friction
-	if is_on_floor():
-		friction = 5
-	else:
-		friction = 10
-		
-	# Add the gravity.
+	
+		#MOVEMENT
+	
+	#gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-
-	if is_on_floor():
-		can_jump = true
-		
-	if Input.is_action_pressed("jump") and can_jump:
-		velocity.y = -jump_velocity
-		if not $Timers/JumpTimer.time_left:
-			$Timers/JumpTimer.start()
-		
-	if Input.is_action_just_released("jump"):
-		velocity.y /= 3
-		can_jump = false
-
-	
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	#movement
 	direction = Input.get_axis("left", "right")
 	if direction: #if directional input
 		velocity.x += direction * acceleration * 0.3
 		velocity.x = clamp(velocity.x, -max_speed, max_speed)
-	
-	#get aim direction
-	if Input.get_vector("left", "right", "up", "down") != Vector2.ZERO:
-		aim_direction = Input.get_vector("left", "right", "up", "down")
-	else:
-		if $Sprite2D.flip_h == true:
-			aim_direction = Vector2(-1, 0)
-		else:
-			aim_direction = Vector2(1, 0)
-	
-	#switching spell mode
-	if Input.is_action_just_pressed("switch-mode"):
-		if spell_mode == "attack":
-			spell_mode = "utility"
-		if spell_mode == "utility":
-			spell_mode = "attack"
-
-	#switching materials
-	if Input.is_action_just_pressed("cycle-spell-right"):
-		match material_equipped:
-			"fire":
-				if lightning_unlocked:
-					switch_material("lightning")
-				elif water_unlocked:
-					switch_material("water")
-					
-			"lightning":
-				if water_unlocked:
-					switch_material("water")
-				elif fire_unlocked:
-					switch_material("fire")
-					
-			"water":
-				if fire_unlocked:
-					switch_material("fire")
-				elif lightning_unlocked:
-					switch_material("lightning")
-			
-			
-			
-	if Input.is_action_just_pressed("cycle-spell-left"):
-		match material_equipped:
-			"fire":
-				if water_unlocked:
-					switch_material("water")
-				elif lightning_unlocked:
-					switch_material("lightning")
-			
-			"lightning":
-				if fire_unlocked:
-					switch_material("fire")
-				elif water_unlocked:
-					switch_material("water")
-			
-			"water":
-				if lightning_unlocked:
-					switch_material("lightning")
-				elif fire_unlocked:
-					switch_material("fire")
-		
-	#casting spells
-	if Input.is_action_just_pressed("spell"):
-		match spell_mode:
-			"attack":
-				match material_equipped:
-					"fire":
-						fireball()
-					
-					"lightning":
-						lightning_bolt()
-					
-					"water":
-						water_attack()
-				
-			"utility":
-				pass
-		
 	
 	#Flip player to direction they are moving
 	if direction < 0:
@@ -160,109 +104,133 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.flip_h = false
 	
 	#friction
+	if is_on_floor():
+		friction = 5
+	else:
+		friction = 10
+	
+	#jump buffer
+	if Input.is_action_just_pressed("jump") and not is_on_floor():
+		$JumpBufferTimer.start()
+		jump_buffer = true
+	
 	if friction:
 		velocity.x = move_toward(velocity.x, 0, friction)
+	
+		#SPELLS
+	
+	#getting aim direction
+	if Input.get_vector("left", "right", "up", "down") != Vector2.ZERO:
+		aim_direction = Input.get_vector("left", "right", "up", "down")
+	else:
+		if $Sprite2D.flip_h == true:
+			aim_direction = Vector2(-1, 0)
+		else:
+			aim_direction = Vector2(1, 0)
+	
+	#switching material
+	if Input.is_action_just_pressed("cycle-spell-left"):
+		cycle_spell_left()
+	if Input.is_action_just_pressed("cycle-spell-right"):
+		cycle_spell_right()
+	
+	#spell mode switching
+	#if Input.is_action_just_pressed("switch-mode"):
+		#if spell_mode == "attack":
+			#spell_mode == "utility"
+		#elif spell_mode == "utility":
+			#spell_mode == "attack"
+
 	move_and_slide()
-	set_conditions()
 
-func set_conditions():
-	if casting:
-		state_machine.set("parameters/conditions/casting", true)
-	else:
-		state_machine.set("parameters/conditions/casting", false)
-	
-	if direction == 0 and velocity == Vector2.ZERO:
-		state_machine.set("parameters/conditions/idle", true)
-	else:
-		state_machine.set("parameters/conditions/idle", false)
-	
-	if !is_on_floor() and !casting:
-		state_machine.set("parameters/conditions/jumping", true)
-	else:
-		state_machine.set("parameters/conditions/jumping", false)
-	
-	if is_on_floor():
-		state_machine.set("parameters/conditions/landing", true)
-	else:
-		state_machine.set("parameters/conditions/landing", false)
-	
-	if is_on_floor() and velocity.x and !casting:
-		state_machine.set("parameters/conditions/walking", true)
-	else:
-		state_machine.set("parameters/conditions/walking", false)
-	
+func cycle_spell_right():
+	match material_equipped:
+		"fire":
+			if lightning_material.unlocked:
+				switch_material("lightning")
+			elif water_material.unlocked:
+				switch_material("water")
+				
+		"lightning":
+			if water_material.unlocked:
+				switch_material("water")
+			elif fire_material.unlocked:
+				switch_material("fire")
+				
+		"water":
+			if fire_material.unlocked:
+				switch_material("fire")
+			elif lightning_material.unlocked:
+				switch_material("lightning")
 
-func hit(dmg):
-	current_health -= dmg
-	$"..".pass_player_info()
+func cycle_spell_left():
+	match material_equipped:
+		"fire":
+			if water_material.unlocked:
+				switch_material("water")
+			elif lightning_material.unlocked:
+				switch_material("lightning")
+		
+		"lightning":
+			if fire_material.unlocked:
+				switch_material("fire")
+			elif water_material.unlocked:
+				switch_material("water")
+		
+		"water":
+			if lightning_material.unlocked:
+				switch_material("lightning")
+			elif fire_material.unlocked:
+				switch_material("fire")
+
+func switch_material(player_material):
+	print(player_material)
+	match player_material:
+		"fire":
+			material_equipped = "fire"
+			material_equipped_amount = fire_material.current
+			material_equipped_max = fire_material.max
+		"water":
+			material_equipped = "water"
+			material_equipped_amount = water_material.current
+			material_equipped_max = water_material.max
+		"lightning":
+			material_equipped = "lightning"
+			material_equipped_amount = lightning_material.current
+			material_equipped_max = lightning_material.max
+	$"..".pass_player_info(self)
 
 func pickup(type, quantity):
 
 	match type:
 		
 		"fire":
-			current_fire_materials += quantity
+			fire_material.current += quantity
 		
 		"lightning":
-			current_lightning_materials += quantity
+			lightning_material.current += quantity
 		
 		"water":
-			current_water_materials += quantity
+			water_material.current += quantity
 		
 		"satchel":
-			current_fire_materials = max_fire_materials
-			current_lightning_materials = max_lightning_materials
+			fire_material.current = fire_material.max
+			lightning_material.current = lightning_material.max
 	
 	if type == material_equipped:
 		material_equipped_amount += quantity
 		
 	material_equipped_amount = clamp(material_equipped_amount, 0, material_equipped_max)
-	current_fire_materials = clamp(current_fire_materials, 0, max_fire_materials)
-	current_lightning_materials = clamp(current_lightning_materials, 0, max_lightning_materials)
-	$"..".pass_player_info()
+	fire_material.current = clamp(fire_material.current, 0, fire_material.max)
+	lightning_material.current = clamp(lightning_material.current, 0, lightning_material.max)
+	$"..".pass_player_info(self)
 
-func switch_material(player_material):
-	match player_material:
-		"fire":
-			material_equipped = "fire"
-			material_equipped_amount = current_fire_materials
-			material_equipped_max = max_fire_materials
-		"water":
-			material_equipped = "water"
-			material_equipped_amount = current_water_materials
-			material_equipped_max = max_water_materials
-		"lightning":
-			material_equipped = "lightning"
-			material_equipped_amount = current_lightning_materials
-			material_equipped_max = max_lightning_materials
-	$"..".pass_player_info()
+func pass_player_info():
+	$"..".pass_player_info(self)
 
-func fireball():
-	if current_fire_materials > 0 and can_fireball:
-		var fireball_instance = fireball_scene.instantiate()
-		
-		fireball_instance.direction = aim_direction
-		
-		self.add_child(fireball_instance)
-		fireball_instance.go_to_root()
-		
-		current_fire_materials -= 1
-		material_equipped_amount -= 1
-		can_fireball = false
-		casting = true
-		$Timers/FireballTimer.start()
-		$"..".pass_player_info()
+func hit(dmg):
+	current_health -= dmg
+	$"..".pass_player_info(self)
 
-
-func lightning_bolt():
-	pass
-
-func water_attack():
-	pass
-
-func _on_fireball_timer_timeout() -> void:
-	can_fireball = true
-	casting = false
-
-func _on_jump_timer_timeout() -> void:
-	can_jump = false
+func _on_jump_buffer_timer_timeout() -> void:
+	jump_buffer = false
