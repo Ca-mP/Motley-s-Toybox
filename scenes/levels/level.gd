@@ -1,10 +1,8 @@
 extends Node2D
 class_name Level
 
-@onready var player = $Player
-
 func _ready() -> void:
-	pass_player_info(player)
+	pass_player_info($Player)
 
 func _process(_delta: float) -> void:
 	pass_player_position()
@@ -20,4 +18,4 @@ func pass_player_info(player):
 	ui.update()
 
 func pass_player_position():
-	$Enemies.pass_player_position(player.get_global_position())
+	$Enemies.pass_player_position($Player.get_global_position())

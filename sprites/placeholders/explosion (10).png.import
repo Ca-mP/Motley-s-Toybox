@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk2yx7xq4gs4o"
-path="res://.godot/imported/Attack_1.png-e2a3906bad9dbdf672ea3bee9911e2d8.ctex"
+uid="uid://cbqgmxd22eki2"
+path="res://.godot/imported/explosion (10).png-88951c7043b3d4c38329c584bac5cd58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholders/Wanderer Magican/Attack_1.png"
-dest_files=["res://.godot/imported/Attack_1.png-e2a3906bad9dbdf672ea3bee9911e2d8.ctex"]
+source_file="res://sprites/placeholders/explosion (10).png"
+dest_files=["res://.godot/imported/explosion (10).png-88951c7043b3d4c38329c584bac5cd58.ctex"]
 
 [params]
 

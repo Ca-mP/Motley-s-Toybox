@@ -19,7 +19,7 @@ func enter_state():
 	animator.play("land")
 	animation_finished = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("spell") and actor.material_equipped_amount:
 		cast.emit()
 	elif actor.velocity.y > 0:

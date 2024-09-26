@@ -21,7 +21,7 @@ func enter_state():
 	pause_timer.start()
 	animator.play("idle")
 
-func _physics_process_(delta: float) -> void:
+func _physics_process_(_delta: float) -> void:
 	actor.velocity.x = 0
 	if actor.health <= 0 and in_state:
 		die.emit()

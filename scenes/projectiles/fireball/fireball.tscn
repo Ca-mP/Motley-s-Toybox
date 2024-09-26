@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://evojq1kigx0v"]
+[gd_scene load_steps=18 format=3 uid="uid://evojq1kigx0v"]
 
-[ext_resource type="Script" path="res://scenes/projectiles/fireball.gd" id="1_0e8py"]
+[ext_resource type="Script" path="res://scenes/projectiles/fireball/fireball.gd" id="1_0e8py"]
 [ext_resource type="Texture2D" uid="uid://d1attm51vmjkw" path="res://sprites/projectiles/Fireball_ThrowSpriteSheet.png" id="2_rgslp"]
+[ext_resource type="PackedScene" uid="uid://bjmurd4u8v6fo" path="res://scenes/projectiles/fireball/fireball_explosion.tscn" id="3_vdlcd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjbcf"]
 atlas = ExtResource("2_rgslp")
@@ -103,6 +104,7 @@ scale = Vector2(0.1, 0.1)
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_0e8py")
+explosion_scene = ExtResource("3_vdlcd")
 speed = 500
 damage = 2
 

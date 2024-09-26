@@ -2,17 +2,22 @@ extends Area2D
 
 @onready var direction: Vector2
 
+@export var explosion_scene: PackedScene
 @export var speed: int
 @export var damage: int
 
 @onready var original_position: Vector2
 
+var exploding: bool
+
 func _ready() -> void:
+	exploding = false
 	original_position.y -= 35
 	rotation = direction.angle()
 
 func _process(delta: float) -> void:
-	position += direction.normalized() * speed * delta
+	if not exploding:
+		position += direction.normalized() * speed * delta
 
 func go_to_root():
 	var parent = self.get_parent()
@@ -22,8 +27,11 @@ func go_to_root():
 		parent = self.get_parent()
 	position = original_position
 
-func _on_body_entered(body: Node2D) -> void:
-	if "hit" in body:
-		body.hit(damage)
-	if not body.name == "Player":
-		queue_free()
+func _on_body_entered(_body: Node2D) -> void:
+	explode()
+
+func explode():
+	exploding = true
+	var explosion = explosion_scene.instantiate()
+	self.call_deferred("add_child", explosion)
+	$AnimatedSprite2D.visible = false

@@ -1,9 +1,8 @@
 extends PlayerState
-class_name PlayerFireballState
 
 signal done
 
-var fireball_scene = preload("res://scenes/projectiles/fireball.tscn")
+var fireball_scene = preload("res://scenes/projectiles/fireball/fireball.tscn")
 
 func _ready() -> void:
 	super()

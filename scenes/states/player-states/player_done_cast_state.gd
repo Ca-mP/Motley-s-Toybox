@@ -12,7 +12,7 @@ func _ready() -> void:
 func enter_state():
 	super()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if actor.velocity.y > 0:
 		fall.emit()
 	elif actor.velocity.x == 0:

@@ -30,6 +30,7 @@ class_name Player
 @export var lightning_spell_state: State
 @export var water_spell_state: State
 @export var fireball_state: State
+@export var blast_jump_state: State
 
 @export var done_cast_state: State
 
@@ -72,8 +73,10 @@ func _ready() -> void:
 	cast_state.water_spell.connect(state_machine.change_state.bind(water_spell_state))
 	
 	fire_spell_state.fireball.connect(state_machine.change_state.bind(fireball_state))
+	fire_spell_state.blast_jump.connect(state_machine.change_state.bind(blast_jump_state))
 	
 	fireball_state.done.connect(state_machine.change_state.bind(done_cast_state))
+	blast_jump_state.done.connect(state_machine.change_state.bind(done_cast_state))
 	
 	done_cast_state.idle.connect(state_machine.change_state.bind(idle_state))
 	done_cast_state.walk.connect(state_machine.change_state.bind(walk_state))
@@ -135,11 +138,13 @@ func _physics_process(delta: float) -> void:
 		cycle_spell_right()
 	
 	#spell mode switching
-	#if Input.is_action_just_pressed("switch-mode"):
-		#if spell_mode == "attack":
-			#spell_mode == "utility"
-		#elif spell_mode == "utility":
-			#spell_mode == "attack"
+	if Input.is_action_just_pressed("switch-mode"):
+		var previous_mode = spell_mode
+		if previous_mode == "attack":
+			spell_mode = "utility"
+		elif previous_mode == "utility":
+			spell_mode = "attack"
+		print(spell_mode)
 
 	move_and_slide()
 
@@ -184,7 +189,6 @@ func cycle_spell_left():
 				switch_material("fire")
 
 func switch_material(player_material):
-	print(player_material)
 	match player_material:
 		"fire":
 			material_equipped = "fire"
