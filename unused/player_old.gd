@@ -38,7 +38,7 @@ var can_fireball := true
 
 var friction: float
 
-var fireball_scene = preload("res://scenes/projectiles/fireball.tscn")
+var fireball_scene = preload("res://scenes/projectiles/fireball/fireball.tscn")
 
 func _ready() -> void:
 	switch_material("fire")

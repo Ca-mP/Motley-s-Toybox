@@ -19,4 +19,6 @@ func on_body_entered(body):
 		body.burn()
 
 func animation_finished():
+	if "end" in $"..":
+		$"..".end()
 	queue_free()

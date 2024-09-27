@@ -18,9 +18,9 @@ func update():
 	
 	#get material icons and update the material icon
 	if player_material_equipped == "fire":
-		$TopBar/Materials/MaterialIcon.texture = fire_icon
+		material_icon.texture = fire_icon
 	elif player_material_equipped == "lightning":
-		$TopBar/Materials/MaterialIcon.texture = lightning_icon
+		material_icon.texture = lightning_icon
 	
 	material_counter.text = str(player_current_materials)
 	

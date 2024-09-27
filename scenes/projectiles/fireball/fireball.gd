@@ -35,3 +35,6 @@ func explode():
 	var explosion = explosion_scene.instantiate()
 	self.call_deferred("add_child", explosion)
 	$AnimatedSprite2D.visible = false
+
+func end():
+	queue_free()

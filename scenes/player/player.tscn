@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=27 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
 [ext_resource type="Texture2D" uid="uid://dsbhnd4lxp0du" path="res://sprites/player/WizSpriteSheet.png" id="2_stlx7"]
@@ -33,6 +33,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [24]
+}
+
+[sub_resource type="Animation" id="Animation_i02jb"]
+resource_name = "blast_jump"
+length = 0.250008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9]
 }
 
 [sub_resource type="Animation" id="Animation_ypg6x"]
@@ -136,23 +153,6 @@ tracks/0/keys = {
 "values": [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
 }
 
-[sub_resource type="Animation" id="Animation_i02jb"]
-resource_name = "blast_jump"
-length = 0.250008
-step = 0.0833333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [6, 7, 8, 9]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1qbk6"]
 _data = {
 "RESET": SubResource("Animation_iro6b"),
@@ -164,6 +164,9 @@ _data = {
 "spell": SubResource("Animation_m8ap6"),
 "walk": SubResource("Animation_lw0qb")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8d337"]
+radius = 15.1327
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "done_cast_state")]
 position = Vector2(420, 473)
@@ -249,7 +252,7 @@ actor = NodePath("../../../..")
 animator = NodePath("../../../../AnimationPlayer")
 
 [node name="PlayerBlastJumpState" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("actor", "animator") instance=ExtResource("11_nsdv2")]
-jump_velocity = 2000
+jump_velocity = 1000
 actor = NodePath("../../../..")
 animator = NodePath("../../../../AnimationPlayer")
 
@@ -281,9 +284,6 @@ position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_mieej")
 metadata/_edit_lock_ = true
 
-[node name="FloorCast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 3)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -294,5 +294,13 @@ libraries = {
 [node name="JumpBufferTimer" type="Timer" parent="."]
 wait_time = 0.2
 
+[node name="InteractBox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBox"]
+position = Vector2(-1, -38)
+shape = SubResource("CircleShape2D_8d337")
+
 [connection signal="timeout" from="StateMachine/PlayerJumpState/JumpTimer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="area_entered" from="InteractBox" to="." method="_on_interact_box_area_entered"]

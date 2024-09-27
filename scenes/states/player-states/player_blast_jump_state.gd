@@ -31,6 +31,13 @@ func exit_state():
 func on_animation_finished(anim_name):
 	if anim_name == "blast_jump":
 		var explosion = explosion_scene.instantiate()
+		explosion.original_position = actor.position
+		
 		actor.velocity.y = -jump_velocity
-		actor.call_deferred("add_child", explosion)
+		
+		self.add_child(explosion)
+		explosion.go_to_root()
+		
 		has_jumped = true
+		actor.has_blast_jumped = true
+		actor.pass_player_info()

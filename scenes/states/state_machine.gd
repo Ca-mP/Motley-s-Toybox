@@ -8,6 +8,7 @@ func _ready() -> void:
 	change_state(starting_state)
 
 func change_state(state):
+	print("New state: " + str(state))
 	if state is State:
 		if current_state:
 			current_state.exit_state()

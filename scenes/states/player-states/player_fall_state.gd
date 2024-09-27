@@ -10,7 +10,8 @@ func _ready() -> void:
 func enter_state():
 	super()
 	animator.play("fall")
-	actor.velocity.y /= 3
+	if actor.velocity.y < 0:
+		actor.velocity.y /= 3
 
 func _physics_process(_delta: float) -> void:
 	if actor.is_on_floor():

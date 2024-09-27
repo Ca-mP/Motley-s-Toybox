@@ -19,6 +19,7 @@ func enter_state():
 	set_physics_process(true)
 	in_state = true
 	pause_timer.start()
+	actor.velocity.x = 0
 	animator.play("idle")
 
 func _physics_process_(_delta: float) -> void:

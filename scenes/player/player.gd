@@ -35,6 +35,7 @@ class_name Player
 @export var done_cast_state: State
 
 @onready var spell_mode := "attack"
+@onready var has_blast_jumped := false
 @onready var can_cast: bool
 @onready var aim_direction: Vector2
 @onready var friction: int
@@ -74,6 +75,7 @@ func _ready() -> void:
 	
 	fire_spell_state.fireball.connect(state_machine.change_state.bind(fireball_state))
 	fire_spell_state.blast_jump.connect(state_machine.change_state.bind(blast_jump_state))
+	fire_spell_state.done.connect(state_machine.change_state.bind(done_cast_state))
 	
 	fireball_state.done.connect(state_machine.change_state.bind(done_cast_state))
 	blast_jump_state.done.connect(state_machine.change_state.bind(done_cast_state))
@@ -87,14 +89,14 @@ func _ready() -> void:
 	switch_material("fire")
 
 func _physics_process(delta: float) -> void:
-	
+
 		#MOVEMENT
 	
 	#gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	#movement
+	
+	#horizontal movement
 	direction = Input.get_axis("left", "right")
 	if direction: #if directional input
 		velocity.x += direction * acceleration * 0.3
@@ -109,8 +111,6 @@ func _physics_process(delta: float) -> void:
 	#friction
 	if is_on_floor():
 		friction = 5
-	else:
-		friction = 10
 	
 	#jump buffer
 	if Input.is_action_just_pressed("jump") and not is_on_floor():
@@ -119,7 +119,14 @@ func _physics_process(delta: float) -> void:
 	
 	if friction:
 		velocity.x = move_toward(velocity.x, 0, friction)
+
+
+		#INTERACTION
+	if Input.is_action_just_pressed("up"):
+		pass
 	
+
+
 		#SPELLS
 	
 	#getting aim direction
@@ -145,6 +152,10 @@ func _physics_process(delta: float) -> void:
 		elif previous_mode == "utility":
 			spell_mode = "attack"
 		print(spell_mode)
+	
+	#resetting blast jump
+	if is_on_floor() and state_machine.current_state != blast_jump_state:
+		has_blast_jumped = false
 
 	move_and_slide()
 
@@ -238,3 +249,7 @@ func hit(dmg):
 
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false
+
+func _on_interact_box_area_entered(area: Area2D) -> void:
+	if area is SaveIdol and Input.is_action_just_pressed("up"):
+		pass
