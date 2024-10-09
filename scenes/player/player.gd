@@ -55,6 +55,7 @@ func _ready() -> void:
 	
 	walk_state.idle.connect(state_machine.change_state.bind(idle_state))
 	walk_state.jump.connect(state_machine.change_state.bind(jump_state))
+	walk_state.fall.connect(state_machine.change_state.bind(fall_state))
 	walk_state.cast.connect(state_machine.change_state.bind(cast_state))
 	
 	jump_state.fall.connect(state_machine.change_state.bind(fall_state))
@@ -122,10 +123,13 @@ func _physics_process(delta: float) -> void:
 
 
 		#INTERACTION
-	if Input.is_action_just_pressed("up"):
-		pass
 	
-
+	if Input.is_action_just_pressed("up"):
+		var interact_areas = $InteractBox.get_overlapping_areas()
+		
+		for interact_area in interact_areas:
+			if "interact" in interact_area:
+				interact_area.interact()
 
 		#SPELLS
 	
@@ -151,7 +155,6 @@ func _physics_process(delta: float) -> void:
 			spell_mode = "utility"
 		elif previous_mode == "utility":
 			spell_mode = "attack"
-		print(spell_mode)
 	
 	#resetting blast jump
 	if is_on_floor() and state_machine.current_state != blast_jump_state:

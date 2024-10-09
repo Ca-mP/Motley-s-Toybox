@@ -5,13 +5,13 @@ class_name PlayerState
 @export var animator: AnimationPlayer
 
 func _ready() -> void:
-	super()
+	set_physics_process(false)
 
 func enter_state():
-	super()
+	set_physics_process(true)
 
 func _physics_process(_delta: float) -> void:
 	pass
 
 func exit_state():
-	super()
+	set_physics_process(false)

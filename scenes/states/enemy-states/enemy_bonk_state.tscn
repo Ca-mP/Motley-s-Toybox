@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl7hw7ycqww1v"]
+
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_bonk_state.gd" id="1_q5hue"]
+
+[node name="EnemyBonkState" type="Node"]
+script = ExtResource("1_q5hue")

@@ -4,13 +4,18 @@ signal done
 
 var fireball_scene = preload("res://scenes/projectiles/fireball/fireball.tscn")
 
+@export var fireball_timer: Timer
+
 func _ready() -> void:
 	super()
-	animator.animation_finished.connect(on_animation_finished)
+	fireball_timer.timeout.connect(on_timeout)
+	in_state = false
 
 func enter_state():
 	super()
+	in_state = true
 	animator.play("spell")
+	fireball_timer.start()
 	
 	var fireball_instance = fireball_scene.instantiate()
 	
@@ -25,9 +30,12 @@ func enter_state():
 	
 	actor.pass_player_info()
 
-func on_animation_finished(anim_name):
-	if anim_name == "spell":
+func on_timeout():
+	if in_state:
 		done.emit()
+	else:
+		fireball_timer.stop()
 
 func exit_state():
 	super()
+	in_state = false

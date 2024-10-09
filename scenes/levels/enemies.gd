@@ -1,4 +1,5 @@
 extends Node2D
+class_name LevelEnemies
 
 var children: Dictionary
 

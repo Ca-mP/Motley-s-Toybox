@@ -1,8 +1,4 @@
-	-Add save rooms
--Add room ids
--Add loading player info when starts level
-
--Add Ability doors
+-Add Skeleton Enemy
 -Add level
 -Add thunder attack
 -Add particles

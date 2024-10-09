@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwstlh2463k4l"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_d4qek"]
+[ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="2_ae0ju"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_pause_state.gd" id="3_sg0ls"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_shock_state.gd" id="4_5iub1"]
+[ext_resource type="Texture2D" uid="uid://cl7byd0jfmory" path="res://icon.svg" id="5_h8sdn"]
+
+[sub_resource type="Animation" id="Animation_twwbs"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_yef7v"]
+resource_name = "shock"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utp5w"]
+_data = {
+"idle": SubResource("Animation_twwbs"),
+"shock": SubResource("Animation_yef7v")
+}
+
+[node name="Test" type="Node2D"]
+
+[node name="Enemy" type="CharacterBody2D" parent="."]
+script = ExtResource("1_d4qek")
+
+[node name="StateMachine" type="Node" parent="Enemy" node_paths=PackedStringArray("starting_state")]
+script = ExtResource("2_ae0ju")
+starting_state = NodePath("EnemyPauseState")
+
+[node name="EnemyPauseState" type="Node" parent="Enemy/StateMachine" node_paths=PackedStringArray("actor", "animator", "pause_timer")]
+script = ExtResource("3_sg0ls")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+pause_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Enemy/StateMachine/EnemyPauseState"]
+
+[node name="EnemyShockState" type="Node" parent="Enemy/StateMachine" node_paths=PackedStringArray("actor", "animator", "sprite")]
+script = ExtResource("4_5iub1")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
+libraries = {
+"": SubResource("AnimationLibrary_utp5w")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("5_h8sdn")

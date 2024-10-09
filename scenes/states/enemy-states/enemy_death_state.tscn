@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfotkibnmnr8w"]
+
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_death_state.gd" id="1_b0f8u"]
+
+[node name="EnemyDeathState" type="Node"]
+script = ExtResource("1_b0f8u")

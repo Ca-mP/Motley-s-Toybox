@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name GameUI
 
 @export var player_max_health: int
 @export var player_current_health: int

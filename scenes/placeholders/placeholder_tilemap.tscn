@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://ccxtee0n3tigv"]
 
-[ext_resource type="Texture2D" uid="uid://bpq71ssg7na0r" path="res://sprites/Swamp 2D Platformer Tileset.png" id="1_1umg0"]
+[ext_resource type="Texture2D" uid="uid://bpq71ssg7na0r" path="res://sprites/placeholders/Swamp 2D Platformer Tileset.png" id="1_1umg0"]
 [ext_resource type="Script" path="res://scenes/placeholders/placeholder_tilemap.gd" id="2_0ojkh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l01nh"]
