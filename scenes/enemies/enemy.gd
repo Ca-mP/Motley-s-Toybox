@@ -14,7 +14,7 @@ class_name Enemy
 var ground_on_left: bool
 var ground_on_right: bool
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if left_feeler.is_colliding():
 		ground_on_left = true
 	else:

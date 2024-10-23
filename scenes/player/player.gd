@@ -4,9 +4,11 @@ class_name Player
 @export_category("Character")
 @export var max_health: int
 @export var current_health: int
-@export var material_equipped: String
 @export var max_speed: int
 @export var acceleration: int
+
+@export_category("Equipped")
+@export var equipped_material := {"material": null, "max": null, "current": null}
 
 @export_category("Fire")
 @export var fire_material := {"unlocked": true, "max": 20, "current": 20}
@@ -34,15 +36,17 @@ class_name Player
 
 @export var done_cast_state: State
 
+@export var stun_state: State
+@export var death_state: State
+
 @onready var spell_mode := "attack"
 @onready var has_blast_jumped := false
 @onready var can_cast: bool
 @onready var aim_direction: Vector2
 @onready var friction: int
-@onready var material_equipped_amount: int
-@onready var material_equipped_max: int
 
 var direction
+var stunned := false
 var jump_buffer: bool
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -86,11 +90,12 @@ func _ready() -> void:
 	done_cast_state.jump.connect(state_machine.change_state.bind(jump_state))
 	done_cast_state.fall.connect(state_machine.change_state.bind(fall_state))
 	
-	#setting these
-	switch_material("fire")
+	stun_state.end_stun.connect(state_machine.change_state.bind(done_cast_state))
+	stun_state.die.connect(state_machine.change_state.bind(death_state))
+
+
 
 func _physics_process(delta: float) -> void:
-
 		#MOVEMENT
 	
 	#gravity
@@ -98,16 +103,18 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	#horizontal movement
-	direction = Input.get_axis("left", "right")
-	if direction: #if directional input
-		velocity.x += direction * acceleration * 0.3
-		velocity.x = clamp(velocity.x, -max_speed, max_speed)
+	if not stunned:
+		direction = Input.get_axis("left", "right")
+		if direction: #if directional input
+			velocity.x += direction * acceleration * 0.3
+			velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	
 	#Flip player to direction they are moving
-	if direction < 0:
-		$Sprite2D.flip_h = true
-	if direction > 0:
-		$Sprite2D.flip_h = false
+	if not stunned:
+		if direction < 0:
+			$Sprite2D.flip_h = true
+		if direction > 0:
+			$Sprite2D.flip_h = false
 	
 	#friction
 	if is_on_floor():
@@ -130,6 +137,17 @@ func _physics_process(delta: float) -> void:
 		for interact_area in interact_areas:
 			if "interact" in interact_area:
 				interact_area.interact()
+
+		#DAMAGE
+	
+	#stun + iframes
+	if stunned:
+		set_collision_mask_value(3, false)
+		set_collision_mask_value(5, false)
+	else:
+		set_collision_mask_value(3, true)
+		set_collision_mask_value(5, true)
+	
 
 		#SPELLS
 	
@@ -159,11 +177,11 @@ func _physics_process(delta: float) -> void:
 	#resetting blast jump
 	if is_on_floor() and state_machine.current_state != blast_jump_state:
 		has_blast_jumped = false
-
+	
 	move_and_slide()
 
 func cycle_spell_right():
-	match material_equipped:
+	match equipped_material.material:
 		"fire":
 			if lightning_material.unlocked:
 				switch_material("lightning")
@@ -183,7 +201,7 @@ func cycle_spell_right():
 				switch_material("lightning")
 
 func cycle_spell_left():
-	match material_equipped:
+	match equipped_material.material:
 		"fire":
 			if water_material.unlocked:
 				switch_material("water")
@@ -205,21 +223,22 @@ func cycle_spell_left():
 func switch_material(player_material):
 	match player_material:
 		"fire":
-			material_equipped = "fire"
-			material_equipped_amount = fire_material.current
-			material_equipped_max = fire_material.max
+			equipped_material.material = "fire"
+			equipped_material.current = fire_material.current
+			equipped_material.max = fire_material.max
 		"water":
-			material_equipped = "water"
-			material_equipped_amount = water_material.current
-			material_equipped_max = water_material.max
+			equipped_material.material = "water"
+			equipped_material.amount = water_material.current
+			equipped_material.max = water_material.max
 		"lightning":
-			material_equipped = "lightning"
-			material_equipped_amount = lightning_material.current
-			material_equipped_max = lightning_material.max
+			equipped_material.material = "lightning"
+			equipped_material.current = lightning_material.current
+			equipped_material.max = lightning_material.max
+		_:
+			print("material switch invalid")
 	$"..".pass_player_info(self)
 
 func pickup(type, quantity):
-
 	match type:
 		
 		"fire":
@@ -234,11 +253,11 @@ func pickup(type, quantity):
 		"satchel":
 			fire_material.current = fire_material.max
 			lightning_material.current = lightning_material.max
-	
-	if type == material_equipped:
-		material_equipped_amount += quantity
+			
+	if type == equipped_material.material:
+		equipped_material.current += quantity
 		
-	material_equipped_amount = clamp(material_equipped_amount, 0, material_equipped_max)
+	equipped_material.current = clamp(equipped_material.current, 0, equipped_material.max)
 	fire_material.current = clamp(fire_material.current, 0, fire_material.max)
 	lightning_material.current = clamp(lightning_material.current, 0, lightning_material.max)
 	$"..".pass_player_info(self)
@@ -249,6 +268,7 @@ func pass_player_info():
 func hit(dmg):
 	current_health -= dmg
 	$"..".pass_player_info(self)
+	state_machine.change_state(stun_state)
 
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false
@@ -256,3 +276,8 @@ func _on_jump_buffer_timer_timeout() -> void:
 func _on_interact_box_area_entered(area: Area2D) -> void:
 	if area is SaveIdol and Input.is_action_just_pressed("up"):
 		pass
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	print(body)
+	if body is Enemy:
+		hit(1)

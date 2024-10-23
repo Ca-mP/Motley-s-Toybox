@@ -67,7 +67,5 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "-WASD to move
 -Space to jump
--V to change spell mode
--Shift to cast spell
--You can aim your fireball 
-in 8 directions"
+-J to change spell mode
+-H to cast spell"

@@ -26,7 +26,7 @@ func enter_state():
 	fireball_instance.go_to_root()
 	
 	actor.fire_material.current -= 1
-	actor.material_equipped_amount -= 1
+	actor.equipped_material.current -= 1
 	
 	actor.pass_player_info()
 

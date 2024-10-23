@@ -6,6 +6,9 @@ class_name Room
 @export var save_points: LevelSavePoints
 @export var doors: LevelDoors
 @export var ui: CanvasLayer
+@export var camera: Camera2D
+@export var camera_limiter_bl: Node2D
+@export var camera_limiter_tr: Node2D
 
 var save_path = "user://wizard-save-file.save"
 
@@ -22,29 +25,45 @@ var water_max
 
 func _ready() -> void:
 	pass_player_info(player)
+	set_camera_limits()
+
+func set_camera_limits():
+	camera.limit_left = camera_limiter_bl.position.x
+	camera.limit_bottom = camera_limiter_bl.position.y
+	camera.limit_right = camera_limiter_tr.position.x
+	camera.limit_top = camera_limiter_tr.position.y
 
 func _process(_delta: float) -> void:
-	pass_player_position()
+	if is_instance_valid(player):
+		pass_player_position()
 
 func pass_player_info(_player):
 	ui.player_max_health = _player.max_health
 	ui.player_current_health = _player.current_health
-	ui.player_material_equipped = _player.material_equipped
-	ui.player_current_materials = _player.material_equipped_amount
+	ui.player_material_equipped = _player.equipped_material.material
+	ui.player_current_materials = _player.equipped_material.current
 	
 	ui.update()
 
 func pass_player_position():
-	enemies.pass_player_position(player.position)
+	if player:
+		enemies.pass_player_position(player.position)
 
 func change_room(from_id, to_id):
 	$"..".change_room(from_id, to_id)
 
-func put_player_at_door(id):
-	for door in doors.get_children():
-		if door.to_id == id:
-			player.position = door.position
-	player.velocity = Vector2.ZERO
+func put_player_at_door(room_id):
+	for child in doors.get_children(): #getting all doors
+		if child is RoomDoor:
+			var door = child
+			if door.to_id == room_id: #checking if id from door player went through matches
+				player.position = door.position #putting player at door
+				if door.upwards:
+					player.velocity.y = 200 #making player fall if coming through upwards door
+				if door.downwards:
+					player.velocity.y = -200 #making player rise if coming through downwards door
+				return
+	print("ERROR: No door with matching id")
 
 func save(save_area, save_id):
 	var file = FileAccess.open(save_path, FileAccess.WRITE)

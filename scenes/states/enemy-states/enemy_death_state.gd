@@ -16,6 +16,9 @@ func enter_state():
 	in_state = true
 
 func _physics_process(_delta: float) -> void:
+	actor.set_collision_layer_value(3, false)
+	actor.set_collision_mask_value(1, false)
+	actor.set_collision_mask_value(4, false)
 	actor.velocity = Vector2.ZERO
 	animator.play("death")
 

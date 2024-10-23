@@ -6,6 +6,21 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_1yg3e"]
 radius = 14.0357
 
+[sub_resource type="Animation" id="Animation_hcb8b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_na7ly"]
 resource_name = "default"
 loop_mode = 1
@@ -23,21 +38,6 @@ tracks/0/keys = {
 "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
 
-[sub_resource type="Animation" id="Animation_hcb8b"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jc7yy"]
 _data = {
 "RESET": SubResource("Animation_hcb8b"),
@@ -53,7 +53,7 @@ area = NodePath(".")
 starting_velocity = Vector2(-30, -50)
 speed = 5
 projectile_gravity = 1.0
-damage = 1
+damage = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.05, 0.05)

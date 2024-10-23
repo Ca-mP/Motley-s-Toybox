@@ -20,7 +20,7 @@ func enter_state():
 	animation_finished = false
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("spell") and actor.material_equipped_amount:
+	if Input.is_action_pressed("spell") and actor.equipped_material.current:
 		cast.emit()
 	elif actor.velocity.y > 0:
 		fall.emit()

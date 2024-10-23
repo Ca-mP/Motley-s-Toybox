@@ -18,7 +18,7 @@ func enter_state():
 	animator.play("blast_jump")
 	
 	actor.fire_material.current -= 1
-	actor.material_equipped_amount -= 1
+	actor.equipped_material.current -= 1
 	
 
 func _physics_process(_delta: float) -> void:

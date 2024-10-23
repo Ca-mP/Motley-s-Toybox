@@ -18,7 +18,7 @@ func enter_state():
 func _physics_process(_delta: float) -> void:
 	if actor.is_on_floor():
 		land.emit()
-	if Input.is_action_pressed("spell") and actor.material_equipped_amount:
+	if Input.is_action_pressed("spell") and actor.equipped_material.current:
 		cast.emit()
 
 func animation_finished(anim_name):
