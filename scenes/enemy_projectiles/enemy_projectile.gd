@@ -31,5 +31,5 @@ func go_to_root():
 
 func on_body_entered(body: Node2D) -> void:
 	if "hit" in body:
-		body.hit(damage)
+		body.hit(damage, direction)
 	queue_free()

@@ -36,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 	if atk_area.get_overlapping_bodies() and can_hit_wall:
 		hit.emit()
 		if "hit" in atk_area.get_overlapping_bodies()[0]:
-			atk_area.get_overlapping_bodies()[0].hit(actor.damage)
+			atk_area.get_overlapping_bodies()[0].hit(actor.damage, direction)
 
 func exit_state():
 	can_hit_wall = false

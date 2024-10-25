@@ -265,10 +265,11 @@ func pickup(type, quantity):
 func pass_player_info():
 	$"..".pass_player_info(self)
 
-func hit(dmg):
+func hit(dmg: int, direction: int):
 	current_health -= dmg
 	$"..".pass_player_info(self)
 	state_machine.change_state(stun_state)
+	stun_state.direction = direction
 
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false
@@ -278,6 +279,8 @@ func _on_interact_box_area_entered(area: Area2D) -> void:
 		pass
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	print(body)
 	if body is Enemy:
-		hit(1)
+		if body.position.x < position.x:
+			hit(1, -1)
+		elif body.position.x > position.x:
+			hit(1, 1)

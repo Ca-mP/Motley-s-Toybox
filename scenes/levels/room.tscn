@@ -32,7 +32,6 @@ camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
 
 [node name="Player" parent="." instance=ExtResource("2_h774q")]
 position = Vector2(-131, 202)
-collision_mask = 22
 acceleration = 70
 equipped_material = {
 "current": 15,
