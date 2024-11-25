@@ -9,6 +9,8 @@ extends Enemy
 @export var shoot_state: State
 @export var death_state: State
 
+var direction := 1
+
 func _ready() -> void:
 	pause_state.saw_player.connect(state_machine.change_state.bind(shoot_state))
 	pause_state.no_player.connect(state_machine.change_state.bind(walk_state))
@@ -32,5 +34,7 @@ func _process(delta: float) -> void:
 		
 	if player_position < position:
 		face_left()
+		direction = -1
 	if player_position > position:
 		face_right()
+		direction = 1

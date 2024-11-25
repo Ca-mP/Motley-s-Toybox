@@ -10,6 +10,7 @@ signal attack_done
 func _ready() -> void:
 	set_physics_process(false)
 	in_state = false
+	animator.animation_finished.connect(_on_animation_player_animation_finished)
 
 func enter_state():
 	set_physics_process(true)
@@ -22,6 +23,7 @@ func exit_state():
 	in_state = false
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	print("animation over")
 	if anim_name == "attack" and in_state:
 		throw_projectile()
 		animator.play("attack2")
