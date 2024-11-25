@@ -137,7 +137,6 @@ pause_state = NodePath("StateMachine/EnemyPauseState")
 death_state = NodePath("StateMachine/EnemyDeathState")
 health = 3
 damage = 2
-attack_type = "ranged"
 left_feeler = NodePath("FloorFeelers/FeelerLeft")
 right_feeler = NodePath("FloorFeelers/FeelerRight")
 

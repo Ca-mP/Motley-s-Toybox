@@ -265,11 +265,11 @@ func pickup(type, quantity):
 func pass_player_info():
 	$"..".pass_player_info(self)
 
-func hit(dmg: int, direction: int):
+func hit(dmg: int, from_direction: int):
 	current_health -= dmg
 	$"..".pass_player_info(self)
+	stun_state.direction = from_direction
 	state_machine.change_state(stun_state)
-	stun_state.direction = direction
 
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false

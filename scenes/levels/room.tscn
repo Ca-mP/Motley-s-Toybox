@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bjt1xj1uah3w7"]
+[gd_scene load_steps=14 format=4 uid="uid://bjt1xj1uah3w7"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_6yx37"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_h774q"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="5_pw1xp"]
 [ext_resource type="Script" path="res://scenes/levels/save_points.gd" id="6_1b8gm"]
 [ext_resource type="PackedScene" uid="uid://co5imygm81kiq" path="res://scenes/levels/props/save_idol.tscn" id="7_u6qpl"]
-[ext_resource type="PackedScene" uid="uid://cjujgg3nn4ytq" path="res://scenes/enemies/teddy/teddy_bear.tscn" id="9_3gts6"]
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="9_8m2f5"]
 [ext_resource type="PackedScene" uid="uid://bjeocburd6f8n" path="res://scenes/environment/doors/doors.tscn" id="10_6n2id"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="11_7nn7y"]
@@ -88,9 +87,6 @@ metadata/_edit_lock_ = true
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource("3_ltrxl")
 metadata/_edit_lock_ = true
-
-[node name="TeddyBear" parent="Enemies" instance=ExtResource("9_3gts6")]
-position = Vector2(89, 190)
 
 [node name="Pickups" type="Node2D" parent="."]
 metadata/_edit_lock_ = true

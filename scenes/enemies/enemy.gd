@@ -3,7 +3,6 @@ class_name Enemy
 
 @export var health: int
 @export var damage: int
-@export var attack_type: String #ranged, melee, special
 @export var pivot: Node2D
 @export var player_position := Vector2.ZERO
 @export var left_feeler: RayCast2D
@@ -24,6 +23,7 @@ func _process(_delta: float) -> void:
 		ground_on_right = true
 	else:
 		ground_on_right = false
+	move_and_slide()
 
 func hit(dmg):
 	health -= dmg

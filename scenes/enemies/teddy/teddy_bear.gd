@@ -55,7 +55,6 @@ func _process(delta: float) -> void:
 		state_machine.change_state(death_state)
 	
 	apply_floor_snap()
-	move_and_slide()
 
 func change_random_walk_pause():
 	var n = random_walk_pause()

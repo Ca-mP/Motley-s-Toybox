@@ -12,4 +12,4 @@ func change_state(state: State):
 		current_state.exit_state()
 	state.enter_state()
 	current_state = state
-	#print("new state: " + str(state))
+	print("new state: " + str(state))

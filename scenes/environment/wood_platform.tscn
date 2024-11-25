@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwd5qr63pwq63"]
+
+[ext_resource type="Script" path="res://scenes/environment/wood_platform.gd" id="1_i7ryi"]
+[ext_resource type="Texture2D" uid="uid://b303nqx5qyl20" path="res://sprites/level/wood-platform.png" id="1_qg51n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcm8t"]
+size = Vector2(128, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn4jn"]
+size = Vector2(136, 20)
+
+[node name="WoodPlatform" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_i7ryi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_qg51n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lcm8t")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pn4jn")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
