@@ -5,6 +5,7 @@ signal done
 var fireball_scene = preload("res://scenes/projectiles/fireball/fireball.tscn")
 
 @export var fireball_timer: Timer
+@export var particles: CPUParticles2D
 
 func _ready() -> void:
 	super()
@@ -24,6 +25,7 @@ func enter_state():
 	
 	self.add_child(fireball_instance)
 	fireball_instance.go_to_root()
+	particles.emitting = true
 	
 	actor.fire_material.current -= 1
 	actor.equipped_material.current -= 1

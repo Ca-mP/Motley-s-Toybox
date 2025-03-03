@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://myfp0giaggo2"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_bukiv"]
-[ext_resource type="PackedScene" uid="uid://co5vqs307pwat" path="res://scenes/rooms/room_test.tscn" id="2_fdnke"]
+[ext_resource type="PackedScene" uid="uid://csmal7pohqmjg" path="res://scenes/rooms/room_11.tscn" id="2_tcvji"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_bukiv")
 
-[node name="RoomTest" parent="." instance=ExtResource("2_fdnke")]
+[node name="Room11" parent="." instance=ExtResource("2_tcvji")]

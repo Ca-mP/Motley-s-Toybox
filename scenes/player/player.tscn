@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=34 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
 [ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_3e7yi"]
@@ -28,12 +28,18 @@ height = 62.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8d337"]
 radius = 15.1327
 
+[sub_resource type="Gradient" id="Gradient_kl3n2"]
+colors = PackedColorArray(0.939022, 0, 0.0871376, 1, 0.968876, 0.816621, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_npkfg"]
+colors = PackedColorArray(0.925973, 0, 0.217957, 1, 0.964882, 0.778588, 1.54018e-06, 1)
+
 [sub_resource type="Animation" id="Animation_iro6b"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -45,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/path = NodePath("Pivot/Sprite2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -62,7 +68,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +85,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -96,7 +102,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -113,7 +119,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -129,7 +135,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -146,7 +152,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -163,7 +169,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -180,7 +186,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -192,7 +198,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/path = NodePath("Pivot/Sprite2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -209,7 +215,7 @@ step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -248,7 +254,7 @@ equipped_material = {
 }
 fire_material = {
 "current": 50,
-"max": 100,
+"max": 50,
 "unlocked": true
 }
 lightning_material = {
@@ -279,11 +285,13 @@ death_state = NodePath("StateMachine/PlayerDeathState")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 6
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -32.5)
 shape = SubResource("RectangleShape2D_a5oih")
 debug_color = Color(0.883108, 0.334748, 0, 0.42)
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -32)
@@ -293,13 +301,44 @@ metadata/_edit_lock_ = true
 [node name="InteractBox" type="Area2D" parent="."]
 self_modulate = Color(0.294278, 0.637678, 0.191592, 1)
 collision_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBox"]
 position = Vector2(-1, -38)
 shape = SubResource("CircleShape2D_8d337")
 debug_color = Color(0.201603, 0.64091, 3.85046e-07, 0.42)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Particles" type="Node2D" parent="Pivot"]
+
+[node name="FireballParticles" type="CPUParticles2D" parent="Pivot/Particles"]
+position = Vector2(16, -40)
+emitting = false
+amount = 20
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+lifetime_randomness = 1.0
+spread = 17.13
+gravity = Vector2(1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+color_ramp = SubResource("Gradient_kl3n2")
+
+[node name="BlastJumpParticles" type="CPUParticles2D" parent="Pivot/Particles"]
+position = Vector2(1, -4)
+emitting = false
+amount = 70
+lifetime = 2.0
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector2(0, 10)
+color_ramp = SubResource("Gradient_npkfg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 position = Vector2(-3, -29)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("15_8vpfr")
@@ -357,17 +396,19 @@ script = ExtResource("9_rxxqp")
 actor = NodePath("../../..")
 animator = NodePath("../../../AnimationPlayer")
 
-[node name="PlayerFireballState" type="Node" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("fireball_timer", "actor", "animator")]
+[node name="PlayerFireballState" type="Node" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("fireball_timer", "particles", "actor", "animator")]
 script = ExtResource("8_3rjay")
 fireball_timer = NodePath("FireballTimer")
+particles = NodePath("../../../../Pivot/Particles/FireballParticles")
 actor = NodePath("../../../..")
 animator = NodePath("../../../../AnimationPlayer")
 
 [node name="FireballTimer" type="Timer" parent="StateMachine/PlayerCastState/PlayerFireSpellState/PlayerFireballState"]
 wait_time = 0.5
 
-[node name="PlayerBlastJumpState" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("actor", "animator") instance=ExtResource("11_nsdv2")]
+[node name="PlayerBlastJumpState" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("particles", "actor", "animator") instance=ExtResource("11_nsdv2")]
 jump_velocity = 1000
+particles = NodePath("../../../../Pivot/Particles/BlastJumpParticles")
 actor = NodePath("../../../..")
 animator = NodePath("../../../../AnimationPlayer")
 

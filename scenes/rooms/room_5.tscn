@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bev6wxe0iky40"]
+[gd_scene load_steps=11 format=4 uid="uid://bev6wxe0iky40"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_2pprq"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_xicfx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="5_n6cvt"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="6_hgpft"]
 [ext_resource type="Script" path="res://scenes/levels/save_points.gd" id="7_ynmjp"]
+[ext_resource type="PackedScene" uid="uid://d8b5urny8w3u" path="res://scenes/pickups/fire_pickup.tscn" id="8_cvfan"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="8_qjoxq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7cro"]
@@ -61,5 +62,11 @@ position = Vector2(-367, 370)
 
 [node name="CameraLimiterTR" type="Node2D" parent="CameraLimiters"]
 position = Vector2(275, -13)
+
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="FirePickup" parent="Pickups" instance=ExtResource("8_cvfan")]
+position = Vector2(75, 229)
+quantity = 10
 
 [node name="UI" parent="." instance=ExtResource("8_qjoxq")]

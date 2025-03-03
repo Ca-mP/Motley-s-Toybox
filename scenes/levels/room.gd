@@ -7,35 +7,32 @@ class_name Room
 @export var doors: LevelDoors
 @export var ui: CanvasLayer
 @export var camera: Camera2D
-@export var camera_limiter_bl: Node2D
-@export var camera_limiter_tr: Node2D
 
 var save_path = "user://wizard-save-file.save"
 
-var area
-var id
-
-var max_health
-var fire_unlocked
-var fire_max
-var lightning_unlocked
-var lightning_max
-var water_unlocked
-var water_max
+var zooming_out := false
 
 func _ready() -> void:
 	pass_player_info(player)
 	set_camera_limits()
 
+@export var camera_limiter_bl: Node2D
+@export var camera_limiter_tr: Node2D
+
 func set_camera_limits():
-	camera.limit_left = camera_limiter_bl.position.x
-	camera.limit_bottom = camera_limiter_bl.position.y
-	camera.limit_right = camera_limiter_tr.position.x
-	camera.limit_top = camera_limiter_tr.position.y
+	camera.limit_left = int(camera_limiter_bl.position.x)
+	camera.limit_bottom = int(camera_limiter_bl.position.y)
+	camera.limit_right = int(camera_limiter_tr.position.x)
+	camera.limit_top = int(camera_limiter_tr.position.y)
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(player):
 		pass_player_position()
+	
+	if zooming_out:
+		camera.zoom -= Vector2(0.01, 0.01)
+		if camera.zoom.x <= 1:
+			zooming_out = false
 
 func pass_player_info(_player):
 	ui.player_max_health = _player.max_health
@@ -64,6 +61,25 @@ func put_player_at_door(room_id):
 					player.velocity.y = -200 #making player rise if coming through downwards door
 				return
 	print("ERROR: No door with matching id")
+
+@onready var level_gates = $LevelGates
+
+func open_gates():
+	level_gates.open_gates()
+
+func close_doors():
+	level_gates.close_gates()
+
+var area
+var id
+
+var max_health
+var fire_unlocked
+var fire_max
+var lightning_unlocked
+var lightning_max
+var water_unlocked
+var water_max
 
 func save(save_area, save_id):
 	var file = FileAccess.open(save_path, FileAccess.WRITE)

@@ -7,11 +7,19 @@ class_name Enemy
 @export var player_position := Vector2.ZERO
 @export var left_feeler: RayCast2D
 @export var right_feeler: RayCast2D
+@export var faces_player: bool
 
 @onready var player_in_range
 
+var direction_to_player: int
 var ground_on_left: bool
 var ground_on_right: bool
+
+func _ready() -> void:
+	set_physics_process(false)
+
+func enter_state():
+	set_physics_process(true)
 
 func _process(_delta: float) -> void:
 	if left_feeler.is_colliding():
@@ -23,13 +31,28 @@ func _process(_delta: float) -> void:
 		ground_on_right = true
 	else:
 		ground_on_right = false
+		
+		if player_position.x > global_position.x:
+			direction_to_player = 1
+			if faces_player:
+				face_right()
+		elif player_position.x < global_position.x:
+			direction_to_player = -1
+			if faces_player:
+				face_left()
+		
+	if health <= 0:
+		die()
 	move_and_slide()
+
+func exit_state():
+	set_physics_process(false)
 
 func hit(dmg):
 	health -= dmg
 
 func die():
-	queue_free()
+	pass
 
 func face_left():
 	pivot.scale.x = -1

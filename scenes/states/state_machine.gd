@@ -10,6 +10,9 @@ func _ready() -> void:
 func change_state(state: State):
 	if current_state:
 		current_state.exit_state()
+		#if $"..".name != "Player":
+			#print("old state: " + str(current_state))
 	state.enter_state()
 	current_state = state
-	print("new state: " + str(state))
+	#if $"..".name != "Player":
+		#print("new state: " + str(state))

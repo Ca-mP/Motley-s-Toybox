@@ -1,16 +1,6 @@
-
-	Continue Level
--Room 8
--Room 9
--Room 10
--Room 11
--Room 12
--Room 13
--Add enemies
--Add items
--Add boss
-
+-Add Key Gate
+-Add Sound
+-Add Background
+-Remake Tileset(?)
 -Add thunder attack
--Add particles
--Add boss
 -Add lighting system

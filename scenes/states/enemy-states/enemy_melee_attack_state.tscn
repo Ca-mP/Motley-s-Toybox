@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c23gf2k3ua8s8"]
+
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_melee_attack_state.gd" id="1_b1jhi"]
+
+[node name="EnemyMeleeAttackState" type="Node"]
+script = ExtResource("1_b1jhi")

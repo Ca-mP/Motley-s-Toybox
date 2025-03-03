@@ -45,6 +45,16 @@ func change_room(from_id, to_id):
 			new_room = preload("res://scenes/rooms/room_9.tscn")
 		10:
 			new_room = preload("res://scenes/rooms/room_10.tscn")
+		11:
+			new_room = preload("res://scenes/rooms/room_11.tscn")
+		12:
+			new_room = preload("res://scenes/rooms/room_12.tscn")
+		13:
+			new_room = preload("res://scenes/rooms/room_13.tscn")
+		14:
+			new_room = preload("res://scenes/rooms/room_14.tscn")
+		15:
+			new_room = preload("res://scenes/rooms/room_15.tscn")
 		_:
 			print("no level found with matching id")
 			return

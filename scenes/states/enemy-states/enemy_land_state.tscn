@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://caiuc4hnlt3ij"]
+
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_land_state.gd" id="1_wvulj"]
+
+[node name="EnemyLandState" type="Node"]
+script = ExtResource("1_wvulj")

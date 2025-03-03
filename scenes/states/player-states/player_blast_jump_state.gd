@@ -2,6 +2,7 @@ extends PlayerState
 
 @export var explosion_scene: PackedScene
 @export var jump_velocity: int
+@export var particles: CPUParticles2D
 
 signal done
 
@@ -22,11 +23,18 @@ func enter_state():
 	
 
 func _physics_process(_delta: float) -> void:
+	if actor.velocity.y < 0:
+		particles.emitting = true
+	else:
+		particles.emitting = false
+	
 	if actor.velocity.y >= 0 and has_jumped:
 		done.emit()
+		particles.emitting = false
 
 func exit_state():
 	super()
+	particles.emitting = false
 
 func on_animation_finished(anim_name):
 	if anim_name == "blast_jump":

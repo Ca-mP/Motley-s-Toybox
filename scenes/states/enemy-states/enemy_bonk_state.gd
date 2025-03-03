@@ -4,7 +4,7 @@ class_name EnemyBonkState
 @export var actor: Enemy
 @export var animator: AnimationPlayer
 
-signal player_seen
+signal saw_player
 signal no_player
 
 func _ready() -> void:
@@ -28,6 +28,6 @@ func exit_state():
 func on_animation_finished(anim_name):
 	if anim_name == "bonk":
 		if actor.player_in_range:
-			player_seen.emit()
+			saw_player.emit()
 		else:
 			no_player.emit()

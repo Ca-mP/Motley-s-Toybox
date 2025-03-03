@@ -112,9 +112,9 @@ func _physics_process(delta: float) -> void:
 	#Flip player to direction they are moving
 	if not stunned:
 		if direction < 0:
-			$Sprite2D.flip_h = true
+			$Pivot.scale.x = -1
 		if direction > 0:
-			$Sprite2D.flip_h = false
+			$Pivot.scale.x = 1
 	
 	#friction
 	if is_on_floor():
@@ -155,7 +155,7 @@ func _physics_process(delta: float) -> void:
 	if Input.get_vector("left", "right", "up", "down") != Vector2.ZERO:
 		aim_direction = Input.get_vector("left", "right", "up", "down")
 	else:
-		if $Sprite2D.flip_h == true:
+		if $Pivot.scale.x == -1:
 			aim_direction = Vector2(-1, 0)
 		else:
 			aim_direction = Vector2(1, 0)
@@ -253,6 +253,10 @@ func pickup(type, quantity):
 		"satchel":
 			fire_material.current = fire_material.max
 			lightning_material.current = lightning_material.max
+		
+		"key":
+			GameState.dungeon_key_found = true
+			return
 			
 	if type == equipped_material.material:
 		equipped_material.current += quantity

@@ -19,8 +19,8 @@ func _ready() -> void:
 
 func enter_state():
 	in_state = true
+	walk_timer.wait_time = 2
 	walk_timer.start()
-	
 	#setting random direction to walk
 	direction_var = randi_range(0, 1)
 	if direction_var == 0:
@@ -44,4 +44,5 @@ func walk_timer_timeout():
 
 func exit_state():
 	set_physics_process(false)
+	walk_timer.stop()
 	in_state = false

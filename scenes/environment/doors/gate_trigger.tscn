@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://hl58jxql6qcg"]
+
+[ext_resource type="Script" path="res://scenes/environment/doors/gate_trigger.gd" id="1_7myji"]
+
+[node name="GateTrigger" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_7myji")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_shape_exited" from="." to="." method="_on_body_shape_exited"]

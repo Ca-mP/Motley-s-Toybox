@@ -21,9 +21,10 @@ func _ready() -> void:
 	shock_state.shock_done.connect(state_machine.change_state.bind(charge_state))
 	
 	charge_state.hit.connect(state_machine.change_state.bind(bonk_state))
+	charge_state.charge_end.connect(state_machine.change_state.bind(pause_state))
 	
 	bonk_state.no_player.connect(change_random_walk_pause) #randomly chooses walk or pause
-	bonk_state.player_seen.connect(state_machine.change_state.bind(charge_state))
+	bonk_state.saw_player.connect(state_machine.change_state.bind(charge_state))
 	
 	death_state.dead.connect(die)
 
