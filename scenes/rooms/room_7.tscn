@@ -112,3 +112,5 @@ position = Vector2(-339, 466)
 
 [node name="CameraLimiter TR" type="Node2D" parent="CameraLimiters"]
 position = Vector2(1738, -238)
+
+[node name="LevelGates" type="Node2D" parent="."]

@@ -52,7 +52,7 @@ func hit(dmg):
 	health -= dmg
 
 func die():
-	pass
+	queue_free()
 
 func face_left():
 	pivot.scale.x = -1

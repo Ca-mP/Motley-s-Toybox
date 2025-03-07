@@ -1,4 +1,5 @@
 -Add Key Gate
+-Add tutorial segment
 -Add Sound
 -Add Background
 -Remake Tileset(?)

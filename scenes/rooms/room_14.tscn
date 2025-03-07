@@ -65,3 +65,5 @@ shape = SubResource("RectangleShape2D_xyedx")
 [node name="FirePickup" parent="Pickups" instance=ExtResource("8_urrql")]
 position = Vector2(342, 164)
 quantity = 10
+
+[node name="LevelGates" type="Node2D" parent="."]

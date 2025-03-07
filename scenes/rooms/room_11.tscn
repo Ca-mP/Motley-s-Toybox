@@ -85,4 +85,6 @@ to_id = 12
 position = Vector2(1.5, 25)
 shape = SubResource("RectangleShape2D_vrt2s")
 
+[node name="LevelGates" type="Node2D" parent="."]
+
 [node name="UI" parent="." instance=ExtResource("7_q1ex8")]

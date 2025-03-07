@@ -8,12 +8,10 @@ signal dead
 
 func _ready() -> void:
 	set_physics_process(false)
-	in_state = false
 	animator.animation_finished.connect(animation_finished)
 
 func enter_state():
 	set_physics_process(true)
-	in_state = true
 
 func _physics_process(_delta: float) -> void:
 	actor.set_collision_layer_value(3, false)
@@ -24,8 +22,8 @@ func _physics_process(_delta: float) -> void:
 
 func exit_state():
 	set_physics_process(false)
-	in_state = false
 
 func animation_finished(anim_name):
-	if anim_name == "death" and in_state:
+	if anim_name == "death":
 		dead.emit()
+		print("die")
