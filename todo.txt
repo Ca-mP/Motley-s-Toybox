@@ -1,3 +1,7 @@
+-Fix gates
+-Fix boss getting stuck in walk state
+-Fix player not keeping velocity going through doors
+-Fix bear not playing death animation
 -Add Key Gate
 -Add tutorial segment
 -Add Sound

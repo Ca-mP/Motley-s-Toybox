@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c25hypj4eh8il"]
+[gd_scene load_steps=11 format=4 uid="uid://c25hypj4eh8il"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_e11wn"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_5pgev"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="6_1sq3r"]
 [ext_resource type="PackedScene" uid="uid://bn1bsv5whabgs" path="res://scenes/pickups/key_pickup.tscn" id="7_3i1pg"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="7_5opqr"]
+[ext_resource type="PackedScene" uid="uid://bdmgn66sic3yp" path="res://scenes/environment/doors/key_gate.tscn" id="7_vrq08"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5pcn"]
 size = Vector2(17.5, 149)
@@ -60,9 +61,12 @@ shape = SubResource("RectangleShape2D_s5pcn")
 
 [node name="LevelGates" type="Node2D" parent="."]
 
+[node name="KeyGate" parent="LevelGates" instance=ExtResource("7_vrq08")]
+position = Vector2(439, 99)
+
 [node name="LevelPickups" type="Node2D" parent="."]
 
 [node name="KeyPickup" parent="LevelPickups" instance=ExtResource("7_3i1pg")]
-position = Vector2(457, 150)
+position = Vector2(191, 158)
 
 [node name="UI" parent="." instance=ExtResource("7_5opqr")]

@@ -6,6 +6,7 @@ class_name Gate
 
 func _ready() -> void:
 	animator.animation_finished.connect(on_animation_finished)
+	print(collision_shape)
 
 func open():
 	animator.play("open")
