@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://buwlkltve3t81"]
+
+[ext_resource type="Script" path="res://scenes/enemy_projectiles/stuffing.gd" id="1_lxbat"]
+[ext_resource type="Texture2D" uid="uid://cv7h5w0oh8exw" path="res://sprites/enemies/teddy/StuffingProjectileSpriteSheet.png" id="2_75yk2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1yg3e"]
+radius = 14.0357
+
+[sub_resource type="Animation" id="Animation_hcb8b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_na7ly"]
+resource_name = "default"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jc7yy"]
+_data = {
+"RESET": SubResource("Animation_hcb8b"),
+"default": SubResource("Animation_na7ly")
+}
+
+[node name="Stuffing" type="Area2D" node_paths=PackedStringArray("area")]
+scale = Vector2(0.7, 0.7)
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_lxbat")
+area = NodePath(".")
+starting_velocity = Vector2(-30, -50)
+speed = 5
+projectile_gravity = 1.0
+damage = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_75yk2")
+hframes = 6
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -2)
+shape = SubResource("CircleShape2D_1yg3e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jc7yy")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-2.85714, -1.42857)
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 20.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 3.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

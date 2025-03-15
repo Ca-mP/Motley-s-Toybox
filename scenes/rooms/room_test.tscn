@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=4 uid="uid://co5vqs307pwat"]
+
+[ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_oisc4"]
+[ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_oet60"]
+[ext_resource type="PackedScene" uid="uid://djsdndxse8wbp" path="res://scenes/levels/level_tileset.tscn" id="3_p7t04"]
+[ext_resource type="PackedScene" uid="uid://dwfy8a5i0cwyd" path="res://scenes/levels/scenery_tileset.tscn" id="4_gmin1"]
+[ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="5_crlsi"]
+[ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="6_rwmqo"]
+[ext_resource type="PackedScene" uid="uid://c7kdam7k40n2p" path="res://scenes/enemies/bosses/brute.tscn" id="7_j8hww"]
+[ext_resource type="Script" path="res://scenes/levels/save_points.gd" id="7_kkxhc"]
+[ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="8_42s0m"]
+
+[node name="RoomTest" type="Node2D" node_paths=PackedStringArray("player", "enemies", "save_points", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
+script = ExtResource("1_oisc4")
+player = NodePath("Player")
+enemies = NodePath("LevelEnemies")
+save_points = NodePath("LevelSavePoints")
+doors = NodePath("LevelDoors")
+ui = NodePath("UI")
+camera = NodePath("Player/Camera2D")
+camera_limiter_bl = NodePath("CameraLimiters/CameraLimiterBL")
+camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
+
+[node name="Player" parent="." instance=ExtResource("2_oet60")]
+position = Vector2(49, 409)
+fire_material = {
+"current": 10,
+"max": 20,
+"unlocked": true
+}
+lightning_material = {
+"current": 20,
+"max": 0,
+"unlocked": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="LevelTileset" parent="." instance=ExtResource("3_p7t04")]
+tile_map_data = PackedByteArray("AADp/w0AAAACAAcAAADq/w0AAAACAAcAAADr/w0AAAACAAcAAADs/w0AAAACAAcAAADt/w0AAAACAAcAAADu/w0AAAACAAcAAADv/w0AAAACAAcAAADw/w0AAAACAAcAAADx/w0AAAACAAcAAADy/w0AAAACAAcAAADz/w0AAAACAAcAAAD0/w0AAAACAAcAAAD1/w0AAAACAAcAAAD2/w0AAAACAAcAAAD3/w0AAAACAAcAAAD4/w0AAAACAAcAAAD5/w0AAAACAAcAAAD6/w0AAAACAAcAAAD7/w0AAAACAAcAAAD8/w0AAAACAAcAAAD9/w0AAAACAAcAAAD+/w0AAAACAAcAAAD//w0AAAACAAcAAAAAAA0AAAACAAcAAAABAA0AAAACAAcAAAACAA0AAAACAAcAAAADAA0AAAACAAcAAAAEAA0AAAACAAcAAAAFAA0AAAACAAcAAAAGAA0AAAACAAcAAAAHAA0AAAACAAcAAAAIAA0AAAACAAcAAAAJAA0AAAACAAcAAAAKAA0AAAACAAcAAAALAA0AAAACAAcAAAAMAA0AAAACAAcAAAANAA0AAAACAAcAAAAOAA0AAAACAAcAAAAPAA0AAAACAAcAAAAQAA0AAAACAAcAAAARAA0AAAACAAcAAAASAA0AAAACAAcAAAATAA0AAAACAAcAAAAUAA0AAAACAAcAAAAVAA0AAAACAAcAAAAWAA0AAAACAAcAAAAXAA0AAAACAAcAAAAYAA0AAAACAAcAAAAZAA0AAAACAAcAAAAaAA0AAAACAAcAAAAbAA0AAAACAAcAAAAcAA0AAAACAAcAAAAdAA0AAAACAAcAAAAeAA0AAAACAAcAAAAfAA0AAAACAAcAAAAgAA0AAAACAAcAAAAhAA0AAAACAAcAAAAiAA0AAAACAAcAAAAjAA0AAAACAAcAAAAkAA0AAAACAAcAAAAlAA0AAAACAAcAAAAmAA0AAAACAAcAAAAnAA0AAAACAAcAAAAoAA0AAAACAAcAAAApAA0AAAACAAcAAAAqAA0AAAACAAcAAAArAA0AAAACAAcAAAAsAA0AAAACAAcAAAAtAA0AAAACAAcAAAAuAA0AAAACAAcAAAAvAA0AAAACAAcAAAAwAA0AAAACAAcAAAAxAA0AAAACAAcAAAAYAAwAAAADAAkAAAAYAAsAAAADAAkAAADp/wwAAAADAAkAAADp/wsAAAADAAkAAAA=")
+metadata/_edit_lock_ = true
+
+[node name="SceneryTileset" parent="." instance=ExtResource("4_gmin1")]
+metadata/_edit_lock_ = true
+
+[node name="LevelDoors" type="Node2D" parent="."]
+script = ExtResource("5_crlsi")
+
+[node name="LevelEnemies" type="Node2D" parent="."]
+script = ExtResource("6_rwmqo")
+metadata/_edit_lock_ = true
+
+[node name="Brute" parent="LevelEnemies" instance=ExtResource("7_j8hww")]
+position = Vector2(-113, 345)
+
+[node name="LevelSavePoints" type="Node2D" parent="."]
+script = ExtResource("7_kkxhc")
+metadata/_edit_lock_ = true
+
+[node name="CameraLimiters" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CameraLimiterBL" type="Node2D" parent="CameraLimiters"]
+position = Vector2(-792, 437)
+
+[node name="CameraLimiterTR" type="Node2D" parent="CameraLimiters"]
+position = Vector2(8485, -8348)
+
+[node name="UI" parent="." instance=ExtResource("8_42s0m")]

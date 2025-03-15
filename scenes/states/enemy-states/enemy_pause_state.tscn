@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cns74djm6bsh5"]
+
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_pause_state.gd" id="1_a6gfj"]
+
+[node name="EnemyPauseState" type="Node"]
+script = ExtResource("1_a6gfj")

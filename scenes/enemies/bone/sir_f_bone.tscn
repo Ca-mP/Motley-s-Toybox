@@ -1,0 +1,251 @@
+[gd_scene load_steps=20 format=3 uid="uid://cpjtpwpst32a8"]
+
+[ext_resource type="Script" path="res://scenes/enemies/bone/sir_f_bone.gd" id="1_wmnb7"]
+[ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_oyiew"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_pause_state.gd" id="4_dwnva"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_walk_state.gd" id="5_teimy"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_death_state.gd" id="6_5xdov"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_shock_state.gd" id="7_55bfn"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_charge_state.gd" id="7_t118d"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_bonk_state.gd" id="8_gdf5a"]
+[ext_resource type="Texture2D" uid="uid://bk3dboyi05l3a" path="res://sprites/enemies/SirFBoneNewSpriteSheet.png" id="9_hox2b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdtw2"]
+size = Vector2(10, 57)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vxt1"]
+height = 62.0
+
+[sub_resource type="Animation" id="Animation_uqc82"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [47]
+}
+
+[sub_resource type="Animation" id="Animation_5ao04"]
+resource_name = "bonk"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71]
+}
+
+[sub_resource type="Animation" id="Animation_fg1ll"]
+resource_name = "charge"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_sbxa6"]
+resource_name = "death"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+}
+
+[sub_resource type="Animation" id="Animation_7exp3"]
+resource_name = "idle"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [47]
+}
+
+[sub_resource type="Animation" id="Animation_e47g4"]
+resource_name = "shock"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+}
+
+[sub_resource type="Animation" id="Animation_5gbue"]
+resource_name = "walk"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3kkbc"]
+_data = {
+"RESET": SubResource("Animation_uqc82"),
+"bonk": SubResource("Animation_5ao04"),
+"charge": SubResource("Animation_fg1ll"),
+"death": SubResource("Animation_sbxa6"),
+"idle": SubResource("Animation_7exp3"),
+"shock": SubResource("Animation_e47g4"),
+"walk": SubResource("Animation_5gbue")
+}
+
+[node name="SirFBone" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "pause_state", "walk_state", "shock_state", "charge_state", "bonk_state", "death_state", "pivot")]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_wmnb7")
+state_machine = NodePath("StateMachine")
+pause_state = NodePath("StateMachine/EnemyPauseState")
+walk_state = NodePath("StateMachine/EnemyWalkState")
+shock_state = NodePath("StateMachine/EnemyShockState")
+charge_state = NodePath("StateMachine/EnemyChargeState")
+bonk_state = NodePath("StateMachine/EnemyBonkState")
+death_state = NodePath("StateMachine/EnemyDeathState")
+health = 2
+damage = 5
+pivot = NodePath("Pivot")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_oyiew")
+starting_state = NodePath("EnemyPauseState")
+
+[node name="EnemyPauseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "pause_timer")]
+script = ExtResource("4_dwnva")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+pause_timer = NodePath("PauseTimer")
+
+[node name="PauseTimer" type="Timer" parent="StateMachine/EnemyPauseState"]
+wait_time = 2.5
+
+[node name="EnemyWalkState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "walk_timer")]
+script = ExtResource("5_teimy")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+walk_timer = NodePath("WalkTimer")
+speed = 50
+
+[node name="WalkTimer" type="Timer" parent="StateMachine/EnemyWalkState"]
+wait_time = 2.5
+
+[node name="EnemyShockState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "sprite")]
+script = ExtResource("7_55bfn")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Pivot/Sprite2D")
+
+[node name="EnemyChargeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "atk_area", "stupid_timer")]
+script = ExtResource("7_t118d")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+atk_area = NodePath("../../Pivot/AtkArea")
+stupid_timer = NodePath("StupidTimer")
+charge_speed = 300
+
+[node name="StupidTimer" type="Timer" parent="StateMachine/EnemyChargeState"]
+wait_time = 0.06
+
+[node name="EnemyBonkState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("8_gdf5a")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="EnemyDeathState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("6_5xdov")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="AtkArea" type="Area2D" parent="Pivot"]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/AtkArea"]
+position = Vector2(16, 1.5)
+shape = SubResource("RectangleShape2D_qdtw2")
+debug_color = Color(0.997697, 0, 0.160094, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(0, -9)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_hox2b")
+hframes = 9
+vframes = 8
+frame = 47
+
+[node name="FloorFeelers" type="Node2D" parent="."]
+
+[node name="LeftFeeler" type="RayCast2D" parent="FloorFeelers"]
+position = Vector2(-18, 28)
+target_position = Vector2(0, 18)
+collision_mask = 2
+
+[node name="RightFeeler" type="RayCast2D" parent="FloorFeelers"]
+position = Vector2(15, 28)
+target_position = Vector2(0, 18)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_3vxt1")
+metadata/_edit_lock_ = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 3
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3kkbc")
+}

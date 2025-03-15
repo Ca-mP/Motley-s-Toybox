@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://co5imygm81kiq"]
+
+[ext_resource type="Script" path="res://scenes/levels/props/save_idol.gd" id="1_fny8w"]
+[ext_resource type="Texture2D" uid="uid://btncrfi5jhnpb" path="res://sprites/level/SaveState.png" id="2_dwpt1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88sdg"]
+size = Vector2(69.3333, 74)
+
+[node name="SaveIdol" type="Area2D"]
+scale = Vector2(0.3, 0.3)
+collision_layer = 2
+script = ExtResource("1_fny8w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_dwpt1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -3)
+shape = SubResource("RectangleShape2D_88sdg")

@@ -1,0 +1,212 @@
+[gd_scene load_steps=18 format=3 uid="uid://cjujgg3nn4ytq"]
+
+[ext_resource type="Script" path="res://scenes/enemies/teddy/teddy_bear.gd" id="1_e5syq"]
+[ext_resource type="Texture2D" uid="uid://cupfg675kjlij" path="res://sprites/enemies/teddy/StuffBuffNewSpriteSheet.png" id="2_4pj8e"]
+[ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_y6atu"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_walk_state.gd" id="4_b8712"]
+[ext_resource type="PackedScene" uid="uid://yvgke4wa82ua" path="res://scenes/states/enemy-states/enemy_ranged_attack_state.tscn" id="5_gynkf"]
+[ext_resource type="PackedScene" uid="uid://buwlkltve3t81" path="res://scenes/enemy_projectiles/stuffing.tscn" id="6_1npml"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_pause_state.gd" id="7_fhlpf"]
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_death_state.gd" id="8_gkq0f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5vn36"]
+radius = 32.0
+height = 152.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c33ie"]
+size = Vector2(573.5, 320)
+
+[sub_resource type="Animation" id="Animation_34gyb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="Animation" id="Animation_okk2o"]
+resource_name = "attack"
+length = 0.166675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_1k2yg"]
+resource_name = "attack2"
+length = 0.666675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_wgyav"]
+resource_name = "death"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666666, 0.75, 0.833333, 0.916666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_kyde1"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666666, 0.75, 0.833333, 0.916666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_hfrh2"]
+resource_name = "walk"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666666, 0.75, 0.833333, 0.916666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_85b1x"]
+_data = {
+"RESET": SubResource("Animation_34gyb"),
+"attack": SubResource("Animation_okk2o"),
+"attack2": SubResource("Animation_1k2yg"),
+"death": SubResource("Animation_wgyav"),
+"idle": SubResource("Animation_kyde1"),
+"walk": SubResource("Animation_hfrh2")
+}
+
+[node name="TeddyBear" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "walk_state", "attack_state", "pause_state", "death_state", "left_feeler", "right_feeler")]
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_e5syq")
+state_machine = NodePath("StateMachine")
+walk_state = NodePath("StateMachine/EnemyWalkState")
+attack_state = NodePath("StateMachine/EnemyRangedAttackState")
+pause_state = NodePath("StateMachine/EnemyPauseState")
+death_state = NodePath("StateMachine/EnemyDeathState")
+health = 3
+damage = 2
+left_feeler = NodePath("FloorFeelers/FeelerLeft")
+right_feeler = NodePath("FloorFeelers/FeelerRight")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, -4)
+scale = Vector2(1, 1.212)
+texture = ExtResource("2_4pj8e")
+hframes = 7
+vframes = 7
+frame = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_5vn36")
+
+[node name="RangeAreaPivot" type="Node2D" parent="."]
+
+[node name="RangeArea" type="Area2D" parent="RangeAreaPivot"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeAreaPivot/RangeArea"]
+position = Vector2(-329.25, -98)
+shape = SubResource("RectangleShape2D_c33ie")
+debug_color = Color(0.998937, 0, 0.128371, 0.42)
+
+[node name="FloorFeelers" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="FeelerRight" type="RayCast2D" parent="FloorFeelers"]
+position = Vector2(44, 28)
+collision_mask = 2
+
+[node name="FeelerLeft" type="RayCast2D" parent="FloorFeelers"]
+position = Vector2(-38, 30)
+collision_mask = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_85b1x")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_y6atu")
+starting_state = NodePath("EnemyPauseState")
+
+[node name="EnemyWalkState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "walk_timer")]
+script = ExtResource("4_b8712")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+walk_timer = NodePath("WalkTimer")
+speed = 50
+
+[node name="WalkTimer" type="Timer" parent="StateMachine/EnemyWalkState"]
+
+[node name="EnemyRangedAttackState" parent="StateMachine" node_paths=PackedStringArray("actor", "animator") instance=ExtResource("5_gynkf")]
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+projectile_scene = ExtResource("6_1npml")
+
+[node name="EnemyPauseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "pause_timer")]
+script = ExtResource("7_fhlpf")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+pause_timer = NodePath("PauseTimer")
+
+[node name="PauseTimer" type="Timer" parent="StateMachine/EnemyPauseState"]
+
+[node name="EnemyDeathState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("8_gkq0f")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/EnemyRangedAttackState" method="_on_animation_player_animation_finished"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw3teyaodus8k"]
+
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_fq3fa"]
+[ext_resource type="Texture2D" uid="uid://dokp3swo1ts58" path="res://sprites/ui/FireballUI.png" id="2_r38ly"]
+[ext_resource type="Texture2D" uid="uid://bnxnibrhuosnj" path="res://sprites/ui/item-frame.png" id="3_7l3hn"]
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("healthbar", "material_icon", "material_counter")]
+script = ExtResource("1_fq3fa")
+healthbar = NodePath("VBoxContainer/TopBar/HealthBar")
+material_icon = NodePath("VBoxContainer/TopBar/Materials/MaterialIcon")
+material_counter = NodePath("VBoxContainer/TopBar/Materials/MaterialCounter")
+
+[node name="Background" type="Node" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background"]
+offset_left = 1056.0
+offset_right = 1152.0
+offset_bottom = 32.0
+size_flags_horizontal = 10
+
+[node name="ItemFrame" type="TextureRect" parent="Background/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture = ExtResource("3_7l3hn")
+expand_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Background/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("3_7l3hn")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 1153.0
+offset_bottom = 358.0
+
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer/TopBar"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Materials" type="HBoxContainer" parent="VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="MaterialIcon" type="TextureRect" parent="VBoxContainer/TopBar/Materials"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("2_r38ly")
+expand_mode = 2
+
+[node name="MaterialCounter" type="Label" parent="VBoxContainer/TopBar/Materials"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "-WASD to move
+-Space to jump
+-J to change spell mode
+-H to cast spell"

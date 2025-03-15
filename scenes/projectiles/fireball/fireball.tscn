@@ -1,0 +1,137 @@
+[gd_scene load_steps=19 format=3 uid="uid://evojq1kigx0v"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/fireball/fireball.gd" id="1_0e8py"]
+[ext_resource type="Texture2D" uid="uid://d1attm51vmjkw" path="res://sprites/projectiles/Fireball_ThrowSpriteSheet.png" id="2_rgslp"]
+[ext_resource type="PackedScene" uid="uid://bjmurd4u8v6fo" path="res://scenes/projectiles/fireball/fireball_explosion.tscn" id="3_vdlcd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjbcf"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug15j"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(1920, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2iws"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(3840, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfeea"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(5760, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo7es"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(7680, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsyke"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(9600, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mk7c"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(0, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8ddw"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(1920, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cvfs"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(3840, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umjv1"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(5760, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw6wj"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(7680, 1080, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt42u"]
+atlas = ExtResource("2_rgslp")
+region = Rect2(9600, 1080, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b0n6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjbcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug15j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2iws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfeea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo7es")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsyke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mk7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8ddw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cvfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umjv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw6wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt42u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gp0dm"]
+radius = 118.089
+
+[sub_resource type="Gradient" id="Gradient_sa18b"]
+colors = PackedColorArray(0.954205, 0, 0.0330808, 1, 0.956184, 0.735722, 3.85046e-07, 1)
+
+[node name="Fireball" type="Area2D"]
+scale = Vector2(0.1, 0.1)
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_0e8py")
+explosion_scene = ExtResource("3_vdlcd")
+speed = 500
+damage = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_b0n6x")
+autoplay = "default"
+frame_progress = 0.533034
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 4.76837e-07)
+shape = SubResource("CircleShape2D_gp0dm")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 20
+lifetime = 2.0
+speed_scale = 2.0
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+spread = 108.83
+gravity = Vector2(0, -10)
+color_ramp = SubResource("Gradient_sa18b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

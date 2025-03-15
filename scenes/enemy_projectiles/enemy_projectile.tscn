@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc5ks75wkm54g"]
+
+[ext_resource type="Script" path="res://scenes/enemy_projectiles/enemy_projectile.gd" id="1_hp2tv"]
+[ext_resource type="Texture2D" uid="uid://cl7byd0jfmory" path="res://icon.svg" id="2_uepdf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1y7qj"]
+radius = 17.0
+
+[node name="EnemyProjectile" type="Area2D" node_paths=PackedStringArray("area")]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_hp2tv")
+area = NodePath(".")
+starting_velocity = Vector2(-30, -50)
+speed = 5
+projectile_gravity = 1.0
+damage = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_uepdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1y7qj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

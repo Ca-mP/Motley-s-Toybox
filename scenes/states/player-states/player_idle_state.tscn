@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btc126hdpebs7"]
+
+[ext_resource type="Script" path="res://scenes/states/player-states/player_idle_state.gd" id="1_cfg72"]
+
+[node name="PlayerIdleState" type="Node"]
+script = ExtResource("1_cfg72")

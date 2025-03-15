@@ -1,0 +1,130 @@
+[gd_scene load_steps=19 format=3 uid="uid://c1vobjn3f8hda"]
+
+[ext_resource type="Texture2D" uid="uid://djylxs4usbog2" path="res://sprites/level/DoorSpriteSheet.png" id="1_uoixv"]
+[ext_resource type="Script" path="res://scenes/environment/rubble_door.gd" id="1_w4jcy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq5bg"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(0, 0, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47pyr"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(223, 0, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0s0r"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(446, 0, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45jhw"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(669, 0, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3wn5"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(0, 238, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqqxx"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(223, 238, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fu2wv"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(446, 238, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pl1x5"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(669, 238, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhewl"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(0, 476, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj66j"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(223, 476, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fwdx"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(446, 476, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e85gs"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(669, 476, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esnni"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(0, 714, 223, 238)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymy0a"]
+atlas = ExtResource("1_uoixv")
+region = Rect2(223, 714, 223, 238)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j2oct"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq5bg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47pyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0s0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45jhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3wn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqqxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fu2wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pl1x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhewl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj66j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fwdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e85gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esnni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymy0a")
+}],
+"loop": false,
+"name": &"crumble",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2lru"]
+size = Vector2(161, 214)
+
+[node name="RubbleDoor" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 29
+script = ExtResource("1_w4jcy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_j2oct")
+animation = &"crumble"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -2)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_h2lru")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
