@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cspa6l1o6jlnk"]
+[gd_scene load_steps=13 format=3 uid="uid://cspa6l1o6jlnk"]
 
 [ext_resource type="Script" path="res://scenes/environment/doors/boss_gate.gd" id="1_gjdn1"]
 [ext_resource type="Texture2D" uid="uid://7ye44x28odjl" path="res://sprites/level/gateSpriteSheet.png" id="1_oa7y4"]
+[ext_resource type="AudioStream" uid="uid://baxhn2nhtoy07" path="res://sfx/metal/chain 2.wav" id="3_76twc"]
+[ext_resource type="AudioStream" uid="uid://celfvx8kcxt8l" path="res://sfx/metal/anvil hit 9.wav" id="4_mllhx"]
 
 [sub_resource type="Animation" id="Animation_panep"]
 length = 0.001
@@ -33,6 +35,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [5, 4, 3, 2, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chain")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnvilHit")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_nxpf5"]
@@ -67,6 +97,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chain")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_q2ivv"]
@@ -129,5 +173,11 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea"]
 position = Vector2(2.5, 2)
 shape = SubResource("RectangleShape2D_ei0vm")
+
+[node name="Chain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_76twc")
+
+[node name="AnvilHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mllhx")
 
 [connection signal="body_exited" from="PlayerArea" to="." method="_on_player_area_body_exited"]

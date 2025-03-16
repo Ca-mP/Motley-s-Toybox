@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bjmurd4u8v6fo"]
+[gd_scene load_steps=22 format=3 uid="uid://bjmurd4u8v6fo"]
 
 [ext_resource type="Texture2D" uid="uid://cbqgmxd22eki2" path="res://sprites/placeholders/explosion (10).png" id="1_b0onh"]
 [ext_resource type="Script" path="res://scenes/projectiles/fireball/fireball_explosion.gd" id="1_ue8ku"]
+[ext_resource type="AudioStream" uid="uid://mx3lf77om0nq" path="res://sfx/explosion/SE-Explosion3-F.ogg" id="3_5dm4t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vunag"]
 atlas = ExtResource("1_b0onh")
@@ -142,5 +143,8 @@ frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_arvto")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5dm4t")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

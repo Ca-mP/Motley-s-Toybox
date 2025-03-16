@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func enter_state():
 	super()
+	sfx.play()
 	in_state = true
 	animator.play("spell")
 	fireball_timer.start()

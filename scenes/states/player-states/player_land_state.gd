@@ -16,6 +16,9 @@ func _ready() -> void:
 
 func enter_state():
 	super()
+	sfx.pitch_scale = randf_range(0.8, 1.2)
+	print(sfx.pitch_scale)
+	sfx.play()
 	animator.play("land")
 	animation_finished = false
 

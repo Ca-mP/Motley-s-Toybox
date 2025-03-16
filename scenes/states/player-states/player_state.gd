@@ -3,6 +3,7 @@ class_name PlayerState
 
 @export var actor: CharacterBody2D
 @export var animator: AnimationPlayer
+@export var sfx: AudioStreamPlayer
 
 func _ready() -> void:
 	set_physics_process(false)
