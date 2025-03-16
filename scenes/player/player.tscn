@@ -272,7 +272,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "done_cast_state", "stun_state", "death_state")]
-collision_mask = 22
+collision_mask = 54
 script = ExtResource("1_ri1hm")
 max_health = 20
 current_health = 20

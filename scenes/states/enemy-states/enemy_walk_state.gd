@@ -19,6 +19,7 @@ func _ready() -> void:
 
 func enter_state():
 	in_state = true
+	await get_tree().process_frame
 	walk_timer.start()
 	#setting random direction to walk
 	direction_var = randi_range(0, 1)

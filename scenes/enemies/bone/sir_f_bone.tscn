@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cpjtpwpst32a8"]
+[gd_scene load_steps=23 format=3 uid="uid://cpjtpwpst32a8"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bone/sir_f_bone.gd" id="1_wmnb7"]
 [ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_oyiew"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_charge_state.gd" id="7_t118d"]
 [ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_bonk_state.gd" id="8_gdf5a"]
 [ext_resource type="Texture2D" uid="uid://bk3dboyi05l3a" path="res://sprites/enemies/SirFBoneNewSpriteSheet.png" id="9_hox2b"]
+[ext_resource type="AudioStream" uid="uid://mknxh5fi4r74" path="res://sfx/metal/body hits metal 1.wav" id="10_sdngc"]
+[ext_resource type="AudioStream" uid="uid://blduuwscdidb" path="res://sfx/steps/Concrete 1.wav" id="11_bdi1n"]
+[ext_resource type="AudioStream" uid="uid://1bpwutswywxi" path="res://sfx/steps/Concrete 2.wav" id="12_51wer"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdtw2"]
 size = Vector2(10, 57)
@@ -46,6 +49,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/MetalHit")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_fg1ll"]
 resource_name = "charge"
@@ -62,6 +79,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Step1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Step2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_sbxa6"]
@@ -127,6 +172,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Step1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.416667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Step2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3kkbc"]
@@ -249,3 +322,14 @@ metadata/_edit_lock_ = true
 libraries = {
 "": SubResource("AnimationLibrary_3kkbc")
 }
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="MetalHit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_sdngc")
+
+[node name="Step1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_bdi1n")
+
+[node name="Step2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_51wer")

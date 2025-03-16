@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://mknxh5fi4r74"
-path="res://.godot/imported/body hits metal 1.wav-b4e25fea3a4894ec9be5f60f565dcf35.sample"
+path="res://.godot/imported/body hits metal 1.wav-573da101722b5accf81dade6b1c5b291.sample"
 
 [deps]
 
-source_file="res://sfx/body hits metal 1.wav"
-dest_files=["res://.godot/imported/body hits metal 1.wav-b4e25fea3a4894ec9be5f60f565dcf35.sample"]
+source_file="res://sfx/metal/body hits metal 1.wav"
+dest_files=["res://.godot/imported/body hits metal 1.wav-573da101722b5accf81dade6b1c5b291.sample"]
 
 [params]
 
