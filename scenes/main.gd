@@ -1,6 +1,6 @@
 extends Node2D
 
-var current_room: Node
+var current_scene: Node
 
 var max_health: int
 var current_health: int
@@ -16,11 +16,18 @@ var water_max: int
 var water_current: int
 
 func _ready() -> void:
-	current_room = self.get_child(0)
+	current_scene = self.get_child(0)
+
+func start_game():
+	#remove starting screen as child
+	remove_child(current_scene)
+	#add first room as child
+	change_room(112, 0)
+	pass
 
 func change_room(from_id, to_id):
 	var new_room
-	current_room = self.get_child(0)
+	current_scene = self.get_child(0)
 	#adding correct room scene as child of main
 	match to_id:
 		0:
@@ -60,8 +67,9 @@ func change_room(from_id, to_id):
 			return
 	
 	#storing player info and removing current room
-	store_player_info()
-	call_deferred("remove_child", current_room)
+	if from_id != 112:
+		store_player_info()
+	call_deferred("remove_child", current_scene)
 	
 	#ading new room and returning player info
 	new_room = new_room.instantiate()
@@ -69,11 +77,12 @@ func change_room(from_id, to_id):
 	return_player_info(new_room)
 	
 	#putting player at correct door
-	new_room.put_player_at_door(from_id)
-	current_room = self.get_child(0)
+	if from_id != 112:
+		new_room.put_player_at_door(from_id)
+	current_scene = self.get_child(0)
 
 func store_player_info() -> void:
-	for child in current_room.get_children():
+	for child in current_scene.get_children():
 		if child.name == "Player":
 			var player = child
 			
