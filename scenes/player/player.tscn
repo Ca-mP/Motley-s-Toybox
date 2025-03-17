@@ -1,7 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=36 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
-[ext_resource type="Texture2D" uid="uid://cjs0i2u6vpfq3" path="res://sprites/player/WizTheNewSpriteSheet.png" id="2_r8r7f"]
+[ext_resource type="Texture2D" uid="uid://mj8tw3wfihl2" path="res://sprites/player/WizTheNewSpriteSheet.png" id="2_r8r7f"]
 [ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_3e7yi"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_jump_state.gd" id="4_vg3c6"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_walk_state.gd" id="5_tntcf"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" path="res://scenes/states/player-states/player_done_cast_state.gd" id="13_ru3pq"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_stun_state.gd" id="16_jk5hn"]
 [ext_resource type="Script" path="res://player_death_state.gd" id="17_ocg4m"]
+[ext_resource type="AudioStream" uid="uid://de5qd8edsmof8" path="res://sfx/swoosh 8.wav" id="18_jtkim"]
+[ext_resource type="AudioStream" uid="uid://bdjn3twdmtcj1" path="res://sfx/body fall 5.wav" id="19_bl3wc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5oih"]
 size = Vector2(28, 65)
@@ -381,10 +383,11 @@ script = ExtResource("7_y0vod")
 actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 
-[node name="PlayerLandState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+[node name="PlayerLandState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "sfx")]
 script = ExtResource("9_wuijw")
 actor = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
+sfx = NodePath("../../Sounds/BodyFall5")
 
 [node name="PlayerCastState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
 script = ExtResource("8_fnswv")
@@ -396,12 +399,13 @@ script = ExtResource("9_rxxqp")
 actor = NodePath("../../..")
 animator = NodePath("../../../AnimationPlayer")
 
-[node name="PlayerFireballState" type="Node" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("fireball_timer", "particles", "actor", "animator")]
+[node name="PlayerFireballState" type="Node" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("fireball_timer", "particles", "actor", "animator", "sfx")]
 script = ExtResource("8_3rjay")
 fireball_timer = NodePath("FireballTimer")
 particles = NodePath("../../../../Pivot/Particles/FireballParticles")
 actor = NodePath("../../../..")
 animator = NodePath("../../../../AnimationPlayer")
+sfx = NodePath("../../../../Sounds/Swoosh8")
 
 [node name="FireballTimer" type="Timer" parent="StateMachine/PlayerCastState/PlayerFireSpellState/PlayerFireballState"]
 wait_time = 0.5
@@ -439,6 +443,14 @@ animator = NodePath("../../AnimationPlayer")
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Swoosh8" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("18_jtkim")
+
+[node name="BodyFall5" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("19_bl3wc")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="area_entered" from="InteractBox" to="." method="_on_interact_box_area_entered"]
