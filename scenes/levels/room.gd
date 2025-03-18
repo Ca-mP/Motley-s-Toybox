@@ -141,3 +141,6 @@ func load_data():
 		if save_point.area == area and save_point.id == id:
 			player.position = save_point.position
 	pass_player_info($Player)
+
+func player_dead():
+	$"..".player_dead()

@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1gg3know475k"]
+[gd_scene load_steps=2 format=3 uid="uid://c4g3kwruer6n"]
 
-[ext_resource type="Texture2D" uid="uid://cl7byd0jfmory" path="res://icon.svg" id="1_ik7ku"]
-[ext_resource type="Script" path="res://scenes/opening_screen.gd" id="1_vvtnt"]
+[ext_resource type="Script" path="res://scenes/screens/death_screen.gd" id="1_y0quq"]
 
-[node name="OpeningScreen" type="Node2D"]
-script = ExtResource("1_vvtnt")
+[node name="DeathScreen" type="Node2D"]
+script = ExtResource("1_y0quq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
@@ -23,9 +22,11 @@ offset_bottom = 538.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_ik7ku")
+bbcode_enabled = true
+text = "[center]YOU DIED[/center]"
+fit_content = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
@@ -39,6 +40,6 @@ fit_content = true
 
 [node name="Button" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "Start Game"
+text = "Retry"
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/Button" to="." method="_on_button_pressed"]

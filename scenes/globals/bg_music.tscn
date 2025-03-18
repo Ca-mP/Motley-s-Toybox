@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7uvywjwdeegs"]
+
+[ext_resource type="AudioStream" uid="uid://b1y50pcd0n0q2" path="res://sfx/music/Sketchbook 2024-11-30.ogg" id="1_58of2"]
+
+[node name="BGMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_58of2")
+volume_db = -4.0

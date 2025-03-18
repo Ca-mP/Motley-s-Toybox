@@ -69,6 +69,8 @@ func change_room(from_id, to_id):
 	#storing player info and removing current room
 	if from_id != 112:
 		store_player_info()
+	else:
+		set_beginning_player_info()
 	call_deferred("remove_child", current_scene)
 	
 	#ading new room and returning player info
@@ -79,8 +81,24 @@ func change_room(from_id, to_id):
 	#putting player at correct door
 	if from_id != 112:
 		new_room.put_player_at_door(from_id)
-	current_scene = self.get_child(0)
+	current_scene = new_room
 
+func set_beginning_player_info() -> void:
+	max_health = 100
+	current_health = 100
+	equipped_material = "fire"
+	
+	fire_unlocked = true
+	fire_max = 50
+	fire_current = 50
+	
+	lightning_unlocked = false
+	lightning_max = 0
+	lightning_current = 0
+	
+	water_unlocked = false
+	water_max = 0
+	water_current = 0
 func store_player_info() -> void:
 	for child in current_scene.get_children():
 		if child.name == "Player":
@@ -127,3 +145,10 @@ func return_player_info(_new_room) -> void:
 			player.switch_material(equipped_material)
 			return
 	print("no player found")
+
+func player_dead():
+	var death_screen_path = preload("res://scenes/screens/death_screen.tscn")
+	var death_screen = death_screen_path.instantiate()
+	print(current_scene)
+	remove_child(current_scene)
+	add_child(death_screen)

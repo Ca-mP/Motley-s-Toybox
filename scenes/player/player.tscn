@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=38 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
 [ext_resource type="Texture2D" uid="uid://mj8tw3wfihl2" path="res://sprites/player/WizTheNewSpriteSheet.png" id="2_r8r7f"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" path="res://player_death_state.gd" id="17_ocg4m"]
 [ext_resource type="AudioStream" uid="uid://de5qd8edsmof8" path="res://sfx/swoosh 8.wav" id="18_jtkim"]
 [ext_resource type="AudioStream" uid="uid://bdjn3twdmtcj1" path="res://sfx/body fall 5.wav" id="19_bl3wc"]
+[ext_resource type="AudioStream" uid="uid://blduuwscdidb" path="res://sfx/steps/Concrete 1.wav" id="19_kputj"]
+[ext_resource type="AudioStream" uid="uid://1bpwutswywxi" path="res://sfx/steps/Concrete 2.wav" id="20_7kfb1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5oih"]
 size = Vector2(28, 65)
@@ -180,6 +182,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [7, 8, 9, 10, 11]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Swoosh8")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0833333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_44w4v"]
 resource_name = "stun"
@@ -225,6 +241,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Concrete1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.416667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Concrete2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.916667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1qbk6"]
@@ -448,6 +492,12 @@ wait_time = 0.2
 
 [node name="Swoosh8" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("18_jtkim")
+
+[node name="Concrete1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("19_kputj")
+
+[node name="Concrete2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("20_7kfb1")
 
 [node name="BodyFall5" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("19_bl3wc")

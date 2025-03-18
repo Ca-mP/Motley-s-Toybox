@@ -91,11 +91,14 @@ func _ready() -> void:
 	done_cast_state.fall.connect(state_machine.change_state.bind(fall_state))
 	
 	stun_state.end_stun.connect(state_machine.change_state.bind(done_cast_state))
-	stun_state.die.connect(state_machine.change_state.bind(death_state))
+	stun_state.die.connect(die)
 
 
 
 func _physics_process(delta: float) -> void:
+	
+	if Input.is_action_pressed("j"):
+		die()
 		#MOVEMENT
 	
 	#gravity
@@ -274,6 +277,9 @@ func hit(dmg: int, from_direction: int):
 	$"..".pass_player_info(self)
 	stun_state.direction = from_direction
 	state_machine.change_state(stun_state)
+
+func die():
+	$"..".player_dead()
 
 func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer = false
