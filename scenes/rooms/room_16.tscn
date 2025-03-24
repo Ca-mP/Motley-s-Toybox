@@ -61,8 +61,8 @@ shape = SubResource("RectangleShape2D_bl3ly")
 [node name="RoomDoor2" type="Area2D" parent="LevelDoors"]
 position = Vector2(-318, 444)
 script = ExtResource("5_5on04")
-from_id = 15
-to_id = 16
+from_id = 16
+to_id = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor2"]
 position = Vector2(-28, -65)
@@ -74,7 +74,7 @@ shape = SubResource("RectangleShape2D_rdy56")
 metadata/_edit_lock_ = true
 
 [node name="FirePickup" parent="Pickups" instance=ExtResource("7_5q6st")]
-position = Vector2(235, 429)
+position = Vector2(151, 422)
 quantity = 25
 
 [node name="3DTileset" parent="." instance=ExtResource("7_kxc2o")]

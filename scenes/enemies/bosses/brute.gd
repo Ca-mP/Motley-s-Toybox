@@ -75,7 +75,7 @@ func choose_attack():
 	elif player_in_charge_range:
 		state_machine.change_state(charge_state)
 	else:
-		state_machine.change_state(pause_state)
+		state_machine.change_state(jump_state)
 
 func choose_movement():
 	var rand_i = randi_range(0, 2)

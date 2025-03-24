@@ -35,10 +35,10 @@ metadata/_edit_lock_ = true
 [node name="CameraLimiters" type="Node2D" parent="."]
 
 [node name="CameraLimiterBL" type="Node2D" parent="CameraLimiters"]
-position = Vector2(-144, 209)
+position = Vector2(330, 525)
 
 [node name="CameraLimiterTR" type="Node2D" parent="CameraLimiters"]
-position = Vector2(530, -78)
+position = Vector2(748, 42)
 
 [node name="LevelEnemies" type="Node2D" parent="."]
 script = ExtResource("4_hqf8g")
