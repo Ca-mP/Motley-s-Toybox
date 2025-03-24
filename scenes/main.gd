@@ -82,9 +82,10 @@ func change_room(from_id, to_id):
 			new_room = preload("res://scenes/rooms/room_24.tscn")
 		25:
 			new_room = preload("res://scenes/rooms/room_25.tscn")
+		113:
+			new_room = preload("res://scenes/screens/win_screen.tscn")
 		_:
 			print("no level found with matching id")
-			return
 	
 	#storing player info and removing current room
 	if from_id != 112:
@@ -99,7 +100,7 @@ func change_room(from_id, to_id):
 	return_player_info(new_room)
 	
 	#putting player at correct door
-	if from_id != 112:
+	if from_id != 112 and to_id != 113:
 		new_room.put_player_at_door(from_id)
 	current_scene = new_room
 

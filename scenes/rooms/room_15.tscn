@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://86jfdw8tnlcd"]
+[gd_scene load_steps=13 format=4 uid="uid://86jfdw8tnlcd"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_lrkk5"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_38c01"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_qnioh"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_dwbu5"]
 [ext_resource type="PackedScene" uid="uid://cjujgg3nn4ytq" path="res://scenes/enemies/teddy/teddy_bear.tscn" id="4_kpty1"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="5_vagqk"]
@@ -27,6 +28,10 @@ ui = NodePath("UI")
 camera = NodePath("Player/Camera2D")
 camera_limiter_bl = NodePath("CameraLimiters/CameraLimiterBL")
 camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
+
+[node name="DungeonBackground" type="Sprite2D" parent="."]
+position = Vector2(298, 306)
+texture = ExtResource("2_qnioh")
 
 [node name="Player" parent="." instance=ExtResource("2_38c01")]
 position = Vector2(333, -52)

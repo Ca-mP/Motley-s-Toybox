@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://da35ha4u4wt5x"]
+
+[ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_iyccs"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_7of2o"]
+[ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="3_pay87"]
+[ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_e8v28"]
+[ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="5_aywfk"]
+[ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="6_6jisg"]
+[ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="7_nhrg7"]
+[ext_resource type="PackedScene" uid="uid://ie0ds48vlkdj" path="res://scenes/levels/tilemap/3d_tileset.tscn" id="8_g60f2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ct2c4"]
+size = Vector2(30, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aarwi"]
+size = Vector2(133, 30)
+
+[node name="Room30" type="Node2D"]
+script = ExtResource("1_iyccs")
+
+[node name="DungeonBackground" type="Sprite2D" parent="."]
+position = Vector2(267, 107)
+texture = ExtResource("2_7of2o")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("3_pay87")]
+position = Vector2(-51, 9)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="CameraLimiters" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CameraLimiterBL" type="Node2D" parent="CameraLimiters"]
+position = Vector2(-117, 498)
+
+[node name="CameraLimiterTR" type="Node2D" parent="CameraLimiters"]
+position = Vector2(555, -15)
+
+[node name="LevelEnemies" type="Node2D" parent="."]
+script = ExtResource("4_e8v28")
+metadata/_edit_lock_ = true
+
+[node name="LevelDoors" type="Node2D" parent="."]
+script = ExtResource("5_aywfk")
+metadata/_edit_lock_ = true
+
+[node name="RoomDoor" type="Area2D" parent="LevelDoors"]
+position = Vector2(572, 471)
+script = ExtResource("6_6jisg")
+from_id = 20
+to_id = 21
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor"]
+position = Vector2(40, -69)
+shape = SubResource("RectangleShape2D_ct2c4")
+
+[node name="RoomDoor2" type="Area2D" parent="LevelDoors"]
+position = Vector2(-42, -3)
+script = ExtResource("6_6jisg")
+from_id = 20
+to_id = 17
+upwards = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor2"]
+position = Vector2(-10.5, -92)
+shape = SubResource("RectangleShape2D_aarwi")
+
+[node name="UI" parent="." instance=ExtResource("7_nhrg7")]
+
+[node name="Pickups" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="3DTileset" parent="." instance=ExtResource("8_g60f2")]
+metadata/_edit_lock_ = true

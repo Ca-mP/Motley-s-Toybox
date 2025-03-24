@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bb75p7er1pleh"]
+[gd_scene load_steps=12 format=4 uid="uid://bb75p7er1pleh"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_e5gfw"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_umrah"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="5_up3ld"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="6_i4k1g"]
 [ext_resource type="PackedScene" uid="uid://ie0ds48vlkdj" path="res://scenes/levels/tilemap/3d_tileset.tscn" id="7_o0r30"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="7_tw78p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wkv5g"]
 size = Vector2(30, 146)
@@ -24,6 +25,10 @@ ui = NodePath("UI")
 camera = NodePath("Player/Camera2D")
 camera_limiter_bl = NodePath("CameraLimiters/CameraLimiterBL")
 camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
+
+[node name="DungeonBackground" type="Sprite2D" parent="."]
+position = Vector2(267, 107)
+texture = ExtResource("7_tw78p")
 
 [node name="Player" parent="." instance=ExtResource("2_umrah")]
 position = Vector2(-51, 9)
@@ -55,8 +60,7 @@ metadata/_edit_lock_ = true
 position = Vector2(572, 471)
 script = ExtResource("5_up3ld")
 from_id = 20
-to_id = 17
-upwards = true
+to_id = 21
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor"]
 position = Vector2(40, -69)
@@ -66,7 +70,8 @@ shape = SubResource("RectangleShape2D_wkv5g")
 position = Vector2(-42, -3)
 script = ExtResource("5_up3ld")
 from_id = 20
-to_id = 21
+to_id = 17
+upwards = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor2"]
 position = Vector2(-10.5, -92)

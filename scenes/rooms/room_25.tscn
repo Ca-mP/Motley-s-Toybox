@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/rooms/room_25.gd" id="1_43pgr"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_5inqx"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_gnfye"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_wl0ip"]
 [ext_resource type="PackedScene" uid="uid://c7kdam7k40n2p" path="res://scenes/enemies/bosses/brute.tscn" id="5_qg3wt"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="6_614ge"]
@@ -14,14 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://cwd5qr63pwq63" path="res://scenes/environment/wood_platform.tscn" id="13_bjyaw"]
 [ext_resource type="PackedScene" uid="uid://ie0ds48vlkdj" path="res://scenes/levels/tilemap/3d_tileset.tscn" id="13_m87so"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdn1f"]
-size = Vector2(129, 20)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dp676"]
 size = Vector2(17.5, 149)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p654v"]
-size = Vector2(135, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdn1f"]
+size = Vector2(129, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_83yor"]
 size = Vector2(152, 20)
@@ -35,6 +33,10 @@ ui = NodePath("UI")
 camera = NodePath("Player/Camera2D")
 camera_limiter_bl = NodePath("CameraLimiters/CameraLimiterBL")
 camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
+
+[node name="DungeonBackground" type="Sprite2D" parent="."]
+position = Vector2(178, -204)
+texture = ExtResource("2_gnfye")
 
 [node name="Player" parent="." instance=ExtResource("2_5inqx")]
 position = Vector2(-488, 45)
@@ -61,36 +63,26 @@ position = Vector2(740, -2)
 [node name="LevelDoors" type="Node2D" parent="."]
 script = ExtResource("6_614ge")
 
-[node name="RoomDoor2" type="Area2D" parent="LevelDoors"]
-position = Vector2(864, 63)
-script = ExtResource("7_w2xvr")
-from_id = 12
-to_id = 13
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor2"]
-position = Vector2(60, -62)
-rotation = 1.5708
-shape = SubResource("RectangleShape2D_pdn1f")
-
 [node name="RoomDoor" type="Area2D" parent="LevelDoors"]
 position = Vector2(-576, 61)
 script = ExtResource("7_w2xvr")
-from_id = 12
-to_id = 10
+from_id = 25
+to_id = 23
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor"]
 position = Vector2(-27, -60)
 shape = SubResource("RectangleShape2D_dp676")
 
-[node name="RoomDoor3" type="Area2D" parent="LevelDoors"]
-position = Vector2(-438, -649)
+[node name="RoomDoor2" type="Area2D" parent="."]
+position = Vector2(864, 63)
 script = ExtResource("7_w2xvr")
-from_id = 12
-to_id = 11
+from_id = 25
+to_id = 113
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor3"]
-position = Vector2(7, -52)
-shape = SubResource("RectangleShape2D_p654v")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDoor2"]
+position = Vector2(60, -62)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_pdn1f")
 
 [node name="Pickups" type="Node2D" parent="."]
 

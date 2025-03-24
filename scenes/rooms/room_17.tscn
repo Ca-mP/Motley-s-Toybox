@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://bly1rhlwqmkro"]
+[gd_scene load_steps=12 format=4 uid="uid://bly1rhlwqmkro"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_0umcl"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_dq18l"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_sw4ad"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="3_wymig"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="4_5dyxn"]
 [ext_resource type="PackedScene" uid="uid://cjujgg3nn4ytq" path="res://scenes/enemies/teddy/teddy_bear.tscn" id="4_v7ia2"]
@@ -15,8 +16,19 @@ size = Vector2(30, 146)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yh3k"]
 size = Vector2(202, 27)
 
-[node name="Room17" type="Node2D"]
+[node name="Room17" type="Node2D" node_paths=PackedStringArray("player", "enemies", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
 script = ExtResource("1_0umcl")
+player = NodePath("Player")
+enemies = NodePath("LevelEnemies")
+doors = NodePath("LevelDoors")
+ui = NodePath("UI")
+camera = NodePath("Player/Camera2D")
+camera_limiter_bl = NodePath("CameraLimiters/CameraLimiterBL")
+camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
+
+[node name="DungeonBackground" type="Sprite2D" parent="."]
+position = Vector2(465, 455)
+texture = ExtResource("2_sw4ad")
 
 [node name="Player" parent="." instance=ExtResource("2_dq18l")]
 position = Vector2(677, 509)
@@ -59,6 +71,7 @@ position = Vector2(52, 666)
 script = ExtResource("5_4i5io")
 from_id = 17
 to_id = 20
+downwards = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor2"]
 position = Vector2(-12, 36)

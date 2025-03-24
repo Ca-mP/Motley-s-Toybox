@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://p118lyeq84qr"]
+[gd_scene load_steps=12 format=4 uid="uid://p118lyeq84qr"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_s4gg5"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_aepc7"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_mwdi1"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="3_it5kf"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="4_rj4j6"]
@@ -24,6 +25,10 @@ ui = NodePath("UI")
 camera = NodePath("Player/Camera2D")
 camera_limiter_bl = NodePath("CameraLimiters/CameraLimiterBL")
 camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
+
+[node name="DungeonBackground" type="Sprite2D" parent="."]
+position = Vector2(47, 231)
+texture = ExtResource("2_aepc7")
 
 [node name="Player" parent="." instance=ExtResource("2_mwdi1")]
 position = Vector2(-120, 433)

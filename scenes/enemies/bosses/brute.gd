@@ -54,7 +54,6 @@ func _process(delta: float) -> void:
 		player_in_range = false
 		
 	if punch_range.get_overlapping_bodies():
-		print(punch_range.get_overlapping_bodies()[0].name)
 		player_in_punch_range = true
 	else:
 		player_in_punch_range = false
