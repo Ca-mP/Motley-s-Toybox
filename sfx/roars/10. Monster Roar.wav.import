@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d1f8vhl5sah82"
+path="res://.godot/imported/10. Monster Roar.wav-0784002b8f8fc247e407fbeee70835c9.sample"
+
+[deps]
+
+source_file="res://sfx/roars/10. Monster Roar.wav"
+dest_files=["res://.godot/imported/10. Monster Roar.wav-0784002b8f8fc247e407fbeee70835c9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

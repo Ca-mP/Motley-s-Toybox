@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c7kdam7k40n2p"]
+[gd_scene load_steps=40 format=3 uid="uid://c7kdam7k40n2p"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bosses/brute.gd" id="1_rka7u"]
 [ext_resource type="Texture2D" uid="uid://rplh7wf4af4a" path="res://sprites/enemies/bosses/demonBrute_Spritesheet.png" id="2_7i8fu"]
@@ -12,9 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://npaf5qqcnowv" path="res://scenes/states/enemy-states/enemy_aerial_state.tscn" id="10_vkj57"]
 [ext_resource type="PackedScene" uid="uid://caiuc4hnlt3ij" path="res://scenes/states/enemy-states/enemy_land_state.tscn" id="11_l40wd"]
 [ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_death_state.gd" id="12_lk5gq"]
+[ext_resource type="AudioStream" uid="uid://cljrh7imvyije" path="res://sfx/roars/09. Monster Roar.wav" id="13_c2mke"]
 [ext_resource type="AudioStream" uid="uid://de5qd8edsmof8" path="res://sfx/swoosh 8.wav" id="13_jobgi"]
+[ext_resource type="AudioStream" uid="uid://d1f8vhl5sah82" path="res://sfx/roars/10. Monster Roar.wav" id="14_72b00"]
 [ext_resource type="AudioStream" uid="uid://dg40v0i1q78rq" path="res://sfx/steps/bounce on 1.wav" id="14_y80vk"]
 [ext_resource type="AudioStream" uid="uid://bpxyk0i1ac7j6" path="res://sfx/steps/bounce on 2.wav" id="15_ytn7r"]
+[ext_resource type="AudioStream" uid="uid://bq0mjhn4a0vip" path="res://sfx/banana hits face 1.wav" id="18_upkxt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7iag4"]
 size = Vector2(73, 78)
@@ -269,7 +272,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_rh1yf"]
 resource_name = "death"
-length = 2.00001
+length = 3.0
 step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -282,6 +285,62 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/09_MonsterRoar")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.583333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/10_MonsterRoar")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.833333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/BananaHitsFace1")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/Swoosh")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_uj6fm"]
@@ -630,7 +689,7 @@ libraries = {
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_klao5")
-starting_state = NodePath("EnemyJumpState")
+starting_state = NodePath("EnemyDeathState")
 
 [node name="EnemyPauseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "pause_timer")]
 script = ExtResource("4_t2vej")
@@ -697,6 +756,12 @@ animator = NodePath("../../AnimationPlayer")
 
 [node name="Sounds" type="Node" parent="."]
 
+[node name="09_MonsterRoar" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_c2mke")
+
+[node name="10_MonsterRoar" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("14_72b00")
+
 [node name="Swoosh" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("13_jobgi")
 
@@ -708,3 +773,6 @@ stream = ExtResource("15_ytn7r")
 
 [node name="BounceOn2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("15_ytn7r")
+
+[node name="BananaHitsFace1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("18_upkxt")

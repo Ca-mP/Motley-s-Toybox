@@ -455,7 +455,7 @@ sfx = NodePath("../../../../Sounds/Swoosh8")
 wait_time = 0.5
 
 [node name="PlayerBlastJumpState" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("particles", "actor", "animator") instance=ExtResource("11_nsdv2")]
-jump_velocity = 1000
+jump_velocity = 800
 particles = NodePath("../../../../Pivot/Particles/BlastJumpParticles")
 actor = NodePath("../../../..")
 animator = NodePath("../../../../AnimationPlayer")

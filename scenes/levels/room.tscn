@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bjt1xj1uah3w7"]
+[gd_scene load_steps=12 format=4 uid="uid://bjt1xj1uah3w7"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_6yx37"]
 [ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_h4tal"]
@@ -13,9 +13,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lodc0"]
 size = Vector2(33, 154)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8j34"]
-size = Vector2(24, 142)
 
 [node name="Room0" type="Node2D" node_paths=PackedStringArray("player", "enemies", "save_points", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
 script = ExtResource("1_6yx37")
@@ -64,21 +61,11 @@ script = ExtResource("11_7nn7y")
 [node name="RoomDoor" type="Area2D" parent="Doors"]
 position = Vector2(128, 219)
 script = ExtResource("9_8m2f5")
-to_id = 1
+to_id = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/RoomDoor"]
 position = Vector2(32.5, -62)
 shape = SubResource("RectangleShape2D_lodc0")
-metadata/_edit_lock_ = true
-
-[node name="RoomDoor2" type="Area2D" parent="Doors"]
-position = Vector2(-417, 219)
-script = ExtResource("9_8m2f5")
-to_id = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/RoomDoor2"]
-position = Vector2(-28, -53)
-shape = SubResource("RectangleShape2D_d8j34")
 metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node2D" parent="."]

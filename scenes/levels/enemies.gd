@@ -9,4 +9,5 @@ func pass_player_position(pos: Vector2):
 		get_child(i).player_position = pos
 
 func open_gates():
+	parent = $".."
 	parent.open_gates()

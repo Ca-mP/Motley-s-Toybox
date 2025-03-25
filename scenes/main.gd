@@ -82,6 +82,20 @@ func change_room(from_id, to_id):
 			new_room = preload("res://scenes/rooms/room_24.tscn")
 		25:
 			new_room = preload("res://scenes/rooms/room_25.tscn")
+		26:
+			new_room = preload("res://scenes/rooms/room_26.tscn")
+		27:
+			new_room = preload("res://scenes/rooms/room_27.tscn")
+		28:
+			new_room = preload("res://scenes/rooms/room_28.tscn")
+		29:
+			new_room = preload("res://scenes/rooms/room_29.tscn")
+		30:
+			new_room = preload("res://scenes/rooms/room_30.tscn")
+		31:
+			new_room = preload("res://scenes/rooms/room_31.tscn")
+		32:
+			new_room = preload("res://scenes/rooms/room_32.tscn")
 		113:
 			new_room = preload("res://scenes/screens/win_screen.tscn")
 		_:

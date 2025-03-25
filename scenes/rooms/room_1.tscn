@@ -58,6 +58,7 @@ script = ExtResource("7_2gpd3")
 position = Vector2(-386, -233)
 script = ExtResource("7_e7scj")
 from_id = 1
+to_id = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelDoors/RoomDoor"]
 position = Vector2(-13.5, -53)

@@ -65,6 +65,7 @@ func put_player_at_door(room_id):
 @onready var level_gates = $LevelGates
 
 func open_gates():
+	level_gates = $LevelGates
 	level_gates.open_gates()
 
 func close_doors():

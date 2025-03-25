@@ -6,4 +6,4 @@
 [node name="PlayerBlastJumpState" type="Node"]
 script = ExtResource("1_qnx2j")
 explosion_scene = ExtResource("2_xceoo")
-jump_velocity = 500
+jump_velocity = 150
