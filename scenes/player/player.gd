@@ -42,7 +42,7 @@ class_name Player
 @onready var spell_mode := "attack"
 @onready var has_blast_jumped := false
 @onready var can_cast: bool
-@onready var aim_direction: Vector2
+@onready var aim_direction: int
 @onready var friction: int
 
 var direction
@@ -155,13 +155,10 @@ func _physics_process(delta: float) -> void:
 		#SPELLS
 	
 	#getting aim direction
-	if Input.get_vector("left", "right", "up", "down") != Vector2.ZERO:
-		aim_direction = Input.get_vector("left", "right", "up", "down")
+	if $Pivot.scale.x == -1:
+		aim_direction = -1
 	else:
-		if $Pivot.scale.x == -1:
-			aim_direction = Vector2(-1, 0)
-		else:
-			aim_direction = Vector2(1, 0)
+		aim_direction = 1
 	
 	#switching material
 	if Input.is_action_just_pressed("cycle-spell-left"):
@@ -260,6 +257,9 @@ func pickup(type, quantity):
 		"key":
 			GameState.dungeon_key_found = true
 			return
+		
+		"endgame":
+			$"..".end_game()
 			
 	if type == equipped_material.material:
 		equipped_material.current += quantity

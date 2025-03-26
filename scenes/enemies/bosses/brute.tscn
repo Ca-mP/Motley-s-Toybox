@@ -689,7 +689,7 @@ libraries = {
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_klao5")
-starting_state = NodePath("EnemyDeathState")
+starting_state = NodePath("EnemyPauseState")
 
 [node name="EnemyPauseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "pause_timer")]
 script = ExtResource("4_t2vej")

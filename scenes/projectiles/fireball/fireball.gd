@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var direction: Vector2
+@onready var direction: int
 
 @export var explosion_scene: PackedScene
 @export var speed: int
@@ -13,11 +13,12 @@ var exploding: bool
 func _ready() -> void:
 	exploding = false
 	original_position.y -= 35
-	rotation = direction.angle()
+	if direction < 1:
+		$AnimatedSprite2D.flip_h = true
 
 func _process(delta: float) -> void:
 	if not exploding:
-		position += direction.normalized() * speed * delta
+		position.x += direction * speed * delta
 
 func go_to_root():
 	var parent = self.get_parent()

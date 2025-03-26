@@ -187,3 +187,6 @@ func player_dead():
 	print(current_scene)
 	remove_child(current_scene)
 	add_child(death_screen)
+
+func end_game():
+	pass

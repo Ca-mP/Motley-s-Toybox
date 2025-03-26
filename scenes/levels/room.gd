@@ -144,4 +144,7 @@ func load_data():
 	pass_player_info($Player)
 
 func player_dead():
-	$"..".player_deaad()
+	$"..".player_dead()
+
+func end_game():
+	$"..".end_game()

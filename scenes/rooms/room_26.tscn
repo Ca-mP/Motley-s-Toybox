@@ -89,5 +89,5 @@ offset_left = -181.0
 offset_top = 139.0
 offset_right = -75.0
 offset_bottom = 208.0
-text = "Use the B button to jump!"
+text = "Use the A button to jump!"
 fit_content = true
