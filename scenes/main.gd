@@ -96,6 +96,8 @@ func change_room(from_id, to_id):
 			new_room = preload("res://scenes/rooms/room_31.tscn")
 		32:
 			new_room = preload("res://scenes/rooms/room_32.tscn")
+		33:
+			new_room = preload("res://scenes/rooms/room_33.tscn")
 		113:
 			new_room = preload("res://scenes/screens/win_screen.tscn")
 		_:
@@ -189,4 +191,4 @@ func player_dead():
 	add_child(death_screen)
 
 func end_game():
-	pass
+	change_room(33, 113)

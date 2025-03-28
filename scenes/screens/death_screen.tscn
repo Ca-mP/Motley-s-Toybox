@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4g3kwruer6n"]
+[gd_scene load_steps=4 format=3 uid="uid://c4g3kwruer6n"]
 
 [ext_resource type="Script" path="res://scenes/screens/death_screen.gd" id="1_y0quq"]
+[ext_resource type="Texture2D" uid="uid://bkymsvlph2vu5" path="res://sprites/ui/restart.png" id="2_nkduw"]
+[ext_resource type="Texture2D" uid="uid://cd0uplsrjh5j7" path="res://sprites/ui/youDied.png" id="2_quq31"]
 
 [node name="DeathScreen" type="Node2D"]
 script = ExtResource("1_y0quq")
@@ -22,24 +24,26 @@ offset_bottom = 538.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
-bbcode_enabled = true
-text = "[center]YOU DIED[/center]"
-fit_content = true
+texture = ExtResource("2_quq31")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 text = " 
  
  
- 
 
 "
 fit_content = true
 
-[node name="Button" type="Button" parent="ColorRect/VBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
-text = "Retry"
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_nkduw")
+texture_pressed = ExtResource("2_nkduw")
+texture_hover = ExtResource("2_nkduw")
+texture_disabled = ExtResource("2_nkduw")
+texture_focused = ExtResource("2_nkduw")
 
-[connection signal="pressed" from="ColorRect/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
