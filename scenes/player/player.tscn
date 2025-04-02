@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=41 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
 [ext_resource type="Texture2D" uid="uid://mj8tw3wfihl2" path="res://sprites/player/WizTheNewSpriteSheet.png" id="2_r8r7f"]
@@ -285,6 +285,43 @@ _data = {
 "walk": SubResource("Animation_lw0qb")
 }
 
+[sub_resource type="Animation" id="Animation_i8p0d"]
+resource_name = "switch_spell"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0yhiu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0988617, 0.816406, 0.799589, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lw2np"]
+_data = {
+"RESET": SubResource("Animation_0yhiu"),
+"switch_spell": SubResource("Animation_i8p0d")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "done_cast_state", "stun_state", "death_state")]
 position = Vector2(420, 473)
 collision_mask = 22
@@ -385,6 +422,7 @@ gravity = Vector2(0, 10)
 color_ramp = SubResource("Gradient_npkfg")
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+modulate = Color(0.0988617, 0.816406, 0.799589, 1)
 position = Vector2(1, -35)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_r8r7f")
@@ -395,6 +433,11 @@ frame = 24
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1qbk6")
+}
+
+[node name="SpellSwitchAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lw2np")
 }
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]

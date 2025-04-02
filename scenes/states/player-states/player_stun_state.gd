@@ -15,7 +15,6 @@ func _ready() -> void:
 func enter_state():
 	knockback_speed = 3000
 	actor.set_collision_mask_value(3, false)
-	actor.set_collision_layer_value(1, false)
 	set_physics_process(true)
 	actor.velocity /= 4
 	animator.play("stun")
@@ -28,7 +27,6 @@ func _physics_process(delta: float) -> void:
 func exit_state():
 	set_physics_process(false)
 	actor.set_collision_mask_value(3, true)
-	actor.set_collision_layer_value(1, true)
 	actor.stunned = false
 
 func on_animation_finished(anim_name):

@@ -39,7 +39,7 @@ class_name Player
 @export var stun_state: State
 @export var death_state: State
 
-@onready var spell_mode := "attack"
+@onready var spell_mode: String
 @onready var has_blast_jumped := false
 @onready var can_cast: bool
 @onready var aim_direction: int
@@ -168,6 +168,7 @@ func _physics_process(delta: float) -> void:
 	
 	#spell mode switching
 	if Input.is_action_just_pressed("switch-mode"):
+		$SpellSwitchAnimator.play("switch_spell")
 		var previous_mode = spell_mode
 		if previous_mode == "attack":
 			spell_mode = "utility"

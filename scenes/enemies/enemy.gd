@@ -27,19 +27,26 @@ func _process(_delta: float) -> void:
 		ground_on_left = true
 	elif not falls:
 		ground_on_left = false
+		if player_position.x > global_position.x:
+			direction_to_player = 1
+			if faces_player and velocity.y == 0:
+				face_right()
+		elif player_position.x < global_position.x:
+			direction_to_player = -1
+			if faces_player and velocity.y == 0:
+				face_left()
 	
 	if right_feeler.is_colliding():
 		ground_on_right = true
 	elif not falls:
 		ground_on_right = false
-		
 		if player_position.x > global_position.x:
 			direction_to_player = 1
-			if faces_player:
+			if faces_player and velocity.y == 0:
 				face_right()
 		elif player_position.x < global_position.x:
 			direction_to_player = -1
-			if faces_player:
+			if faces_player and velocity.y == 0:
 				face_left()
 		
 	if health <= 0:

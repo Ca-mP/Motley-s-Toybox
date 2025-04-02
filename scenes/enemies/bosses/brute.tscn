@@ -29,7 +29,7 @@ size = Vector2(69, 142)
 size = Vector2(122, 87)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xn2q3"]
-size = Vector2(819, 60)
+size = Vector2(558, 60)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jmu12"]
 particles_animation = true
@@ -625,7 +625,7 @@ shape = SubResource("RectangleShape2D_x852q")
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/RangeBoxes/ChargeRange"]
-position = Vector2(376.5, 33)
+position = Vector2(246, 33)
 shape = SubResource("RectangleShape2D_xn2q3")
 
 [node name="FloorFeelers" type="Node2D" parent="."]

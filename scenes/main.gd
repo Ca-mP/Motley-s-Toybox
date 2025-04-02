@@ -14,6 +14,7 @@ var lightning_current: int
 var water_unlocked: bool
 var water_max: int
 var water_current: int
+var spell_mode: String
 
 func _ready() -> void:
 	current_scene = self.get_child(0)
@@ -136,6 +137,9 @@ func set_beginning_player_info() -> void:
 	water_unlocked = false
 	water_max = 0
 	water_current = 0
+	
+	spell_mode = "attack"
+
 func store_player_info() -> void:
 	for child in current_scene.get_children():
 		if child.name == "Player":
@@ -156,6 +160,9 @@ func store_player_info() -> void:
 			water_unlocked = player.water_material.unlocked
 			water_max = player.water_material.max
 			water_current = player.water_material.current
+			
+			spell_mode = player.spell_mode
+			print(spell_mode)
 			return
 	print("no player found")
 
@@ -179,6 +186,8 @@ func return_player_info(_new_room) -> void:
 			player.water_material.max = water_max
 			player.water_material.current = water_current
 			
+			player.spell_mode = spell_mode
+			print(spell_mode)
 			player.switch_material(equipped_material)
 			return
 	print("no player found")
