@@ -22,6 +22,7 @@ BgMusic="*res://scenes/globals/bg_music.tscn"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="viewport"
 
 [input]
@@ -122,3 +123,8 @@ select={
 [physics]
 
 2d/default_gravity=1200.0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
