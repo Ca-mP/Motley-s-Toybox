@@ -65,7 +65,8 @@ horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "-Joystick or DPad to move
--A
--Y to change spell mode
--X to cast spell"
+text = "KEYBOARD CONTROLS	
+-Movement: WASD
+-Jump: Space Bar
+-Cast Spell: J
+-Switch Spell: K"

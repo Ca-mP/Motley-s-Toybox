@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c1gg3know475k" path="res://scenes/screens/opening_screen.tscn" id="2_gequs"]
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_bukiv")
 
 [node name="OpeningScreen" parent="." instance=ExtResource("2_gequs")]

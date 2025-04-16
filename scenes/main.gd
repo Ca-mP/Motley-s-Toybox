@@ -195,7 +195,6 @@ func return_player_info(_new_room) -> void:
 func player_dead():
 	var death_screen_path = preload("res://scenes/screens/death_screen.tscn")
 	var death_screen = death_screen_path.instantiate()
-	print(current_scene)
 	remove_child(current_scene)
 	add_child(death_screen)
 

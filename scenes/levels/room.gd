@@ -10,6 +10,8 @@ class_name Room
 
 var save_path = "user://wizard-save-file.save"
 
+var pause_screen_scene = preload("res://scenes/screens/pause_screen.tscn")
+
 var zooming_out := false
 
 func _ready() -> void:
@@ -25,14 +27,28 @@ func set_camera_limits():
 	camera.limit_right = int(camera_limiter_tr.position.x)
 	camera.limit_top = int(camera_limiter_tr.position.y)
 
+@onready var player_canvas_layer = $"Player/CanvasLayer"
+
 func _process(_delta: float) -> void:
+	#Passes player position to enemies
 	if is_instance_valid(player):
 		pass_player_position()
 	
+	#Handling zoom-out rooms
 	if zooming_out:
 		camera.zoom -= Vector2(0.01, 0.01)
 		if camera.zoom.x <= 1:
 			zooming_out = false
+		
+		#Pausing game
+	if Input.is_action_just_pressed("pause"):
+		if get_tree().paused == false:
+			get_tree().paused = true
+			var pause_screen = pause_screen_scene.instantiate()
+			player_canvas_layer.add_child(pause_screen)
+
+func unpause():
+	get_tree().paused = false
 
 func pass_player_info(_player):
 	ui.player_max_health = _player.max_health

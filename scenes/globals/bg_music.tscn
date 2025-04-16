@@ -3,5 +3,6 @@
 [ext_resource type="AudioStream" uid="uid://fl1aktphs3uw" path="res://sfx/music/Sketchbook 2024-11-07.mp3" id="1_iirhu"]
 
 [node name="BGMusic" type="AudioStreamPlayer"]
+process_mode = 3
 stream = ExtResource("1_iirhu")
 volume_db = -4.0
