@@ -340,11 +340,6 @@ fire_material = {
 "max": 50,
 "unlocked": true
 }
-lightning_material = {
-"current": 0,
-"max": 20,
-"unlocked": true
-}
 water_material = {
 "current": 20,
 "max": 20,

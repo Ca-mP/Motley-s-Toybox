@@ -1,12 +1,15 @@
 extends Control
 
+@onready var continue_button = $ColorRect/VBoxContainer/ContinueButton
+
+func _ready() -> void:
+	continue_button.pressed.connect(b)
+
 func _on_quit_button_pressed() -> void:
-	print("quit")
 	get_tree().quit()
 
 func _on_continue_button_pressed() -> void:
 	print("continue")
 
-
-func _on_continue_button_button_down() -> void:
-	print("pressed down")
+func b():
+	print("continue")

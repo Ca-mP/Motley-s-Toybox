@@ -39,7 +39,7 @@ class_name Player
 @export var stun_state: State
 @export var death_state: State
 
-@onready var spell_mode: String
+@onready var spell_mode := "attack"
 @onready var has_blast_jumped := false
 @onready var can_cast: bool
 @onready var aim_direction: int
@@ -184,6 +184,7 @@ func _physics_process(delta: float) -> void:
 func cycle_spell_right():
 	match equipped_material.material:
 		"fire":
+			print(lightning_material.unlocked)
 			if lightning_material.unlocked:
 				switch_material("lightning")
 			elif water_material.unlocked:

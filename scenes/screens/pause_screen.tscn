@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqrej62iodq0c"]
 
 [ext_resource type="Script" path="res://scenes/screens/pause_screen.gd" id="1_f31en"]
-[ext_resource type="Texture2D" uid="uid://cssqtucyq5pki" path="res://sprites/ui/continueButton.png" id="2_01srw"]
-[ext_resource type="Texture2D" uid="uid://bkymsvlph2vu5" path="res://sprites/ui/restart.png" id="3_m15gw"]
+[ext_resource type="Texture2D" uid="uid://bimsrljdey2dt" path="res://sprites/ui/continuePause.png" id="2_oyjhf"]
+[ext_resource type="Texture2D" uid="uid://bqvhquoitlx1x" path="res://sprites/ui/ExitPause.png" id="3_8koc7"]
 
 [node name="PauseScreen" type="Control"]
 process_mode = 3
@@ -54,22 +54,24 @@ text = "[center]PAUSED[/center]"
 fit_content = true
 
 [node name="ContinueButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
-texture_normal = ExtResource("2_01srw")
-texture_pressed = ExtResource("2_01srw")
-texture_hover = ExtResource("2_01srw")
-texture_disabled = ExtResource("2_01srw")
-texture_focused = ExtResource("2_01srw")
+size_flags_vertical = 3
+texture_normal = ExtResource("2_oyjhf")
+texture_pressed = ExtResource("2_oyjhf")
+texture_hover = ExtResource("2_oyjhf")
+texture_disabled = ExtResource("2_oyjhf")
+texture_focused = ExtResource("2_oyjhf")
 
 [node name="QuitButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture_normal = ExtResource("3_m15gw")
-texture_pressed = ExtResource("3_m15gw")
-texture_hover = ExtResource("3_m15gw")
-texture_disabled = ExtResource("3_m15gw")
+texture_normal = ExtResource("3_8koc7")
+texture_pressed = ExtResource("3_8koc7")
+texture_hover = ExtResource("3_8koc7")
+texture_disabled = ExtResource("3_8koc7")
+texture_focused = ExtResource("3_8koc7")
 
-[connection signal="button_down" from="ColorRect/VBoxContainer/ContinueButton" to="." method="_on_continue_button_button_down"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

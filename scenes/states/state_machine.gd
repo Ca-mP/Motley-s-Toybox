@@ -11,8 +11,8 @@ func change_state(state: State):
 	if current_state:
 		current_state.exit_state()
 		#if $"..".name != "Player":
-			#print("old state: " + str(current_state))
+		#print("old state: " + str(current_state))
 	state.enter_state()
 	current_state = state
 	#if $"..".name != "Player":
-		#print("new state: " + str(state))
+	#print("new state: " + str(state))
