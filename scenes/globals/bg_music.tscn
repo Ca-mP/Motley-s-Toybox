@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://c7uvywjwdeegs"]
 
-[ext_resource type="AudioStream" uid="uid://fl1aktphs3uw" path="res://sfx/music/Sketchbook 2024-11-07.mp3" id="1_iirhu"]
+[ext_resource type="AudioStream" uid="uid://2yqevrvo68nt" path="res://sfx/music/toybox.mp3" id="1_rdcpp"]
 
 [node name="BGMusic" type="AudioStreamPlayer"]
 process_mode = 3
-stream = ExtResource("1_iirhu")
-volume_db = -4.0
+stream = ExtResource("1_rdcpp")
+volume_db = -10.0

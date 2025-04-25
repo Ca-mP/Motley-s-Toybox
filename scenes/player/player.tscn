@@ -1,7 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=45 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
-[ext_resource type="Texture2D" uid="uid://bqkmah42vjhmh" path="res://sprites/player/wizwith new walk.png" id="2_7ibld"]
+[ext_resource type="Texture2D" uid="uid://d6k4mdxxom4m" path="res://sprites/player/wizwiththorpowers.png" id="2_7t56i"]
 [ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_3e7yi"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_jump_state.gd" id="4_vg3c6"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_walk_state.gd" id="5_tntcf"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://b3th4jd6v0r8d" path="res://scenes/states/player-states/player_blast_jump_state.tscn" id="11_nsdv2"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_water_spell_state.gd" id="12_8fo6j"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_done_cast_state.gd" id="13_ru3pq"]
+[ext_resource type="PackedScene" uid="uid://cjiqra4hoivd6" path="res://scenes/states/player-states/player_lightning_blast_state.tscn" id="14_g106i"]
+[ext_resource type="PackedScene" uid="uid://pitx0c1qvu6x" path="res://scenes/states/player-states/player_dash_state.tscn" id="15_5re5x"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_stun_state.gd" id="16_jk5hn"]
 [ext_resource type="Script" path="res://player_death_state.gd" id="17_ocg4m"]
 [ext_resource type="AudioStream" uid="uid://de5qd8edsmof8" path="res://sfx/swoosh 8.wav" id="18_jtkim"]
@@ -166,6 +168,40 @@ tracks/0/keys = {
 "values": [72, 73, 74, 75, 76, 77]
 }
 
+[sub_resource type="Animation" id="Animation_qm7pn"]
+resource_name = "lightning_blast"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107]
+}
+
+[sub_resource type="Animation" id="Animation_58lq7"]
+resource_name = "lightning_blast_intro"
+length = 0.500008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.500008),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [90, 91, 92, 94, 94, 93, 96]
+}
+
 [sub_resource type="Animation" id="Animation_m8ap6"]
 resource_name = "spell"
 length = 1.00001
@@ -280,6 +316,8 @@ _data = {
 "jump": SubResource("Animation_y2o3f"),
 "jump_to_fall": SubResource("Animation_6057e"),
 "land": SubResource("Animation_uet0l"),
+"lightning_blast": SubResource("Animation_qm7pn"),
+"lightning_blast_intro": SubResource("Animation_58lq7"),
 "spell": SubResource("Animation_m8ap6"),
 "stun": SubResource("Animation_44w4v"),
 "walk": SubResource("Animation_lw0qb")
@@ -322,7 +360,7 @@ _data = {
 "switch_spell": SubResource("Animation_i8p0d")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "done_cast_state", "stun_state", "death_state")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "lightning_blast_state", "done_cast_state", "stun_state", "death_state")]
 position = Vector2(420, 473)
 collision_mask = 22
 script = ExtResource("1_ri1hm")
@@ -357,6 +395,7 @@ lightning_spell_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSp
 water_spell_state = NodePath("StateMachine/PlayerCastState/PlayerWaterSpellState")
 fireball_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState/PlayerFireballState")
 blast_jump_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState/PlayerBlastJumpState")
+lightning_blast_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerLightningBlastState")
 done_cast_state = NodePath("StateMachine/PlayerDoneCastState")
 stun_state = NodePath("StateMachine/PlayerStunState")
 death_state = NodePath("StateMachine/PlayerDeathState")
@@ -420,9 +459,9 @@ color_ramp = SubResource("Gradient_npkfg")
 modulate = Color(0.0988617, 0.816406, 0.799589, 1)
 position = Vector2(1, -35)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_7ibld")
-hframes = 10
-vframes = 9
+texture = ExtResource("2_7t56i")
+hframes = 11
+vframes = 11
 frame = 24
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -502,6 +541,12 @@ animator = NodePath("../../../../AnimationPlayer")
 script = ExtResource("11_hnfra")
 actor = NodePath("../../..")
 animator = NodePath("../../../AnimationPlayer")
+
+[node name="PlayerLightningBlastState" parent="StateMachine/PlayerCastState/PlayerLightningSpellState" node_paths=PackedStringArray("actor", "animator") instance=ExtResource("14_g106i")]
+actor = NodePath("../../../..")
+animator = NodePath("../../../../AnimationPlayer")
+
+[node name="PlayerDashState" parent="StateMachine/PlayerCastState/PlayerLightningSpellState" instance=ExtResource("15_5re5x")]
 
 [node name="PlayerWaterSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
 script = ExtResource("12_8fo6j")

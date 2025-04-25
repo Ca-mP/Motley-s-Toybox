@@ -10,10 +10,8 @@ func _ready() -> void:
 
 func enter_state():
 	super()
-	print("fire spell state")
 
 func _physics_process(_delta: float) -> void:
-	print(actor.spell_mode)
 	if actor.spell_mode == "attack":
 		fireball.emit()
 	elif actor.spell_mode == "utility":

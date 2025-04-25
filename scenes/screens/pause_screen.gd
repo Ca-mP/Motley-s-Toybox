@@ -1,15 +1,20 @@
 extends Control
 
-@onready var continue_button = $ColorRect/VBoxContainer/ContinueButton
+@onready var start_button = $ColorRect/VBoxContainer/StartButton
+@onready var exit_button = $ColorRect/VBoxContainer/ExitButton
 
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	continue_button.pressed.connect(b)
+	start_button.pressed.connect(continue_game)
+	exit_button.pressed.connect(exit_game)
 
-func _on_quit_button_pressed() -> void:
-	get_tree().quit()
 
-func _on_continue_button_pressed() -> void:
-	print("continue")
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
 
-func b():
-	print("continue")
+func continue_game():
+	print("start")
+
+func exit_game():
+	print("exit")

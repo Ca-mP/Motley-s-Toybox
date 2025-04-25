@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func enter_state():
 	super()
+	actor.can_move = true
 
 func _physics_process(_delta: float) -> void:
 	if actor.velocity.y > 0:

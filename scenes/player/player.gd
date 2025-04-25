@@ -33,6 +33,7 @@ class_name Player
 @export var water_spell_state: State
 @export var fireball_state: State
 @export var blast_jump_state: State
+@export var lightning_blast_state: State
 
 @export var done_cast_state: State
 
@@ -44,6 +45,7 @@ class_name Player
 @onready var can_cast: bool
 @onready var aim_direction: int
 @onready var friction: int
+@onready var can_move := true
 
 var direction
 var stunned := false
@@ -85,6 +87,10 @@ func _ready() -> void:
 	fireball_state.done.connect(state_machine.change_state.bind(done_cast_state))
 	blast_jump_state.done.connect(state_machine.change_state.bind(done_cast_state))
 	
+	lightning_spell_state.lightning_blast.connect(state_machine.change_state.bind(lightning_blast_state))
+	
+	lightning_blast_state.done.connect(state_machine.change_state.bind(done_cast_state))
+	
 	done_cast_state.idle.connect(state_machine.change_state.bind(idle_state))
 	done_cast_state.walk.connect(state_machine.change_state.bind(walk_state))
 	done_cast_state.jump.connect(state_machine.change_state.bind(jump_state))
@@ -102,11 +108,11 @@ func _physics_process(delta: float) -> void:
 		#MOVEMENT
 	
 	#gravity
-	if not is_on_floor():
+	if not is_on_floor() and not state_machine.current_state == lightning_blast_state:
 		velocity += get_gravity() * delta
 	
 	#horizontal movement
-	if not stunned:
+	if not stunned and can_move:
 		direction = Input.get_axis("left", "right")
 		if direction: #if directional input
 			velocity.x += direction * acceleration * 0.3
