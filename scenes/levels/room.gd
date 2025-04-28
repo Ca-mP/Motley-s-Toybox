@@ -8,6 +8,8 @@ class_name Room
 @export var ui: CanvasLayer
 @export var camera: Camera2D
 
+@onready var player_canvas_layer = $Player/CanvasLayer
+
 var save_path = "user://wizard-save-file.save"
 
 var pause_screen_scene = preload("res://scenes/screens/pause_screen.tscn")
@@ -27,8 +29,6 @@ func set_camera_limits():
 	camera.limit_right = int(camera_limiter_tr.position.x)
 	camera.limit_top = int(camera_limiter_tr.position.y)
 
-@onready var player_canvas_layer = $"Player/CanvasLayer"
-
 func _process(_delta: float) -> void:
 	#Passes player position to enemies
 	if is_instance_valid(player):
@@ -46,9 +46,6 @@ func _process(_delta: float) -> void:
 			get_tree().paused = true
 			var pause_screen = pause_screen_scene.instantiate()
 			player_canvas_layer.add_child(pause_screen)
-
-func unpause():
-	get_tree().paused = false
 
 func pass_player_info(_player):
 	ui.player_max_health = _player.max_health

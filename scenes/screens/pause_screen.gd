@@ -8,13 +8,9 @@ func _ready() -> void:
 	start_button.pressed.connect(continue_game)
 	exit_button.pressed.connect(exit_game)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func continue_game():
-	print("start")
+	get_tree().paused = false
+	queue_free()
 
 func exit_game():
-	print("exit")
+	get_tree().quit()

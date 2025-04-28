@@ -22,7 +22,6 @@ BgMusic="*res://scenes/globals/bg_music.tscn"
 
 [display]
 
-window/size/mode=3
 window/stretch/mode="viewport"
 
 [input]

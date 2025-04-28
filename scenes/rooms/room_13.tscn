@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_e11wn"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_5pgev"]
-[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_y7h12"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground2.png" id="2_y7h12"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_hqf8g"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="5_f30vm"]
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="6_1sq3r"]

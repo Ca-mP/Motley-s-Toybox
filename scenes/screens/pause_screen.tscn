@@ -31,9 +31,12 @@ color = Color(0.26, 0.26, 0.26, 0.643137)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -160.0
+offset_right = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -44,16 +47,6 @@ bbcode_enabled = true
 text = "[center]PAUSED[/center]"
 fit_content = true
 
-[node name="ExitButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture_normal = ExtResource("3_8koc7")
-texture_pressed = ExtResource("3_8koc7")
-texture_hover = ExtResource("3_8koc7")
-texture_disabled = ExtResource("3_8koc7")
-texture_focused = ExtResource("3_8koc7")
-
 [node name="StartButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -63,3 +56,13 @@ texture_pressed = ExtResource("2_oyjhf")
 texture_hover = ExtResource("2_oyjhf")
 texture_disabled = ExtResource("2_oyjhf")
 texture_focused = ExtResource("2_oyjhf")
+
+[node name="ExitButton" type="TextureButton" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("3_8koc7")
+texture_pressed = ExtResource("3_8koc7")
+texture_hover = ExtResource("3_8koc7")
+texture_disabled = ExtResource("3_8koc7")
+texture_focused = ExtResource("3_8koc7")

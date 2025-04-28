@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=4 uid="uid://bev6wxe0iky40"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_2pprq"]
-[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_8p10w"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground2.png" id="2_8p10w"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_xicfx"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="4_v3jhl"]
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="5_n6cvt"]
@@ -22,6 +22,7 @@ size = Vector2(150, 20)
 size = Vector2(20, 145)
 
 [node name="Room5" type="Node2D" node_paths=PackedStringArray("player", "enemies", "save_points", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
+process_mode = 1
 script = ExtResource("1_2pprq")
 player = NodePath("Player")
 enemies = NodePath("LevelEnemies")

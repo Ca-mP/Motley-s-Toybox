@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/toybox.mp3-52fc7276aa702a40c4ede447abc645d3.m
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

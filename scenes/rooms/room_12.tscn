@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=4 uid="uid://b7ed6fhmgk2j5"]
 
 [ext_resource type="Script" path="res://scenes/rooms/room_12.gd" id="1_1e5iv"]
-[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_478qy"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground2.png" id="2_478qy"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_fg6v1"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_mcmib"]
 [ext_resource type="PackedScene" uid="uid://cpjtpwpst32a8" path="res://scenes/enemies/bone/sir_f_bone.tscn" id="4_uhg7n"]

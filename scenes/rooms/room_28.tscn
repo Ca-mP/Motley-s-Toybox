@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=4 uid="uid://bpku2x0j4e7b1"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_1wwu8"]
-[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_775xu"]
+[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground2.png" id="2_775xu"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="3_7bvpi"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_2xdkg"]
 [ext_resource type="PackedScene" uid="uid://cjujgg3nn4ytq" path="res://scenes/enemies/teddy/teddy_bear.tscn" id="5_a47la"]

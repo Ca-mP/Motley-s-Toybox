@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=4 uid="uid://bjt1xj1uah3w7"]
+[gd_scene load_steps=12 format=4 uid="uid://bjt1xj1uah3w7"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_6yx37"]
-[ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground.png" id="2_h4tal"]
+[ext_resource type="Texture2D" uid="uid://dc2kidy8yic18" path="res://sprites/level/dungeonBackground.png" id="2_h4tal"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_h774q"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="3_ltrxl"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="5_pw1xp"]
-[ext_resource type="PackedScene" uid="uid://0ik1qya8dy7p" path="res://scenes/player/player_canvas_layer.tscn" id="5_uxhdy"]
 [ext_resource type="Script" path="res://scenes/levels/save_points.gd" id="6_1b8gm"]
-[ext_resource type="Script" path="res://scenes/player/player_canvas_layer.gd" id="6_ia8li"]
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="9_8m2f5"]
 [ext_resource type="PackedScene" uid="uid://bjeocburd6f8n" path="res://scenes/environment/doors/doors.tscn" id="10_6n2id"]
 [ext_resource type="PackedScene" uid="uid://ie0ds48vlkdj" path="res://scenes/levels/tilemap/3d_tileset.tscn" id="10_lb4wj"]
@@ -29,7 +27,8 @@ camera_limiter_bl = NodePath("CameraLimiters/CameraLimiterBL")
 camera_limiter_tr = NodePath("CameraLimiters/CameraLimiterTR")
 
 [node name="DungeonBackground" type="Sprite2D" parent="."]
-position = Vector2(-123, 39)
+position = Vector2(-70.5, 102)
+scale = Vector2(0.376562, 0.257407)
 texture = ExtResource("2_h4tal")
 
 [node name="3DTileset" parent="." instance=ExtResource("10_lb4wj")]
@@ -53,9 +52,6 @@ fire_material = {
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
-
-[node name="CanvasLayer" parent="Player" instance=ExtResource("5_uxhdy")]
-script = ExtResource("6_ia8li")
 
 [node name="CameraLimiters" type="Node2D" parent="."]
 

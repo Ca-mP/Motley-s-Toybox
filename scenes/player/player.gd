@@ -190,7 +190,6 @@ func _physics_process(delta: float) -> void:
 func cycle_spell_right():
 	match equipped_material.material:
 		"fire":
-			print(lightning_material.unlocked)
 			if lightning_material.unlocked:
 				switch_material("lightning")
 			elif water_material.unlocked:

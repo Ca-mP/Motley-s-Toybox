@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=46 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
 [ext_resource type="Texture2D" uid="uid://d6k4mdxxom4m" path="res://sprites/player/wizwiththorpowers.png" id="2_7t56i"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://bdjn3twdmtcj1" path="res://sfx/body fall 5.wav" id="19_bl3wc"]
 [ext_resource type="AudioStream" uid="uid://blduuwscdidb" path="res://sfx/steps/Concrete 1.wav" id="19_kputj"]
 [ext_resource type="AudioStream" uid="uid://1bpwutswywxi" path="res://sfx/steps/Concrete 2.wav" id="20_7kfb1"]
+[ext_resource type="PackedScene" uid="uid://0ik1qya8dy7p" path="res://scenes/player/player_canvas_layer.tscn" id="24_nvl7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5oih"]
 size = Vector2(28, 65)
@@ -584,6 +585,8 @@ stream = ExtResource("20_7kfb1")
 
 [node name="BodyFall5" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("19_bl3wc")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("24_nvl7p")]
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="area_entered" from="InteractBox" to="." method="_on_interact_box_area_entered"]

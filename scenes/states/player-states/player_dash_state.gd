@@ -1,4 +1,5 @@
 extends PlayerState
+class_name PlayerDashState
 
 signal done
 
