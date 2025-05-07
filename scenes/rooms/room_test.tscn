@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://co5vqs307pwat"]
+[gd_scene load_steps=9 format=4 uid="uid://co5vqs307pwat"]
 
 [ext_resource type="Script" path="res://scenes/rooms/room_test.gd" id="1_d62s4"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_oet60"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="5_crlsi"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="6_rwmqo"]
 [ext_resource type="Script" path="res://scenes/levels/save_points.gd" id="7_kkxhc"]
-[ext_resource type="PackedScene" uid="uid://cjujgg3nn4ytq" path="res://scenes/enemies/teddy/teddy_bear.tscn" id="7_pcn78"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="8_42s0m"]
 
 [node name="RoomTest" type="Node2D" node_paths=PackedStringArray("player", "enemies", "save_points", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
@@ -42,9 +41,6 @@ script = ExtResource("5_crlsi")
 [node name="LevelEnemies" type="Node2D" parent="."]
 script = ExtResource("6_rwmqo")
 metadata/_edit_lock_ = true
-
-[node name="TeddyBear" parent="LevelEnemies" instance=ExtResource("7_pcn78")]
-position = Vector2(291, 387)
 
 [node name="LevelSavePoints" type="Node2D" parent="."]
 script = ExtResource("7_kkxhc")

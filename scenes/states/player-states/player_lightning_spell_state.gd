@@ -15,10 +15,10 @@ func _physics_process(_delta: float) -> void:
 	if actor.spell_mode == "attack":
 		lightning_blast.emit()
 	elif actor.spell_mode == "utility":
-		if actor.has_blast_jumped:
-			done.emit()
-		else:
+		if not actor.gliding:
 			dash.emit()
+		else:
+			done.emit()
 
 func exit_state():
 	super()

@@ -34,24 +34,29 @@ class_name Player
 @export var fireball_state: State
 @export var blast_jump_state: State
 @export var lightning_blast_state: State
+@export var lightning_dash_state: State
 
 @export var done_cast_state: State
 
 @export var stun_state: State
 @export var death_state: State
 
-@onready var spell_mode := "attack"
+@onready var spell_mode: String
 @onready var has_blast_jumped := false
 @onready var can_cast: bool
 @onready var aim_direction: int
 @onready var friction: int
 @onready var can_move := true
+@onready var gliding := false
 
 var direction
 var stunned := false
 var jump_buffer: bool
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+
+var dash_slowing = 10
+var glide_direction: int
 
 func _ready() -> void:
 	#connecting states
@@ -88,8 +93,11 @@ func _ready() -> void:
 	blast_jump_state.done.connect(state_machine.change_state.bind(done_cast_state))
 	
 	lightning_spell_state.lightning_blast.connect(state_machine.change_state.bind(lightning_blast_state))
+	lightning_spell_state.dash.connect(state_machine.change_state.bind(lightning_dash_state))
 	
 	lightning_blast_state.done.connect(state_machine.change_state.bind(done_cast_state))
+	
+	lightning_dash_state.done.connect(state_machine.change_state.bind(done_cast_state))
 	
 	done_cast_state.idle.connect(state_machine.change_state.bind(idle_state))
 	done_cast_state.walk.connect(state_machine.change_state.bind(walk_state))
@@ -105,7 +113,12 @@ func _physics_process(delta: float) -> void:
 	
 	#if Input.is_action_pressed("j"):
 		#die()
+		
+	if not spell_mode:
+		spell_mode = "attack"
 		#MOVEMENT
+	
+	
 	
 	#gravity
 	if not is_on_floor() and not state_machine.current_state == lightning_blast_state:
@@ -116,7 +129,8 @@ func _physics_process(delta: float) -> void:
 		direction = Input.get_axis("left", "right")
 		if direction: #if directional input
 			velocity.x += direction * acceleration * 0.3
-			velocity.x = clamp(velocity.x, -max_speed, max_speed)
+			if not gliding:
+				velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	
 	#Flip player to direction they are moving
 	if not stunned:
@@ -128,6 +142,17 @@ func _physics_process(delta: float) -> void:
 	#friction
 	if is_on_floor():
 		friction = 5
+	
+	
+	#gliding (when player dashes)
+	if gliding:
+		velocity.x -= dash_slowing * glide_direction
+		dash_slowing += 1
+	else:
+		dash_slowing = 10
+	
+	if velocity.x >= -100 and velocity.x <= 100:
+		gliding = false
 	
 	#jump buffer
 	if Input.is_action_just_pressed("jump") and not is_on_floor():

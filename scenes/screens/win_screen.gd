@@ -3,7 +3,7 @@ extends Node2D
 const TARGET_POS = 50
 var speed = 4
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var pos = $"ColorRect/VBoxContainer".position.y
 	if pos > TARGET_POS - 3 and pos < TARGET_POS + 3:
 		pass

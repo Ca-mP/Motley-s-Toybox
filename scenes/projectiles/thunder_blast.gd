@@ -19,9 +19,8 @@ func _ready() -> void:
 	original_position.x  += 38 * direction
 	scale.x = direction * 0.3
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#doing dmg
-	print(get_overlapping_bodies())
 	if get_overlapping_bodies():
 		for body in get_overlapping_bodies():
 			if "hit" in body and can_dmg:

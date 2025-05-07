@@ -38,7 +38,7 @@ func anim_finished(anim_name):
 		self.add_child(lightning_blast_instance)
 		lightning_blast_instance.go_to_root()
 		
-		actor.fire_material.current -= 1
+		actor.lightning_material.current -= 1
 		actor.equipped_material.current -= 1
 		
 		animator.play("lightning_blast")

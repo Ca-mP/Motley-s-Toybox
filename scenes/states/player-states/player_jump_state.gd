@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_released("jump"):
 		fall.emit()
-	if Input.is_action_pressed("spell") and actor.equipped_material.current:
+	if Input.is_action_just_pressed("spell") and actor.equipped_material.current:
 		cast.emit()
 
 func on_jump_timer_timeout():

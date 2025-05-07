@@ -130,9 +130,9 @@ func set_beginning_player_info() -> void:
 	fire_max = 50
 	fire_current = 50
 	
-	lightning_unlocked = false
-	lightning_max = 0
-	lightning_current = 0
+	lightning_unlocked = true
+	lightning_max = 20
+	lightning_current = 20
 	
 	water_unlocked = false
 	water_max = 0

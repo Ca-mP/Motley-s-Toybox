@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bi0h1y0ultup0"]
+[gd_scene load_steps=19 format=3 uid="uid://bi0h1y0ultup0"]
 
 [ext_resource type="Texture2D" uid="uid://0mw8clwe317d" path="res://sprites/projectiles/Lightning.png" id="1_gbgoo"]
 [ext_resource type="Script" path="res://scenes/projectiles/thunder_blast.gd" id="1_qfqet"]
+[ext_resource type="AudioStream" uid="uid://dvrosecckyn8m" path="res://sfx/electric/mixkit-low-electricity-humming-2132.wav" id="3_8ja4q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ppx2v"]
 atlas = ExtResource("1_gbgoo")
@@ -148,3 +149,8 @@ polygon = PackedVector2Array(-35.2995, -67.0939, 151.079, -134.494, 153.38, 50.8
 [node name="DmgTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="Mixkit-low-electricity-humming-2132" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-306.667, 60)
+stream = ExtResource("3_8ja4q")
+autoplay = true

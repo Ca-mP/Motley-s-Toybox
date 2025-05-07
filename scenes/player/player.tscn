@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dmtmrhvnqsk4b"]
+[gd_scene load_steps=49 format=3 uid="uid://dmtmrhvnqsk4b"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
 [ext_resource type="Texture2D" uid="uid://d6k4mdxxom4m" path="res://sprites/player/wizwiththorpowers.png" id="2_7t56i"]
@@ -17,8 +17,10 @@
 [ext_resource type="Script" path="res://scenes/states/player-states/player_done_cast_state.gd" id="13_ru3pq"]
 [ext_resource type="PackedScene" uid="uid://cjiqra4hoivd6" path="res://scenes/states/player-states/player_lightning_blast_state.tscn" id="14_g106i"]
 [ext_resource type="PackedScene" uid="uid://pitx0c1qvu6x" path="res://scenes/states/player-states/player_dash_state.tscn" id="15_5re5x"]
+[ext_resource type="AudioStream" uid="uid://0vqvm7sxwbjm" path="res://sfx/electric/mixkit-small-metallic-sci-fi-drop-888.wav" id="16_b13ec"]
 [ext_resource type="Script" path="res://scenes/states/player-states/player_stun_state.gd" id="16_jk5hn"]
 [ext_resource type="Script" path="res://player_death_state.gd" id="17_ocg4m"]
+[ext_resource type="AudioStream" uid="uid://dmhsgwot1fuv3" path="res://sfx/electric/mixkit-static-electric-glitch-2597.wav" id="17_q211y"]
 [ext_resource type="AudioStream" uid="uid://de5qd8edsmof8" path="res://sfx/swoosh 8.wav" id="18_jtkim"]
 [ext_resource type="AudioStream" uid="uid://bdjn3twdmtcj1" path="res://sfx/body fall 5.wav" id="19_bl3wc"]
 [ext_resource type="AudioStream" uid="uid://blduuwscdidb" path="res://sfx/steps/Concrete 1.wav" id="19_kputj"]
@@ -83,6 +85,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [54, 55, 56, 57, 58, 59]
+}
+
+[sub_resource type="Animation" id="Animation_h06h1"]
+resource_name = "dash"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119]
 }
 
 [sub_resource type="Animation" id="Animation_ypg6x"]
@@ -312,6 +330,7 @@ tracks/2/keys = {
 _data = {
 "RESET": SubResource("Animation_iro6b"),
 "blast_jump": SubResource("Animation_i02jb"),
+"dash": SubResource("Animation_h06h1"),
 "fall": SubResource("Animation_ypg6x"),
 "idle": SubResource("Animation_jhge4"),
 "jump": SubResource("Animation_y2o3f"),
@@ -361,8 +380,7 @@ _data = {
 "switch_spell": SubResource("Animation_i8p0d")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "lightning_blast_state", "done_cast_state", "stun_state", "death_state")]
-position = Vector2(420, 473)
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "lightning_blast_state", "lightning_dash_state", "done_cast_state", "stun_state", "death_state")]
 collision_mask = 22
 script = ExtResource("1_ri1hm")
 max_health = 20
@@ -397,6 +415,7 @@ water_spell_state = NodePath("StateMachine/PlayerCastState/PlayerWaterSpellState
 fireball_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState/PlayerFireballState")
 blast_jump_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState/PlayerBlastJumpState")
 lightning_blast_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerLightningBlastState")
+lightning_dash_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState")
 done_cast_state = NodePath("StateMachine/PlayerDoneCastState")
 stun_state = NodePath("StateMachine/PlayerStunState")
 death_state = NodePath("StateMachine/PlayerDeathState")
@@ -455,6 +474,19 @@ emission_shape = 1
 emission_sphere_radius = 20.0
 gravity = Vector2(0, 10)
 color_ramp = SubResource("Gradient_npkfg")
+
+[node name="DashParticles" type="CPUParticles2D" parent="Pivot/Particles"]
+position = Vector2(-5, -30)
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+direction = Vector2(-1, 0)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 421.45
+color = Color(0.277344, 1, 0.881439, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 modulate = Color(0.0988617, 0.816406, 0.799589, 1)
@@ -547,7 +579,26 @@ animator = NodePath("../../../AnimationPlayer")
 actor = NodePath("../../../..")
 animator = NodePath("../../../../AnimationPlayer")
 
-[node name="PlayerDashState" parent="StateMachine/PlayerCastState/PlayerLightningSpellState" instance=ExtResource("15_5re5x")]
+[node name="PlayerDashState" parent="StateMachine/PlayerCastState/PlayerLightningSpellState" node_paths=PackedStringArray("sfx2", "particles", "actor", "animator", "sfx") instance=ExtResource("15_5re5x")]
+speed = 1000
+sfx2 = NodePath("Mixkit-static-electric-glitch-2597")
+particles = NodePath("../../../../Pivot/Particles/DashParticles")
+actor = NodePath("../../../..")
+animator = NodePath("../../../../AnimationPlayer")
+sfx = NodePath("Mixkit-small-metallic-sci-fi-drop-888")
+
+[node name="DashTimer" type="Timer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+wait_time = 0.2
+one_shot = true
+
+[node name="EffectTimer" type="Timer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+wait_time = 0.05
+
+[node name="Mixkit-small-metallic-sci-fi-drop-888" type="AudioStreamPlayer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+stream = ExtResource("16_b13ec")
+
+[node name="Mixkit-static-electric-glitch-2597" type="AudioStreamPlayer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+stream = ExtResource("17_q211y")
 
 [node name="PlayerWaterSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
 script = ExtResource("12_8fo6j")

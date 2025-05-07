@@ -20,7 +20,7 @@ func _physics_process(_delta: float) -> void:
 		idle.emit()
 	if Input.is_action_pressed("jump"):
 		jump.emit()
-	if Input.is_action_pressed("spell") and actor.equipped_material.current:
+	if Input.is_action_just_pressed("spell") and actor.equipped_material.current:
 		cast.emit()
 
 func exit_state():
