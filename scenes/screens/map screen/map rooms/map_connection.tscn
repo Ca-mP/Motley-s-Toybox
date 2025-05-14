@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5hv42bh8cluf"]
+
+[ext_resource type="Texture2D" uid="uid://cp1plx5chqpr5" path="res://sprites/map screen/mapconnect.png" id="1_5o4pa"]
+
+[node name="MapConnection" type="NinePatchRect"]
+texture_filter = 1
+offset_left = 40.0
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 40.0
+texture = ExtResource("1_5o4pa")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4

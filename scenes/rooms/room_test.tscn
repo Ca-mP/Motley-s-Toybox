@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://co5vqs307pwat"]
+[gd_scene load_steps=10 format=4 uid="uid://co5vqs307pwat"]
 
 [ext_resource type="Script" path="res://scenes/rooms/room_test.gd" id="1_d62s4"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="2_oet60"]
@@ -8,9 +8,11 @@
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="6_rwmqo"]
 [ext_resource type="Script" path="res://scenes/levels/save_points.gd" id="7_kkxhc"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="8_42s0m"]
+[ext_resource type="PackedScene" uid="uid://bd7xe8a7qyqwx" path="res://scenes/environment/sign.tscn" id="9_5qd6j"]
 
 [node name="RoomTest" type="Node2D" node_paths=PackedStringArray("player", "enemies", "save_points", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
 script = ExtResource("1_d62s4")
+room_id = 1351
 player = NodePath("Player")
 enemies = NodePath("LevelEnemies")
 save_points = NodePath("LevelSavePoints")
@@ -56,3 +58,6 @@ position = Vector2(-792, 437)
 position = Vector2(8485, -8348)
 
 [node name="UI" parent="." instance=ExtResource("8_42s0m")]
+
+[node name="Sign" parent="." instance=ExtResource("9_5qd6j")]
+position = Vector2(139, 375)

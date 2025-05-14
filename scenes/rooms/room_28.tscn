@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bpku2x0j4e7b1"]
+[gd_scene load_steps=14 format=4 uid="uid://bpku2x0j4e7b1"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_1wwu8"]
 [ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground2.png" id="2_775xu"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="7_bvjps"]
 [ext_resource type="PackedScene" uid="uid://ie0ds48vlkdj" path="res://scenes/levels/tilemap/3d_tileset.tscn" id="8_nd0eh"]
 [ext_resource type="PackedScene" uid="uid://cwd5qr63pwq63" path="res://scenes/environment/wood_platform.tscn" id="10_wr3fj"]
+[ext_resource type="PackedScene" uid="uid://bd7xe8a7qyqwx" path="res://scenes/environment/sign.tscn" id="11_exnr0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct2c4"]
 size = Vector2(30, 146)
@@ -19,6 +20,7 @@ size = Vector2(46, 172)
 
 [node name="Room28" type="Node2D" node_paths=PackedStringArray("player", "enemies", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
 script = ExtResource("1_1wwu8")
+room_id = 28
 player = NodePath("Player")
 enemies = NodePath("LevelEnemies")
 doors = NodePath("LevelDoors")
@@ -92,10 +94,6 @@ metadata/_edit_lock_ = true
 [node name="WoodPlatform" parent="." instance=ExtResource("10_wr3fj")]
 position = Vector2(46, 304)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -48.0
-offset_top = 126.0
-offset_right = 174.0
-offset_bottom = 172.0
+[node name="Sign" parent="." instance=ExtResource("11_exnr0")]
+position = Vector2(-135, 249)
 text = "Use the X button to throw a fireball at the enemy!"
-fit_content = true

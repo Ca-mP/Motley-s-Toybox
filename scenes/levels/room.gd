@@ -1,6 +1,7 @@
 extends Node2D
 class_name Room
 
+@export var room_id: int
 @export var player: Player
 @export var enemies: LevelEnemies
 @export var save_points: LevelSavePoints
@@ -13,6 +14,7 @@ class_name Room
 var save_path = "user://wizard-save-file.save"
 
 var pause_screen_scene = preload("res://scenes/screens/pause_screen.tscn")
+var map_screen_scene = preload("res://scenes/screens/map screen/map_screen.tscn")
 
 var zooming_out := false
 
@@ -29,6 +31,8 @@ func set_camera_limits():
 	camera.limit_right = int(camera_limiter_tr.position.x)
 	camera.limit_top = int(camera_limiter_tr.position.y)
 
+var map_screen_open := false
+
 func _process(_delta: float) -> void:
 	#Passes player position to enemies
 	if is_instance_valid(player):
@@ -42,10 +46,20 @@ func _process(_delta: float) -> void:
 		
 		#Pausing game
 	if Input.is_action_just_pressed("pause"):
-		if get_tree().paused == false:
+		if get_tree().paused == false and not map_screen_open:
 			get_tree().paused = true
 			var pause_screen = pause_screen_scene.instantiate()
 			player_canvas_layer.add_child(pause_screen)
+	
+	#Pulling up map screen
+	if Input.is_action_just_pressed("map-screen"):
+		if map_screen_open and not get_tree().paused:
+			map_screen_open = false
+		elif not get_tree().paused:
+			var map_screen = map_screen_scene.instantiate()
+			map_screen.current_room_id = room_id
+			player_canvas_layer.add_child(map_screen)
+			map_screen_open = true
 
 func pass_player_info(_player):
 	ui.player_max_health = _player.max_health

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://df0h8i8melut4"]
+[gd_scene load_steps=15 format=4 uid="uid://df0h8i8melut4"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_7ya7i"]
 [ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground2.png" id="2_6a7no"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="3_pw1ls"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_78nud"]
+[ext_resource type="PackedScene" uid="uid://bd7xe8a7qyqwx" path="res://scenes/environment/sign.tscn" id="4_ov8r7"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="5_hesr8"]
 [ext_resource type="PackedScene" uid="uid://cjujgg3nn4ytq" path="res://scenes/enemies/teddy/teddy_bear.tscn" id="5_otdli"]
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="6_cflq6"]
@@ -20,6 +21,7 @@ size = Vector2(38, 131)
 
 [node name="Room32" type="Node2D" node_paths=PackedStringArray("player", "enemies", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
 script = ExtResource("1_7ya7i")
+room_id = 32
 player = NodePath("Player")
 enemies = NodePath("LevelEnemies")
 doors = NodePath("LevelDoors")
@@ -40,6 +42,10 @@ position = Vector2(-51, 9)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 metadata/_edit_lock_ = true
+
+[node name="Sign" parent="." instance=ExtResource("4_ov8r7")]
+position = Vector2(-65, 251)
+text = "These pickups will refill your spells!"
 
 [node name="CameraLimiters" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -102,11 +108,3 @@ position = Vector2(-479, 373)
 
 [node name="WoodPlatform5" parent="." instance=ExtResource("9_6s8fg")]
 position = Vector2(-477, 482)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -29.0
-offset_top = 163.0
-offset_right = 115.0
-offset_bottom = 203.0
-text = "These pickups will refill your spells!"
-fit_content = true

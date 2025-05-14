@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://c5pcsnregcyuf"]
+[gd_scene load_steps=13 format=4 uid="uid://c5pcsnregcyuf"]
 
 [ext_resource type="Script" path="res://scenes/levels/room.gd" id="1_43x2n"]
 [ext_resource type="Texture2D" uid="uid://dvihbseecifao" path="res://sprites/level/dungeonBackground2.png" id="2_w8t1b"]
 [ext_resource type="PackedScene" uid="uid://dmtmrhvnqsk4b" path="res://scenes/player/player.tscn" id="3_2bqd7"]
 [ext_resource type="Script" path="res://scenes/levels/enemies.gd" id="4_eeeem"]
+[ext_resource type="PackedScene" uid="uid://bd7xe8a7qyqwx" path="res://scenes/environment/sign.tscn" id="4_fqe0l"]
 [ext_resource type="Script" path="res://scenes/environment/doors/doors.gd" id="5_hchcv"]
 [ext_resource type="Script" path="res://scenes/environment/doors/room_door.gd" id="6_iaxic"]
 [ext_resource type="PackedScene" uid="uid://dw3teyaodus8k" path="res://scenes/ui/ui.tscn" id="7_3lkf2"]
@@ -18,6 +19,7 @@ size = Vector2(34, 160)
 
 [node name="Room31" type="Node2D" node_paths=PackedStringArray("player", "enemies", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
 script = ExtResource("1_43x2n")
+room_id = 31
 player = NodePath("Player")
 enemies = NodePath("LevelEnemies")
 doors = NodePath("LevelDoors")
@@ -43,6 +45,10 @@ fire_material = {
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 metadata/_edit_lock_ = true
+
+[node name="Sign" parent="." instance=ExtResource("4_fqe0l")]
+position = Vector2(-279, 474)
+text = "You can pass through the bottom of these platforms!"
 
 [node name="CameraLimiters" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -104,11 +110,3 @@ position = Vector2(-434, 164)
 
 [node name="WoodPlatform5" parent="." instance=ExtResource("9_ndnyh")]
 position = Vector2(-442, 411)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -320.0
-offset_top = 340.0
-offset_right = -71.0
-offset_bottom = 409.0
-text = "You can pass through the bottom of these platforms!"
-fit_content = true

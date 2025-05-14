@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5ygp8xv525m8"]
+
+[ext_resource type="Texture2D" uid="uid://dg837hjxucoel" path="res://sprites/map screen/mapblank.png" id="1_e5ato"]
+[ext_resource type="Script" path="res://scenes/screens/map screen/map rooms/map_room.gd" id="2_vyll5"]
+
+[node name="MapRoom" type="NinePatchRect"]
+texture_filter = 1
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = ExtResource("1_e5ato")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+script = ExtResource("2_vyll5")

@@ -25,6 +25,7 @@ size = Vector2(40, 143)
 [node name="Room6" type="Node2D" node_paths=PackedStringArray("player", "enemies", "save_points", "doors", "ui", "camera", "camera_limiter_bl", "camera_limiter_tr")]
 process_mode = 1
 script = ExtResource("1_3clpy")
+room_id = 6
 player = NodePath("Player")
 enemies = NodePath("LevelEnemies")
 save_points = NodePath("LevelSavePoints")
