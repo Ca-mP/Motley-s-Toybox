@@ -55,6 +55,7 @@ offset_bottom = 40.0
 id = 27
 
 [node name="MapRoom4" parent="ColorRect/Rooms" instance=ExtResource("1_00v12")]
+layout_mode = 0
 offset_left = 168.0
 offset_top = 8.0
 offset_right = 200.0
@@ -62,6 +63,7 @@ offset_bottom = 40.0
 id = 26
 
 [node name="MapRoom5" parent="ColorRect/Rooms" instance=ExtResource("1_00v12")]
+layout_mode = 0
 offset_left = 224.0
 offset_top = 8.0
 offset_right = 256.0
@@ -92,18 +94,21 @@ offset_right = 56.0
 offset_bottom = 32.0
 
 [node name="MapConnection3" parent="ColorRect/Connections" instance=ExtResource("2_pggrm")]
+layout_mode = 0
 offset_left = 144.0
 offset_top = 16.0
 offset_right = 168.0
 offset_bottom = 32.0
 
 [node name="MapConnection4" parent="ColorRect/Connections" instance=ExtResource("2_pggrm")]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 16.0
 offset_right = 224.0
 offset_bottom = 32.0
 
 [node name="MapConnection5" parent="ColorRect/Connections" instance=ExtResource("2_pggrm")]
+layout_mode = 0
 offset_left = 256.0
 offset_top = 16.0
 offset_right = 280.0

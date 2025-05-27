@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://c7uvywjwdeegs"]
 
-[ext_resource type="AudioStream" uid="uid://2yqevrvo68nt" path="res://sfx/music/toybox.mp3" id="1_rdcpp"]
+[ext_resource type="AudioStream" uid="uid://bat1g1lymuhlx" path="res://sfx/music/toybox4 (1).mp3" id="1_l4r8v"]
 
 [node name="BGMusic" type="AudioStreamPlayer"]
 process_mode = 3
-stream = ExtResource("1_rdcpp")
+stream = ExtResource("1_l4r8v")
 volume_db = -10.0
