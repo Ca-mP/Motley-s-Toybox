@@ -1,0 +1,11 @@
+-Does brute jump way too high and fly around on school computer too?
+-Finish key gate
+-Fix player not keeping velocity going through doors
+-Fix bear not playing death animation
+-Add Key Gate
+-Add tutorial segment
+-Add Sound
+-Add Background
+-Remake Tileset(?)
+-Add thunder attack
+-Add lighting system

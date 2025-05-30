@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjiqra4hoivd6"]
+
+[ext_resource type="Script" path="res://scenes/states/player-states/player_lightning_blast_state.gd" id="1_crjak"]
+
+[node name="PlayerLightningBlastState" type="Node"]
+script = ExtResource("1_crjak")

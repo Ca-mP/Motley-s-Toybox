@@ -1,0 +1,150 @@
+[gd_scene load_steps=22 format=3 uid="uid://bjmurd4u8v6fo"]
+
+[ext_resource type="Texture2D" uid="uid://cbqgmxd22eki2" path="res://sprites/placeholders/explosion (10).png" id="1_b0onh"]
+[ext_resource type="Script" path="res://scenes/projectiles/fireball/fireball_explosion.gd" id="1_ue8ku"]
+[ext_resource type="AudioStream" uid="uid://mx3lf77om0nq" path="res://sfx/explosion/SE-Explosion3-F.ogg" id="3_5dm4t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vunag"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bhua"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4regb"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48ql1"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd8gd"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yehom"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qhim"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s2t6"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tob34"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxftc"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi2n7"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nxrv"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2a4d"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx0k6"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rx5b7"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_863jr"]
+atlas = ExtResource("1_b0onh")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j6tlp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vunag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bhua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4regb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48ql1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd8gd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yehom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qhim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s2t6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tob34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxftc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi2n7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nxrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2a4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cx0k6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rx5b7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_863jr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_arvto"]
+radius = 41.0
+
+[node name="FireballExplosion" type="Area2D" node_paths=PackedStringArray("area", "animator")]
+scale = Vector2(4, 4)
+collision_layer = 8
+collision_mask = 22
+script = ExtResource("1_ue8ku")
+damage = 2
+area = NodePath(".")
+animator = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j6tlp")
+frame = 15
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_arvto")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5dm4t")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

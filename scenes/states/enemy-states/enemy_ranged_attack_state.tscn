@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yvgke4wa82ua"]
+
+[ext_resource type="Script" path="res://scenes/states/enemy-states/enemy_ranged_attack_state.gd" id="1_fk210"]
+
+[node name="EnemyRangedAttackState" type="Node"]
+script = ExtResource("1_fk210")

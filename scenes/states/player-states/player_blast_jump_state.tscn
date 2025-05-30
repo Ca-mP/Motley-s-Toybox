@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3th4jd6v0r8d"]
+
+[ext_resource type="Script" path="res://scenes/states/player-states/player_blast_jump_state.gd" id="1_qnx2j"]
+[ext_resource type="PackedScene" uid="uid://c32icjohvhcmp" path="res://scenes/projectiles/blast-jump/jump_explosion.tscn" id="2_xceoo"]
+
+[node name="PlayerBlastJumpState" type="Node"]
+script = ExtResource("1_qnx2j")
+explosion_scene = ExtResource("2_xceoo")
+jump_velocity = 150

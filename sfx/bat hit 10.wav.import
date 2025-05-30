@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ckfew0nt5pmhl"
+path="res://.godot/imported/bat hit 10.wav-20ed14e8f35f2dea63529c2fd40dc7f1.sample"
+
+[deps]
+
+source_file="res://sfx/bat hit 10.wav"
+dest_files=["res://.godot/imported/bat hit 10.wav-20ed14e8f35f2dea63529c2fd40dc7f1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgo5ebedq5a2o"]
+
+[ext_resource type="Script" path="res://scenes/states/player-states/player_done_cast_state.gd" id="1_l57y1"]
+
+[node name="PlayerDoneCastState" type="Node"]
+script = ExtResource("1_l57y1")

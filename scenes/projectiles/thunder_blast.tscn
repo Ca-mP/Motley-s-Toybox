@@ -1,0 +1,156 @@
+[gd_scene load_steps=19 format=3 uid="uid://bi0h1y0ultup0"]
+
+[ext_resource type="Texture2D" uid="uid://0mw8clwe317d" path="res://sprites/projectiles/Lightning.png" id="1_gbgoo"]
+[ext_resource type="Script" path="res://scenes/projectiles/thunder_blast.gd" id="1_qfqet"]
+[ext_resource type="AudioStream" uid="uid://dvrosecckyn8m" path="res://sfx/electric/mixkit-low-electricity-humming-2132.wav" id="3_8ja4q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppx2v"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(0, 0, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgp85"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(606, 0, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in3ny"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(1212, 0, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm70t"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(1818, 0, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmuk2"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(2424, 0, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6piwl"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(0, 306, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56hph"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(606, 306, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctchc"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(1212, 306, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlgxk"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(1818, 306, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c4x5"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(2424, 306, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnhw4"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(0, 612, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em3hx"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(606, 612, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdrrs"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(606, 918, 606, 306)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk8ko"]
+atlas = ExtResource("1_gbgoo")
+region = Rect2(1212, 918, 606, 306)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_553g2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppx2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgp85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in3ny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm70t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmuk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6piwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56hph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctchc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlgxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c4x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnhw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_em3hx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdrrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk8ko")
+}],
+"loop": false,
+"name": &"enter",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk8ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdrrs")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"leave",
+"speed": 12.0
+}]
+
+[node name="ThunderBlast" type="Area2D"]
+position = Vector2(12, -30)
+scale = Vector2(0.3, 0.3)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_qfqet")
+dmg = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_553g2")
+frame_progress = 0.851016
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(31.1371, 66.1821)
+scale = Vector2(1.44866, 1.58259)
+polygon = PackedVector2Array(-35.2995, -67.0939, 151.079, -134.494, 153.38, 50.8562, -35.2995, -37.6064)
+
+[node name="DmgTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Mixkit-low-electricity-humming-2132" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-306.667, 60)
+stream = ExtResource("3_8ja4q")
+autoplay = true

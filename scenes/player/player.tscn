@@ -1,0 +1,645 @@
+[gd_scene load_steps=49 format=3 uid="uid://dmtmrhvnqsk4b"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_ri1hm"]
+[ext_resource type="Texture2D" uid="uid://d6k4mdxxom4m" path="res://sprites/player/wizwiththorpowers.png" id="2_7t56i"]
+[ext_resource type="Script" path="res://scenes/states/state_machine.gd" id="3_3e7yi"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_jump_state.gd" id="4_vg3c6"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_walk_state.gd" id="5_tntcf"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_idle_state.gd" id="6_peq4c"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fall_state.gd" id="7_y0vod"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fireball_state.gd" id="8_3rjay"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_cast_state.gd" id="8_fnswv"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fire_spell_state.gd" id="9_rxxqp"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_land_state.gd" id="9_wuijw"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_lightning_spell_state.gd" id="11_hnfra"]
+[ext_resource type="PackedScene" uid="uid://b3th4jd6v0r8d" path="res://scenes/states/player-states/player_blast_jump_state.tscn" id="11_nsdv2"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_water_spell_state.gd" id="12_8fo6j"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_done_cast_state.gd" id="13_ru3pq"]
+[ext_resource type="PackedScene" uid="uid://cjiqra4hoivd6" path="res://scenes/states/player-states/player_lightning_blast_state.tscn" id="14_g106i"]
+[ext_resource type="PackedScene" uid="uid://pitx0c1qvu6x" path="res://scenes/states/player-states/player_dash_state.tscn" id="15_5re5x"]
+[ext_resource type="AudioStream" uid="uid://0vqvm7sxwbjm" path="res://sfx/electric/mixkit-small-metallic-sci-fi-drop-888.wav" id="16_b13ec"]
+[ext_resource type="Script" path="res://scenes/states/player-states/player_stun_state.gd" id="16_jk5hn"]
+[ext_resource type="Script" path="res://player_death_state.gd" id="17_ocg4m"]
+[ext_resource type="AudioStream" uid="uid://dmhsgwot1fuv3" path="res://sfx/electric/mixkit-static-electric-glitch-2597.wav" id="17_q211y"]
+[ext_resource type="AudioStream" uid="uid://de5qd8edsmof8" path="res://sfx/swoosh 8.wav" id="18_jtkim"]
+[ext_resource type="AudioStream" uid="uid://bdjn3twdmtcj1" path="res://sfx/body fall 5.wav" id="19_bl3wc"]
+[ext_resource type="AudioStream" uid="uid://blduuwscdidb" path="res://sfx/steps/Concrete 1.wav" id="19_kputj"]
+[ext_resource type="AudioStream" uid="uid://1bpwutswywxi" path="res://sfx/steps/Concrete 2.wav" id="20_7kfb1"]
+[ext_resource type="PackedScene" uid="uid://0ik1qya8dy7p" path="res://scenes/player/player_canvas_layer.tscn" id="24_nvl7p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5oih"]
+size = Vector2(28, 65)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mieej"]
+radius = 11.0
+height = 62.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8d337"]
+radius = 15.1327
+
+[sub_resource type="Gradient" id="Gradient_kl3n2"]
+colors = PackedColorArray(0.939022, 0, 0.0871376, 1, 0.968876, 0.816621, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_npkfg"]
+colors = PackedColorArray(0.925973, 0, 0.217957, 1, 0.964882, 0.778588, 1.54018e-06, 1)
+
+[sub_resource type="Animation" id="Animation_iro6b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i02jb"]
+resource_name = "blast_jump"
+length = 0.500008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [54, 55, 56, 57, 58, 59]
+}
+
+[sub_resource type="Animation" id="Animation_h06h1"]
+resource_name = "dash"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119]
+}
+
+[sub_resource type="Animation" id="Animation_ypg6x"]
+resource_name = "fall"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666666, 0.75, 0.833333, 0.916666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_jhge4"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666666, 0.75, 0.833333, 0.916666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 35]
+}
+
+[sub_resource type="Animation" id="Animation_y2o3f"]
+resource_name = "jump"
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_6057e"]
+resource_name = "jump_to_fall"
+length = 0.5
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [66, 67, 68, 69, 70, 71]
+}
+
+[sub_resource type="Animation" id="Animation_uet0l"]
+resource_name = "land"
+length = 0.500008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [72, 73, 74, 75, 76, 77]
+}
+
+[sub_resource type="Animation" id="Animation_qm7pn"]
+resource_name = "lightning_blast"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107]
+}
+
+[sub_resource type="Animation" id="Animation_58lq7"]
+resource_name = "lightning_blast_intro"
+length = 0.500008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.500008),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [90, 91, 92, 94, 94, 93, 96]
+}
+
+[sub_resource type="Animation" id="Animation_m8ap6"]
+resource_name = "spell"
+length = 1.00001
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.8743e-07, 0.0833333, 0.166667, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Swoosh8")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0833333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_44w4v"]
+resource_name = "stun"
+length = 0.500008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(26.9087, 48.5029, 21.8566, 17.1484),
+"update": 0,
+"values": [Color(2, 2, 2, 0.746), Color(1, 1, 1, 1), Color(2, 2, 2, 0.746), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lw0qb"]
+resource_name = "walk"
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666666, 0.75, 0.833333, 0.916666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Concrete1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.416667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Concrete2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.916667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1qbk6"]
+_data = {
+"RESET": SubResource("Animation_iro6b"),
+"blast_jump": SubResource("Animation_i02jb"),
+"dash": SubResource("Animation_h06h1"),
+"fall": SubResource("Animation_ypg6x"),
+"idle": SubResource("Animation_jhge4"),
+"jump": SubResource("Animation_y2o3f"),
+"jump_to_fall": SubResource("Animation_6057e"),
+"land": SubResource("Animation_uet0l"),
+"lightning_blast": SubResource("Animation_qm7pn"),
+"lightning_blast_intro": SubResource("Animation_58lq7"),
+"spell": SubResource("Animation_m8ap6"),
+"stun": SubResource("Animation_44w4v"),
+"walk": SubResource("Animation_lw0qb")
+}
+
+[sub_resource type="Animation" id="Animation_0yhiu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0988617, 0.816406, 0.799589, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i8p0d"]
+resource_name = "switch_spell"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(2, 2, 2, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lw2np"]
+_data = {
+"RESET": SubResource("Animation_0yhiu"),
+"switch_spell": SubResource("Animation_i8p0d")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "idle_state", "walk_state", "jump_state", "fall_state", "land_state", "cast_state", "fire_spell_state", "lightning_spell_state", "water_spell_state", "fireball_state", "blast_jump_state", "lightning_blast_state", "lightning_dash_state", "done_cast_state", "stun_state", "death_state")]
+collision_mask = 22
+script = ExtResource("1_ri1hm")
+max_health = 20
+current_health = 20
+max_speed = 300
+acceleration = 50
+equipped_material = {
+"current": 50,
+"material": "fire",
+"max": 200
+}
+fire_material = {
+"current": 50,
+"max": 50,
+"unlocked": true
+}
+water_material = {
+"current": 20,
+"max": 20,
+"unlocked": false
+}
+state_machine = NodePath("StateMachine")
+idle_state = NodePath("StateMachine/PlayerIdleState")
+walk_state = NodePath("StateMachine/PlayerWalkState")
+jump_state = NodePath("StateMachine/PlayerJumpState")
+fall_state = NodePath("StateMachine/PlayerFallState")
+land_state = NodePath("StateMachine/PlayerLandState")
+cast_state = NodePath("StateMachine/PlayerCastState")
+fire_spell_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState")
+lightning_spell_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSpellState")
+water_spell_state = NodePath("StateMachine/PlayerCastState/PlayerWaterSpellState")
+fireball_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState/PlayerFireballState")
+blast_jump_state = NodePath("StateMachine/PlayerCastState/PlayerFireSpellState/PlayerBlastJumpState")
+lightning_blast_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerLightningBlastState")
+lightning_dash_state = NodePath("StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState")
+done_cast_state = NodePath("StateMachine/PlayerDoneCastState")
+stun_state = NodePath("StateMachine/PlayerStunState")
+death_state = NodePath("StateMachine/PlayerDeathState")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -32.5)
+shape = SubResource("RectangleShape2D_a5oih")
+debug_color = Color(0.883108, 0.334748, 0, 0.42)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("CapsuleShape2D_mieej")
+metadata/_edit_lock_ = true
+
+[node name="InteractBox" type="Area2D" parent="."]
+self_modulate = Color(0.294278, 0.637678, 0.191592, 1)
+collision_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBox"]
+position = Vector2(-1, -38)
+shape = SubResource("CircleShape2D_8d337")
+debug_color = Color(0.201603, 0.64091, 3.85046e-07, 0.42)
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Particles" type="Node2D" parent="Pivot"]
+
+[node name="FireballParticles" type="CPUParticles2D" parent="Pivot/Particles"]
+position = Vector2(16, -40)
+emitting = false
+amount = 20
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+lifetime_randomness = 1.0
+spread = 17.13
+gravity = Vector2(1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+color_ramp = SubResource("Gradient_kl3n2")
+
+[node name="BlastJumpParticles" type="CPUParticles2D" parent="Pivot/Particles"]
+position = Vector2(1, -4)
+emitting = false
+amount = 70
+lifetime = 2.0
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector2(0, 10)
+color_ramp = SubResource("Gradient_npkfg")
+
+[node name="DashParticles" type="CPUParticles2D" parent="Pivot/Particles"]
+position = Vector2(-5, -30)
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+direction = Vector2(-1, 0)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 421.45
+color = Color(0.277344, 1, 0.881439, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+modulate = Color(0.0988617, 0.816406, 0.799589, 1)
+position = Vector2(1, -35)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_7t56i")
+hframes = 11
+vframes = 11
+frame = 24
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1qbk6")
+}
+
+[node name="SpellSwitchAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lw2np")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_3e7yi")
+starting_state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("6_peq4c")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerWalkState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("5_tntcf")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerJumpState" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_timer", "actor", "animator")]
+script = ExtResource("4_vg3c6")
+jump_timer = NodePath("JumpTimer")
+jump_velocity = 400
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="JumpTimer" type="Timer" parent="StateMachine/PlayerJumpState"]
+wait_time = 0.4
+one_shot = true
+
+[node name="PlayerFallState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("7_y0vod")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerLandState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator", "sfx")]
+script = ExtResource("9_wuijw")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+sfx = NodePath("../../Sounds/BodyFall5")
+
+[node name="PlayerCastState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("8_fnswv")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerFireSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("9_rxxqp")
+actor = NodePath("../../..")
+animator = NodePath("../../../AnimationPlayer")
+
+[node name="PlayerFireballState" type="Node" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("fireball_timer", "particles", "actor", "animator", "sfx")]
+script = ExtResource("8_3rjay")
+fireball_timer = NodePath("FireballTimer")
+particles = NodePath("../../../../Pivot/Particles/FireballParticles")
+actor = NodePath("../../../..")
+animator = NodePath("../../../../AnimationPlayer")
+sfx = NodePath("../../../../Sounds/Swoosh8")
+
+[node name="FireballTimer" type="Timer" parent="StateMachine/PlayerCastState/PlayerFireSpellState/PlayerFireballState"]
+wait_time = 0.5
+
+[node name="PlayerBlastJumpState" parent="StateMachine/PlayerCastState/PlayerFireSpellState" node_paths=PackedStringArray("particles", "actor", "animator") instance=ExtResource("11_nsdv2")]
+jump_velocity = 800
+particles = NodePath("../../../../Pivot/Particles/BlastJumpParticles")
+actor = NodePath("../../../..")
+animator = NodePath("../../../../AnimationPlayer")
+
+[node name="PlayerLightningSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("11_hnfra")
+actor = NodePath("../../..")
+animator = NodePath("../../../AnimationPlayer")
+
+[node name="PlayerLightningBlastState" parent="StateMachine/PlayerCastState/PlayerLightningSpellState" node_paths=PackedStringArray("actor", "animator") instance=ExtResource("14_g106i")]
+actor = NodePath("../../../..")
+animator = NodePath("../../../../AnimationPlayer")
+
+[node name="PlayerDashState" parent="StateMachine/PlayerCastState/PlayerLightningSpellState" node_paths=PackedStringArray("sfx2", "particles", "actor", "animator", "sfx") instance=ExtResource("15_5re5x")]
+speed = 1000
+sfx2 = NodePath("Mixkit-static-electric-glitch-2597")
+particles = NodePath("../../../../Pivot/Particles/DashParticles")
+actor = NodePath("../../../..")
+animator = NodePath("../../../../AnimationPlayer")
+sfx = NodePath("Mixkit-small-metallic-sci-fi-drop-888")
+
+[node name="DashTimer" type="Timer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+wait_time = 0.2
+one_shot = true
+
+[node name="EffectTimer" type="Timer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+wait_time = 0.05
+
+[node name="Mixkit-small-metallic-sci-fi-drop-888" type="AudioStreamPlayer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+stream = ExtResource("16_b13ec")
+
+[node name="Mixkit-static-electric-glitch-2597" type="AudioStreamPlayer" parent="StateMachine/PlayerCastState/PlayerLightningSpellState/PlayerDashState"]
+stream = ExtResource("17_q211y")
+
+[node name="PlayerWaterSpellState" type="Node" parent="StateMachine/PlayerCastState" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("12_8fo6j")
+actor = NodePath("../../..")
+animator = NodePath("../../../AnimationPlayer")
+
+[node name="PlayerDoneCastState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("13_ru3pq")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerStunState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("16_jk5hn")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="PlayerDeathState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animator")]
+script = ExtResource("17_ocg4m")
+actor = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Swoosh8" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("18_jtkim")
+
+[node name="Concrete1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("19_kputj")
+
+[node name="Concrete2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("20_7kfb1")
+
+[node name="BodyFall5" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("19_bl3wc")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("24_nvl7p")]
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="area_entered" from="InteractBox" to="." method="_on_interact_box_area_entered"]
+[connection signal="timeout" from="StateMachine/PlayerJumpState/JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

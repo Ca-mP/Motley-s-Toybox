@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwd5qr63pwq63"]
+
+[ext_resource type="Script" path="res://scenes/environment/wood_platform.gd" id="1_i7ryi"]
+[ext_resource type="Texture2D" uid="uid://cid4e5ylc5b46" path="res://sprites/level/blockswithnoletters.png" id="2_deifq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcm8t"]
+size = Vector2(128, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn4jn"]
+size = Vector2(163, 66)
+
+[node name="WoodPlatform" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_i7ryi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lcm8t")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 23)
+shape = SubResource("RectangleShape2D_pn4jn")
+
+[node name="Blockswithnoletters" type="Sprite2D" parent="."]
+position = Vector2(-5.84126e-06, -3.57628e-07)
+scale = Vector2(1.33333, 0.75)
+texture = ExtResource("2_deifq")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

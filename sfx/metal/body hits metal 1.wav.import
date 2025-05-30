@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://mknxh5fi4r74"
+path="res://.godot/imported/body hits metal 1.wav-573da101722b5accf81dade6b1c5b291.sample"
+
+[deps]
+
+source_file="res://sfx/metal/body hits metal 1.wav"
+dest_files=["res://.godot/imported/body hits metal 1.wav-573da101722b5accf81dade6b1c5b291.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

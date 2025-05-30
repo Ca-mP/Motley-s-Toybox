@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn4exwvp16uli"]
+
+[ext_resource type="Script" path="res://scenes/states/player-states/player_fall_state.gd" id="1_acrlc"]
+
+[node name="PlayerFallState" type="Node"]
+script = ExtResource("1_acrlc")

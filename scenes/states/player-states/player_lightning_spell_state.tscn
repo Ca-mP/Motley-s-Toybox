@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b83kql1s0ntw"]
+
+[ext_resource type="Script" path="res://scenes/states/player-states/player_lightning_spell_state.gd" id="1_gvly6"]
+
+[node name="PlayerLightningSpellState" type="Node"]
+script = ExtResource("1_gvly6")
