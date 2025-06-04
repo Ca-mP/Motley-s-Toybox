@@ -39,53 +39,103 @@ offset_top = 480.0
 offset_right = 352.0
 offset_bottom = 512.0
 
-[node name="MapRoom2" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+[node name="MapRoom26" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
 offset_left = 352.0
 offset_top = 480.0
 offset_right = 416.0
 offset_bottom = 512.0
+id = 26
 
-[node name="MapRoom3" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
-offset_left = 544.0
-offset_top = 416.0
-offset_right = 576.0
-offset_bottom = 480.0
-
-[node name="MapRoom4" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
-offset_left = 448.0
-offset_top = 352.0
-offset_right = 480.0
-offset_bottom = 416.0
-
-[node name="MapRoom5" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
-offset_left = 480.0
-offset_top = 320.0
-offset_right = 544.0
-offset_bottom = 384.0
-
-[node name="MapRoom6" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
-offset_left = 480.0
-offset_top = 384.0
-offset_right = 544.0
-offset_bottom = 448.0
-
-[node name="MapRoom7" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+[node name="MapRoom27" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
 offset_left = 416.0
 offset_top = 448.0
 offset_right = 480.0
 offset_bottom = 512.0
+id = 27
 
-[node name="MapRoom8" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+[node name="MapRoom28" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
 offset_left = 480.0
 offset_top = 448.0
 offset_right = 544.0
 offset_bottom = 480.0
+id = 28
 
-[node name="MapRoom9" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+[node name="MapRoom29" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 544.0
+offset_top = 416.0
+offset_right = 576.0
+offset_bottom = 480.0
+id = 29
+
+[node name="MapRoom30" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 480.0
+offset_top = 384.0
+offset_right = 544.0
+offset_bottom = 448.0
+id = 30
+
+[node name="MapRoom31" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 448.0
+offset_top = 352.0
+offset_right = 480.0
+offset_bottom = 416.0
+id = 31
+
+[node name="MapRoom32" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 480.0
+offset_top = 320.0
+offset_right = 544.0
+offset_bottom = 384.0
+id = 32
+
+[node name="MapRoom1" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
 offset_left = 544.0
 offset_top = 320.0
 offset_right = 608.0
 offset_bottom = 352.0
+id = 1
+
+[node name="MapRoom2" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 608.0
+offset_top = 288.0
+offset_right = 640.0
+offset_bottom = 352.0
+
+[node name="MapRoom3" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 640.0
+offset_top = 288.0
+offset_right = 704.0
+offset_bottom = 320.0
+
+[node name="MapRoom4" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 640.0
+offset_top = 256.0
+offset_right = 704.0
+offset_bottom = 288.0
+
+[node name="MapRoom5" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 640.0
+offset_top = 224.0
+offset_right = 704.0
+offset_bottom = 256.0
+
+[node name="MapRoom6" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 704.0
+offset_top = 224.0
+offset_right = 832.0
+offset_bottom = 256.0
+
+[node name="MapRoom7" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 768.0
+offset_top = 256.0
+offset_right = 800.0
+offset_bottom = 288.0
+
+[node name="MapRoomUnknown" parent="ColorRect/Rooms" instance=ExtResource("2_4ugw0")]
+offset_left = 448.0
+offset_top = 256.0
+offset_right = 640.0
+offset_bottom = 288.0
 
 [node name="Doors" type="Control" parent="ColorRect"]
 layout_mode = 1
@@ -151,4 +201,55 @@ offset_left = 408.0
 offset_top = 488.0
 offset_right = 424.0
 offset_bottom = 504.0
+texture = ExtResource("3_m45ur")
+
+[node name="TextureRect9" type="TextureRect" parent="ColorRect/Doors"]
+offset_left = 648.0
+offset_top = 248.0
+offset_right = 664.0
+offset_bottom = 264.0
+texture = ExtResource("3_m45ur")
+
+[node name="TextureRect10" type="TextureRect" parent="ColorRect/Doors"]
+offset_left = 680.0
+offset_top = 280.0
+offset_right = 696.0
+offset_bottom = 296.0
+texture = ExtResource("3_m45ur")
+
+[node name="TextureRect11" type="TextureRect" parent="ColorRect/Doors"]
+offset_left = 632.0
+offset_top = 296.0
+offset_right = 648.0
+offset_bottom = 312.0
+texture = ExtResource("3_m45ur")
+
+[node name="TextureRect12" type="TextureRect" parent="ColorRect/Doors"]
+offset_left = 600.0
+offset_top = 328.0
+offset_right = 616.0
+offset_bottom = 344.0
+texture = ExtResource("3_m45ur")
+
+[node name="TextureRect13" type="TextureRect" parent="ColorRect/Doors"]
+offset_left = 776.0
+offset_top = 248.0
+offset_right = 792.0
+offset_bottom = 264.0
+texture = ExtResource("3_m45ur")
+
+[node name="TextureRect14" type="TextureRect" parent="ColorRect/Doors"]
+offset_left = 688.0
+offset_top = 240.0
+offset_right = 704.0
+offset_bottom = 256.0
+texture = ExtResource("3_m45ur")
+
+[node name="YellowDoor" type="TextureRect" parent="ColorRect/Doors"]
+modulate = Color(1, 1, 0, 1)
+self_modulate = Color(1, 1, 0.0117647, 1)
+offset_left = 632.0
+offset_top = 264.0
+offset_right = 648.0
+offset_bottom = 280.0
 texture = ExtResource("3_m45ur")
